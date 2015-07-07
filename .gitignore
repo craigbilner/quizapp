@@ -1,0 +1,10 @@
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Dependency directory
+node_modules
+
+# IntelliJ project files
+.idea
