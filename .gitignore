@@ -3,8 +3,9 @@ pids
 *.pid
 *.seed
 
-# Dependency directory
+# node
 node_modules
+*.log
 
 # IntelliJ project files
 .idea
