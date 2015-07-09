@@ -13,36 +13,24 @@ export default class GameTableComponent extends React.Component {
 
   render() {
     return (
-      <div className="table_container">
+      <div>
         <div className="table_container-top webflex-row">
           <TableTeamComponent />
 
-          <div className="table_container-table_main">
-
-          </div>
+          <div className="table_container-table_main"></div>
           <TableTeamComponent />
         </div>
         <div className="table_container-bottom webflex-row">
-          <div className="table-container-team">
-
-          </div>
-          <div className="table-container-table_head">
-
-          </div>
-          <div className="table-container-team">
-
-          </div>
+          <div className="table-container-team"></div>
+          <div className="table-container-table_head"></div>
+          <div className="table-container-team"></div>
         </div>
         <div className="table_container-bottom webflex-row">
-          <div className="table-container-team">
-
-          </div>
+          <div className="table-container-team"></div>
           <div className="table-container-qm">
             <QMComponent />
           </div>
-          <div className="table-container-team">
-
-          </div>
+          <div className="table-container-team"></div>
         </div>
       </div>
     );

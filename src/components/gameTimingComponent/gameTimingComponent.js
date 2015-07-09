@@ -14,7 +14,7 @@ export default class GameTimingComponent extends React.Component {
 
   render() {
     return (
-      <div className="game_timer webflex-column">
+      <div className="webflex-column">
         <div className="game_timer-title">
           Time remaining
         </div>

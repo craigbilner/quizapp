@@ -17,12 +17,20 @@ export default class GameComponent extends React.Component {
     return (
       <div className="game">
         <div className="game_top webflex-row">
-          <QuestionAnswerComponent />
-          <GameTimingComponent />
+          <div className="question_answer">
+            <QuestionAnswerComponent />
+          </div>
+          <div className="game_timer">
+            <GameTimingComponent />
+          </div>
         </div>
         <div className="game_bottom webflex-row">
-          <GameTableComponent />
-          <GameSummaryComponent />
+          <div className="table_container">
+            <GameTableComponent />
+          </div>
+          <div className="game_summary_container">
+            <GameSummaryComponent />
+          </div>
         </div>
       </div>
     );

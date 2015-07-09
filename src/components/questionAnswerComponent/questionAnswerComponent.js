@@ -16,7 +16,7 @@ export default class QuestionAnswerComponent extends React.Component {
 
   render() {
     return (
-      <div className="question_answer">
+      <div>
         <div className="question_answer-player">
           <AnswererComponent />
         </div>
