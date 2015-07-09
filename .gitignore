@@ -2,6 +2,7 @@
 pids
 *.pid
 *.seed
+*.DS_Store
 
 # node
 node_modules
@@ -9,3 +10,6 @@ node_modules
 
 # IntelliJ project files
 .idea
+
+#local files
+prototypes
