@@ -9,7 +9,11 @@ export default class QuestionComponent extends React.Component {
 
   render() {
     return (
-      <div>Question goes here</div>
+      <span>
+        Juventus were the comfortable winners of this season’s Serie A, finishing
+                17 points ahead of which team, currently featuring the players Daniele de
+                Rossi and Gervinho?
+        </span>
     );
   }
 }
