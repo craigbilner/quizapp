@@ -1,7 +1,9 @@
 'use strict';
 
 import React from 'react';
-import GameComponent from '../gameComponent/gameComponent.js';
+import AltContainer from 'alt/AltContainer';
+import GameComponent from '../gameComponent/gameComponent';
+import GameStore from '../../stores/gameStore';
 
 export default class AppComponent extends React.Component {
   constructor(props) {
@@ -10,9 +12,9 @@ export default class AppComponent extends React.Component {
 
   render() {
     return (
-      <div>
+      <AltContainer store={GameStore}>
         <GameComponent />
-      </div>
+      </AltContainer>
     );
   }
 }
