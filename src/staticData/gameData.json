@@ -1,11 +1,85 @@
 {
-  "test": "file value",
-  "myArray": [
+  "aDesc": "Answer",
+  "qm": "Mark Cooper",
+  "venue": "Crown",
+  "setBy": "David Stainer",
+  "questionSet": [
     {
-      "a": 1
+      "id": 1,
+      "indx": "1a",
+      "qText": "Some question",
+      "aText": "Some answer",
+      "hasFinished": false
     },
     {
-      "b": 2
+      "id": 2,
+      "indx": "1b",
+      "qText": "another question",
+      "aText": "another answer",
+      "hasFinished": false
+    },
+    {
+      "id": 3,
+      "indx": "2a",
+      "qText": "fdsaf dsafdsafd safdsafdsa",
+      "aText": "fdsaf dsaf dsafdsa fd",
+      "hasFinished": false
     }
-  ]
+  ],
+  "teams": {
+    "homeName": "Fast and loos",
+    "homeHandicap": 7,
+    "awayName": "Blenheim Black",
+    "awayHandicap": 10,
+    "players": [
+      {
+        "seat": 1,
+        "name": "Andrew Fanko",
+        "isQuestionee": true,
+        "teamType": 1
+      },
+      {
+        "seat": 2,
+        "name": "Frankie Thomas",
+        "isQuestionee": false,
+        "teamType": 1
+      },
+      {
+        "seat": 3,
+        "name": "Ken Edmond",
+        "isQuestionee": false,
+        "teamType": 1
+      },
+      {
+        "seat": 4,
+        "name": "Ian Holmes",
+        "isQuestionee": false,
+        "teamType": 1
+      },
+      {
+        "seat": 1,
+        "name": "Pietro Aronica",
+        "isQuestionee": false,
+        "teamType": 2
+      },
+      {
+        "seat": 2,
+        "name": "Oliver Levy",
+        "isQuestionee": false,
+        "teamType": 2
+      },
+      {
+        "seat": 3,
+        "name": "Amy Machpherson",
+        "isQuestionee": false,
+        "teamType": 2
+      },
+      {
+        "seat": 4,
+        "name": "Chris James",
+        "isQuestionee": false,
+        "teamType": 2
+      }
+    ]
+  }
 }

@@ -1,11 +1,32 @@
+'use strict';
+
 import alt from '../../altWrapper';
 import Immutable from 'immutable';
+import gameActions from '../actions/gameActions';
 
 class GameStore {
   constructor() {
+    this.bindActions(gameActions);
     this.state = {
       gameData: Immutable.Map({})
     };
+    this.on('bootstrap', () => {
+      this.setQuestionee();
+    });
+  }
+
+  getQuestionee(players) {
+    return players.find((player) => player.get('isQuestionee'));
+  }
+
+  setQuestionee() {
+    const questionee = this.getQuestionee(this.state.gameData.getIn(['teams', 'players']));
+
+    this.setState({gameData: this.state.gameData.set('questionee', questionee.get('name'))});
+  }
+
+  onUpdateQuestionee() {
+    this.setState({gameData: this.state.gameData.set('questionee', 'Craig Bilner')});
   }
 }
 

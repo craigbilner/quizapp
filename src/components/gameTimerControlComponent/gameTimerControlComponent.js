@@ -1,17 +1,20 @@
 'use strict';
 
 import React from 'react';
+import gameActions from '../../actions/gameActions';
 
 export default class GameTimerControlComponent extends React.Component {
   constructor(props) {
     super(props);
+  }
 
-    this.state = {};
+  handleClick() {
+    gameActions.updateQuestionee();
   }
 
   render() {
     return (
-      <div className="game_timer-control webflex-row">
+      <div className="game_timer-control webflex-row" onClick={this.handleClick.bind(this)}>
         PAUSE
       </div>
     );

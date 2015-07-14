@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import AnswererComponent from '../answererComponent/answererComponent';
+import QuestioneeComponent from '../questioneeComponent/questioneeComponent';
 import QuestionComponent from '../questionComponent/questionComponent';
 import RoundComponent from '../roundComponent/roundComponent';
 import QuestionIndxComponent from '../questionIndxComponent/questionIndxComponent';
@@ -10,8 +10,6 @@ import AnswerComponent from '../answerComponent/answerComponent';
 export default class QuestionAnswerComponent extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {};
   }
 
   render() {
@@ -21,7 +19,7 @@ export default class QuestionAnswerComponent extends React.Component {
     return (
       <div>
         <div className="question_answer-player">
-          <AnswererComponent />
+          <QuestioneeComponent questionee={this.props.questionee}/>
         </div>
         <div className="question_answer-meta">
           <RoundComponent />
@@ -47,7 +45,9 @@ export default class QuestionAnswerComponent extends React.Component {
   }
 }
 
-QuestionAnswerComponent.propTypes = {};
+QuestionAnswerComponent.propTypes = {
+  questionee: React.PropTypes.string.isRequired
+};
 
 QuestionAnswerComponent.defaultProps = {};
 

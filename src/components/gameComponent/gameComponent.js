@@ -11,14 +11,19 @@ export default class GameComponent extends React.Component {
     super(props);
   }
 
+  shouldComponentUpdate(nextProps) {
+    return nextProps.gameData !== this.props.gameData;
+  }
+
   render() {
-    console.log(this.props, this.props.gameData.toJS());
+    const gd = this.props.gameData;
+    console.log(gd.toJS());
 
     return (
       <div className="game">
         <div className="game_top webflex-row">
           <div className="question_answer">
-            <QuestionAnswerComponent />
+            <QuestionAnswerComponent questionee={gd.get('questionee')}/>
           </div>
           <div className="game_timer">
             <GameTimingComponent />
