@@ -1,0 +1,11 @@
+{
+  "test": "file value",
+  "myArray": [
+    {
+      "a": 1
+    },
+    {
+      "b": 2
+    }
+  ]
+}

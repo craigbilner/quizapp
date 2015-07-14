@@ -9,7 +9,10 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules|.src\/server/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        query: {
+          stage: 0
+        }
       }
     ]
   },

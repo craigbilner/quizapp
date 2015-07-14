@@ -15,6 +15,9 @@ export default class QuestionAnswerComponent extends React.Component {
   }
 
   render() {
+    const tc1 = 'question_answer-question-indx question_answer-question-left question_answer-meta';
+    const tc2 = 'question_answer-answer-desc question_answer-question-left question_answer-meta';
+
     return (
       <div>
         <div className="question_answer-player">
@@ -24,7 +27,7 @@ export default class QuestionAnswerComponent extends React.Component {
           <RoundComponent />
         </div>
         <div className="question_answer-question webflex-row">
-          <div className="question_answer-question-indx question_answer-question-left question_answer-meta">
+          <div className={tc1}>
             <QuestionIndxComponent />
           </div>
           <div className="question_answer-question-text question_answer-question-right">
@@ -32,7 +35,7 @@ export default class QuestionAnswerComponent extends React.Component {
           </div>
         </div>
         <div className="question_answer-answer webflex-row">
-          <div className="question_answer-answer-desc question_answer-question-left question_answer-meta">
+          <div className={tc2}>
             Answer
           </div>
           <div className="question_answer-answer-text question_answer-question-right">

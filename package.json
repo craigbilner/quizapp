@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --progress --colors --display-error-details",
-    "watch": "webpack --progress --colors --display-error-details --watch",
-    "start": "babel-node --harmony ./src/server/server.js"
+    "build:watch": "npm run build -- --watch",
+    "start": "babel-node --harmony --stage 0 ./src/server/server.js",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,9 @@
   "dependencies": {
     "alt": "^0.17.0",
     "babel": "^5.6.14",
+    "immutable": "^3.7.4",
     "iso": "^4.1.0",
+    "jsonfile": "^2.2.1",
     "koa": "^0.21.0",
     "koa-common": "^1.2.0",
     "koa-hbs": "^0.7.0",

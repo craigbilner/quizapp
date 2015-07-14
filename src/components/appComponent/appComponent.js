@@ -13,7 +13,7 @@ export default class AppComponent extends React.Component {
   render() {
     return (
       <AltContainer store={GameStore}>
-        <GameComponent />
+        <GameComponent gameData={{}} />
       </AltContainer>
     );
   }

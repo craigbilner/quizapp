@@ -9,11 +9,11 @@ import GameSummaryComponent from '../gameSummaryComponent/gameSummaryComponent';
 export default class GameComponent extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {};
   }
 
   render() {
+    console.log(this.props, this.props.gameData.toJS());
+
     return (
       <div className="game">
         <div className="game_top webflex-row">
@@ -37,7 +37,9 @@ export default class GameComponent extends React.Component {
   }
 }
 
-GameComponent.propTypes = {};
+GameComponent.propTypes = {
+  gameData: React.PropTypes.object.isRequired
+};
 
 GameComponent.defaultProps = {};
 
