@@ -8,18 +8,18 @@ export default class QuestionIndxComponent extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return this.props.currentIndx !== nextProps.currentIndx;
+    return this.props.questionIndx !== nextProps.questionIndx;
   }
 
   render() {
     return (
-      <span>{this.props.currentIndx}</span>
+      <span>{this.props.questionIndx}</span>
     );
   }
 }
 
 QuestionIndxComponent.propTypes = {
-  currentIndx: React.PropTypes.string.isRequired
+  questionIndx: React.PropTypes.string.isRequired
 };
 
 QuestionIndxComponent.defaultProps = {};

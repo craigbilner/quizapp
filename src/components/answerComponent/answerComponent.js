@@ -11,12 +11,14 @@ export default class AnswerComponent extends React.Component {
 
   render() {
     return (
-      <span>Roma</span>
+      <span>{this.props.answerText}</span>
     );
   }
 }
 
-AnswerComponent.propTypes = {};
+AnswerComponent.propTypes = {
+  answerText: React.PropTypes.string.isRequired
+};
 
 AnswerComponent.defaultProps = {};
 

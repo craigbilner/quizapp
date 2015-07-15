@@ -46,10 +46,24 @@ class GameStore {
     });
   }
 
+  setQuestionText(text) {
+    this.setState({
+      gameData: this.state.gameData.set('currentQuestion', text)
+    });
+  }
+
+  setAnswerText(text){
+    this.setState({
+      gameData: this.state.gameData.set('currentAnswer', text)
+    });
+  }
+
   setQuestion() {
     const question = this.getQuestion(this.state.gameData.get('questionSet'));
     this.setRound(question.get('indx'));
     this.setIndx(question.get('indx'));
+    this.setQuestionText(question.get('qText'));
+    this.setAnswerText(question.get('aText'));
   }
 
   getQuestionee(players) {

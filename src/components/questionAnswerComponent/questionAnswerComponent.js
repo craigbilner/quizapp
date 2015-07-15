@@ -22,14 +22,14 @@ export default class QuestionAnswerComponent extends React.Component {
           <QuestioneeComponent questionee={this.props.questionee}/>
         </div>
         <div className="question_answer-meta">
-          <RoundComponent roundName={this.props.roundName} />
+          <RoundComponent roundName={this.props.roundName}/>
         </div>
         <div className="question_answer-question webflex-row">
           <div className={tc1}>
-            <QuestionIndxComponent currentIndx={this.props.currentIndx} />
+            <QuestionIndxComponent questionIndx={this.props.questionIndx}/>
           </div>
           <div className="question_answer-question-text question_answer-question-right">
-            <QuestionComponent />
+            <QuestionComponent questionText={this.props.questionText}/>
           </div>
         </div>
         <div className="question_answer-answer webflex-row">
@@ -37,7 +37,7 @@ export default class QuestionAnswerComponent extends React.Component {
             Answer
           </div>
           <div className="question_answer-answer-text question_answer-question-right">
-            <AnswerComponent />
+            <AnswerComponent answerText={this.props.answerText}/>
           </div>
         </div>
       </div>
@@ -48,7 +48,9 @@ export default class QuestionAnswerComponent extends React.Component {
 QuestionAnswerComponent.propTypes = {
   questionee: React.PropTypes.string.isRequired,
   roundName: React.PropTypes.string.isRequired,
-  currentIndx: React.PropTypes.string.isRequired
+  questionIndx: React.PropTypes.string.isRequired,
+  questionText: React.PropTypes.string.isRequired,
+  answerText: React.PropTypes.string.isRequired
 };
 
 QuestionAnswerComponent.defaultProps = {};
