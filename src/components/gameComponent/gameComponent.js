@@ -26,6 +26,7 @@ export default class GameComponent extends React.Component {
             <QuestionAnswerComponent
               questionee={gd.get('questionee')}
               roundName={gd.get('roundName')}
+              currentIndx={gd.get('currentIndx')}
               />
           </div>
           <div className="game_timer">

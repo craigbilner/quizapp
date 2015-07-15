@@ -18,7 +18,9 @@ export default class RoundComponent extends React.Component {
   }
 }
 
-RoundComponent.propTypes = {};
+RoundComponent.propTypes = {
+  roundName: React.PropTypes.string.isRequired
+};
 
 RoundComponent.defaultProps = {};
 

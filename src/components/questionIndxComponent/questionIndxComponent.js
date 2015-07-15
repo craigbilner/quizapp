@@ -5,18 +5,22 @@ import React from 'react';
 export default class QuestionIndxComponent extends React.Component {
   constructor(props) {
     super(props);
+  }
 
-    this.state = {};
+  shouldComponentUpdate(nextProps) {
+    return this.props.currentIndx !== nextProps.currentIndx;
   }
 
   render() {
     return (
-      <span>1B</span>
+      <span>{this.props.currentIndx}</span>
     );
   }
 }
 
-QuestionIndxComponent.propTypes = {};
+QuestionIndxComponent.propTypes = {
+  currentIndx: React.PropTypes.string.isRequired
+};
 
 QuestionIndxComponent.defaultProps = {};
 
