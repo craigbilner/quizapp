@@ -22,7 +22,7 @@ export default class QuestionAnswerComponent extends React.Component {
           <QuestioneeComponent questionee={this.props.questionee}/>
         </div>
         <div className="question_answer-meta">
-          <RoundComponent />
+          <RoundComponent roundName={this.props.roundName} />
         </div>
         <div className="question_answer-question webflex-row">
           <div className={tc1}>

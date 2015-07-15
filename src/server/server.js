@@ -17,6 +17,7 @@ app.use(hbs.middleware({
   viewPath: './src/views'
 }));
 
+app.use(common.favicon(__dirname + '/dist/favicon.ico'));
 app.use(common.static('./dist'));
 
 app.use(function *(next) {

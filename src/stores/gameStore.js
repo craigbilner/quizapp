@@ -12,6 +12,26 @@ class GameStore {
     };
     this.on('bootstrap', () => {
       this.setQuestionee();
+      this.setRound();
+    });
+  }
+
+  getRound(questionSet) {
+    const lastQuestion = questionSet.find(question => !question.get('hasFinished'));
+
+    if (lastQuestion) {
+      const [round] = lastQuestion.get('indx');
+      return parseInt(round, 10);
+    }
+    else {
+      return 1;
+    }
+  }
+
+  setRound() {
+    const roundName = `Round ${this.getRound(this.state.gameData.get('questionSet'))}`;
+    this.setState({
+      gameData: this.state.gameData.set('roundName', roundName)
     });
   }
 
@@ -22,11 +42,15 @@ class GameStore {
   setQuestionee() {
     const questionee = this.getQuestionee(this.state.gameData.getIn(['teams', 'players']));
 
-    this.setState({gameData: this.state.gameData.set('questionee', questionee.get('name'))});
+    this.setState({
+      gameData: this.state.gameData.set('questionee', questionee.get('name'))
+    });
   }
 
   onUpdateQuestionee() {
-    this.setState({gameData: this.state.gameData.set('questionee', 'Craig Bilner')});
+    this.setState({
+      gameData: this.state.gameData.set('questionee', 'Craig Bilner')
+    });
   }
 }
 

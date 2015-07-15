@@ -5,13 +5,15 @@ import React from 'react';
 export default class RoundComponent extends React.Component {
   constructor(props) {
     super(props);
+  }
 
-    this.state = {};
+  shouldComponentUpdate(nextProps) {
+    return this.props.roundName !== nextProps.roundName;
   }
 
   render() {
     return (
-      <span>Round 3</span>
+      <span>{this.props.roundName}</span>
     );
   }
 }

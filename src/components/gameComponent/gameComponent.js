@@ -23,7 +23,10 @@ export default class GameComponent extends React.Component {
       <div className="game">
         <div className="game_top webflex-row">
           <div className="question_answer">
-            <QuestionAnswerComponent questionee={gd.get('questionee')}/>
+            <QuestionAnswerComponent
+              questionee={gd.get('questionee')}
+              roundName={gd.get('roundName')}
+              />
           </div>
           <div className="game_timer">
             <GameTimingComponent />
