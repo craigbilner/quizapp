@@ -1,7 +1,10 @@
 {
   "aDesc": "Answer",
   "roundDesc": "Round",
-  "qm": "Mark Cooper",
+  "qm": {
+    "playerId": 9,
+    "name": "Mark Cooper"
+  },
   "venue": "Crown",
   "setBy": "David Stainer",
   "questionSet": [
@@ -35,48 +38,56 @@
     "players": [
       {
         "seat": 1,
+        "playerId": 1,
         "name": "Andrew Fanko",
         "isQuestionee": true,
         "teamType": 1
       },
       {
         "seat": 2,
+        "playerId": 2,
         "name": "Frankie Thomas",
         "isQuestionee": false,
         "teamType": 1
       },
       {
         "seat": 3,
+        "playerId": 3,
         "name": "Ken Edmond",
         "isQuestionee": false,
         "teamType": 1
       },
       {
         "seat": 4,
+        "playerId": 4,
         "name": "Ian Holmes",
         "isQuestionee": false,
         "teamType": 1
       },
       {
         "seat": 1,
+        "playerId": 5,
         "name": "Pietro Aronica",
         "isQuestionee": false,
         "teamType": 2
       },
       {
         "seat": 2,
+        "playerId": 6,
         "name": "Oliver Levy",
         "isQuestionee": false,
         "teamType": 2
       },
       {
         "seat": 3,
+        "playerId": 7,
         "name": "Amy Machpherson",
         "isQuestionee": false,
         "teamType": 2
       },
       {
         "seat": 4,
+        "playerId": 8,
         "name": "Chris James",
         "isQuestionee": false,
         "teamType": 2

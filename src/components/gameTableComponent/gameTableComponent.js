@@ -15,10 +15,10 @@ export default class GameTableComponent extends React.Component {
     return (
       <div>
         <div className="table_container-top webflex-row">
-          <TableTeamComponent />
+          <TableTeamComponent players={this.props.homeTeam}/>
 
           <div className="table_container-table_main"></div>
-          <TableTeamComponent />
+          <TableTeamComponent players={this.props.awayTeam}/>
         </div>
         <div className="table_container-bottom webflex-row">
           <div className="table-container-team"></div>
@@ -28,7 +28,7 @@ export default class GameTableComponent extends React.Component {
         <div className="table_container-bottom webflex-row">
           <div className="table-container-team"></div>
           <div className="table-container-qm">
-            <QMComponent />
+            <QMComponent player={this.props.questionMaster} />
           </div>
           <div className="table-container-team"></div>
         </div>
@@ -37,7 +37,11 @@ export default class GameTableComponent extends React.Component {
   }
 }
 
-GameTableComponent.propTypes = {};
+GameTableComponent.propTypes = {
+  homeTeam: React.PropTypes.object.isRequired,
+  awayTeam: React.PropTypes.object.isRequired,
+  questionMaster: React.PropTypes.object.isRequired
+};
 
 GameTableComponent.defaultProps = {};
 

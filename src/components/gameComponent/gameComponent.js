@@ -37,7 +37,11 @@ export default class GameComponent extends React.Component {
         </div>
         <div className="game_bottom webflex-row">
           <div className="table_container">
-            <GameTableComponent />
+            <GameTableComponent
+              homeTeam={gd.get('homeTeam')}
+              awayTeam={gd.get('awayTeam')}
+              questionMaster={gd.get('questionMaster')}
+              />
           </div>
           <div className="game_summary_container">
             <GameSummaryComponent />

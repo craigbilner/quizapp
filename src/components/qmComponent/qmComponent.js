@@ -5,18 +5,18 @@ import React from 'react';
 export default class QMComponent extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {};
   }
 
   render() {
     return (
-      <div className="player_profile player_profile_qm">MC</div>
+      <div className="player_profile player_profile_qm">{this.props.player.get('initials')}</div>
     );
   }
 }
 
-QMComponent.propTypes = {};
+QMComponent.propTypes = {
+  player: React.PropTypes.object.isRequired
+};
 
 QMComponent.defaultProps = {};
 

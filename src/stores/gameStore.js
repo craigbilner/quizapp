@@ -11,9 +11,54 @@ class GameStore {
       gameData: Immutable.Map({})
     };
     this.on('bootstrap', () => {
-      this.setQuestionee();
       this.setQuestion();
+      this.setTeams();
     });
+  }
+
+  setHomeTeam(homeTeam) {
+    this.setState({
+      gameData: this.state.gameData.set('homeTeam', homeTeam)
+    });
+  }
+
+  setAwayTeam(awayTeam) {
+    this.setState({
+      gameData: this.state.gameData.set('awayTeam', awayTeam)
+    });
+  }
+
+  getPlayerInitials(name) {
+    return name
+      .split(' ')
+      .reduce(function (prev, next) {
+        prev.push(next[0]);
+        return prev;
+      }, [])
+      .join('')
+      .toUpperCase();
+  }
+
+  getTeamOfType(players, teamType) {
+    return players.filter(player => player.get('teamType') === teamType)
+      .map(player => player.set('initials', this.getPlayerInitials(player.get('name'))));
+  }
+
+  setQM(qm) {
+    const questionMaster = qm.set('initials', this.getPlayerInitials(qm.get('name')));
+
+    this.setState({
+      gameData: this.state.gameData.set('questionMaster', questionMaster)
+    });
+  }
+
+  setTeams() {
+    const players = this.state.gameData.getIn(['teams', 'players']);
+
+    this.setQuestionee(players);
+    this.setHomeTeam(this.getTeamOfType(players, 1));
+    this.setAwayTeam(this.getTeamOfType(players, 2));
+    this.setQM(this.state.gameData.get('qm'));
   }
 
   setRound(indx) {
@@ -52,7 +97,7 @@ class GameStore {
     });
   }
 
-  setAnswerText(text){
+  setAnswerText(text) {
     this.setState({
       gameData: this.state.gameData.set('currentAnswer', text)
     });
@@ -70,8 +115,8 @@ class GameStore {
     return players.find(player => player.get('isQuestionee'));
   }
 
-  setQuestionee() {
-    const questionee = this.getQuestionee(this.state.gameData.getIn(['teams', 'players']));
+  setQuestionee(players) {
+    const questionee = this.getQuestionee(players);
 
     this.setState({
       gameData: this.state.gameData.set('questionee', questionee.get('name'))
