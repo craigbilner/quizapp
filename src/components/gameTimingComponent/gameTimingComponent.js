@@ -8,8 +8,6 @@ import GameTimerControlComponent from '../gameTimerControlComponent/gameTimerCon
 export default class GameTimingComponent extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {};
   }
 
   render() {
@@ -19,7 +17,7 @@ export default class GameTimingComponent extends React.Component {
           Time remaining
         </div>
         <div className="game_timer-time">
-          <GameTimerComponent />
+          <GameTimerComponent gameTime={this.props.gameTime}/>
         </div>
         <div className="game_timer-message">
           <GameTimerMessageComponent />
@@ -32,7 +30,9 @@ export default class GameTimingComponent extends React.Component {
   }
 }
 
-GameTimingComponent.propTypes = {};
+GameTimingComponent.propTypes = {
+  gameTime: React.PropTypes.number.isRequired
+};
 
 GameTimingComponent.defaultProps = {};
 

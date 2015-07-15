@@ -1,35 +1,51 @@
 'use strict';
 
 import React from 'react';
+import gameActions from '../../actions/gameActions';
 
 export default class GameTimerComponent extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      time: 0
-    };
   }
 
-  componentDidMount() {
+  startTimer() {
+    this.clearTimer();
     this.timerInterval = setInterval(()=> {
-      const timeToSet = this.state.time === 0 ? 10 : this.state.time - 1;
-      this.setState({time: timeToSet});
+      gameActions.updateTime(this.props.gameTime - 1);
     }, 1000);
   }
 
-  componentWillUnmount() {
+  clearTimer() {
     clearInterval(this.timerInterval);
+    this.timerInterval = 0;
+  }
+
+  componentDidMount() {
+    this.startTimer();
+  }
+
+  componentWillUnmount() {
+    this.clearTimer();
+  }
+
+  componentWillReceiveProps() {
+    if (this.props.gameTime === 1) {
+      this.clearTimer();
+    } else if (!this.timerInterval) {
+      this.startTimer();
+    }
   }
 
   render() {
     return (
-      <span>{this.state.time}</span>
+      <span>{this.props.gameTime}</span>
     );
   }
 }
 
-GameTimerComponent.propTypes = {};
+GameTimerComponent.propTypes = {
+  gameTime: React.PropTypes.number.isRequired
+};
 
 GameTimerComponent.defaultProps = {};
 

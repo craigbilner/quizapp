@@ -17,8 +17,6 @@ export default class GameComponent extends React.Component {
 
   render() {
     const gd = this.props.gameData;
-    console.log(gd.toJS());
-
     return (
       <div className="game">
         <div className="game_top webflex-row">
@@ -32,7 +30,9 @@ export default class GameComponent extends React.Component {
               />
           </div>
           <div className="game_timer">
-            <GameTimingComponent />
+            <GameTimingComponent
+              gameTime={gd.get('gameTime')}
+              />
           </div>
         </div>
         <div className="game_bottom webflex-row">
@@ -44,7 +44,12 @@ export default class GameComponent extends React.Component {
               />
           </div>
           <div className="game_summary_container">
-            <GameSummaryComponent />
+            <GameSummaryComponent
+              homeName={gd.getIn(['teams', 'homeName'])}
+              homeTeam={gd.get('homeTeam')}
+              awayName={gd.getIn(['teams', 'awayName'])}
+              awayTeam={gd.get('awayTeam')}
+              />
           </div>
         </div>
       </div>

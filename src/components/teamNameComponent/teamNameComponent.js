@@ -5,18 +5,18 @@ import React from 'react';
 export default class TeamNameComponent extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {};
   }
 
   render() {
     return (
-      <span>Fast and Loose</span>
+      <span>{this.props.teamName}</span>
     );
   }
 }
 
-TeamNameComponent.propTypes = {};
+TeamNameComponent.propTypes = {
+  teamName: React.PropTypes.string.isRequired
+};
 
 TeamNameComponent.defaultProps = {};
 

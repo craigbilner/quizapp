@@ -1,10 +1,15 @@
 'use strict';
 
 import React from 'react';
+import gameActions from '../../actions/gameActions';
 
 export default class TableTeamComponent extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  handleClick(playerId) {
+    gameActions.playerAnswered(playerId);
   }
 
   render() {
@@ -13,7 +18,10 @@ export default class TableTeamComponent extends React.Component {
         {
           this.props.players.map(player => {
             return (
-              <div key={player.get('playerId')} className="table_container-player">
+              <div
+                key={player.get('playerId')}
+                className="table_container-player"
+                onClick={this.handleClick.bind(this, player.get('playerId'))}>
                 <div className="player_profile">{player.get('initials')}</div>
               </div>
             );

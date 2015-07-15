@@ -13,6 +13,13 @@ class GameStore {
     this.on('bootstrap', () => {
       this.setQuestion();
       this.setTeams();
+      this.setTime();
+    });
+  }
+
+  setTime(newTime = 10) {
+    this.setState({
+      gameData: this.state.gameData.set('gameTime', Math.max(newTime, 0))
     });
   }
 
@@ -41,7 +48,11 @@ class GameStore {
 
   getTeamOfType(players, teamType) {
     return players.filter(player => player.get('teamType') === teamType)
-      .map(player => player.set('initials', this.getPlayerInitials(player.get('name'))));
+      .map(player => {
+        const init = player.set('initials', this.getPlayerInitials(player.get('name')));
+        const total = init.set('total', 0);
+        return total.set('twos', 0);
+      });
   }
 
   setQM(qm) {
@@ -121,6 +132,14 @@ class GameStore {
     this.setState({
       gameData: this.state.gameData.set('questionee', questionee.get('name'))
     });
+  }
+
+  onPlayerAnswered() {
+    this.setTime();
+  }
+
+  onUpdateTime(newTime) {
+    this.setTime(newTime);
   }
 
   onUpdateQuestionee() {
