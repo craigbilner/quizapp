@@ -3,9 +3,16 @@
   "version": "0.0.1",
   "description": "Upload quiz questions in a PDF or create your own quizzes, then play the quiz league team format with an easy to use interface to handle questions, timing and scoring. With live scoreboards and stats it takes the hassle out of quiz admin.",
   "main": "index.js",
+  "config": {
+    "wpConfig": ""
+  },
   "scripts": {
-    "build": "webpack --progress --colors --display-error-details",
+    "build:base": "webpack --config $npm_package_config_wpConfig --progress --colors --display-error-details",
+    "build": "npm run build:base --quizapp:qpConfig=webpack.config.js --",
     "build:watch": "npm run build -- --watch",
+    "test:build": "npm run build:base --quizapp:wpConfig=webpack.test.config.js --",
+    "test:build:watch": "npm run build:base --quizapp:wpConfig=webpack.test.config.js -- --watch",
+    "test": "mocha ./src/tests.min.js",
     "start": "babel-node --harmony --stage 0 ./src/server/server.js",
     "lint": "eslint src"
   },
@@ -42,7 +49,9 @@
     "eslint": "^0.24.0",
     "eslint-plugin-react": "^2.6.4",
     "jsx-loader": "^0.13.2",
+    "mocha": "^2.2.5",
     "node-libs-browser": "^0.5.2",
+    "react-test-utils": "0.0.1",
     "webpack": "^1.10.1"
   }
 }
