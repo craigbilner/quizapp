@@ -17,7 +17,7 @@ export default class GameTimingComponent extends React.Component {
           Time remaining
         </div>
         <div className="game_timer-time">
-          <GameTimerComponent gameTime={this.props.gameTime}/>
+          <GameTimerComponent gameTime={this.props.gameTime} isReset={this.props.resetGameTime}/>
         </div>
         <div className="game_timer-message">
           <GameTimerMessageComponent />
@@ -31,7 +31,8 @@ export default class GameTimingComponent extends React.Component {
 }
 
 GameTimingComponent.propTypes = {
-  gameTime: React.PropTypes.number.isRequired
+  gameTime: React.PropTypes.number.isRequired,
+  resetGameTime: React.PropTypes.bool.isRequired
 };
 
 GameTimingComponent.defaultProps = {};

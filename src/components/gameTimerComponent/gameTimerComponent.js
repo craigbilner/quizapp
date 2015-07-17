@@ -6,18 +6,23 @@ import gameActions from '../../actions/gameActions';
 export default class GameTimerComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.timeInterval = 1000;
+  }
+
+  timeFunc() {
+    gameActions.updateTime(this.props.gameTime - 1);
+    if (this.props.gameTime !== 0) {
+      this.timer = setTimeout(this.timeFunc.bind(this), this.timeInterval);
+    }
   }
 
   startTimer() {
-    this.clearTimer();
-    this.timerInterval = setInterval(()=> {
-      gameActions.updateTime(this.props.gameTime - 1);
-    }, 1000);
+    this.timer = setTimeout(this.timeFunc.bind(this), this.timeInterval);
   }
 
   clearTimer() {
-    clearInterval(this.timerInterval);
-    this.timerInterval = 0;
+    clearTimeout(this.timer);
+    this.timer = 0;
   }
 
   componentDidMount() {
@@ -28,15 +33,12 @@ export default class GameTimerComponent extends React.Component {
     this.clearTimer();
   }
 
-  componentWillReceiveProps() {
-    if (this.props.gameTime === 1) {
+  render() {
+    if (this.props.isReset) {
       this.clearTimer();
-    } else if (!this.timerInterval) {
       this.startTimer();
     }
-  }
 
-  render() {
     return (
       <span>{this.props.gameTime}</span>
     );
@@ -44,7 +46,8 @@ export default class GameTimerComponent extends React.Component {
 }
 
 GameTimerComponent.propTypes = {
-  gameTime: React.PropTypes.number.isRequired
+  gameTime: React.PropTypes.number.isRequired,
+  isReset: React.PropTypes.bool.isRequired
 };
 
 GameTimerComponent.defaultProps = {};

@@ -13,13 +13,18 @@ class GameStore {
     this.on('bootstrap', () => {
       this.setQuestion();
       this.setTeams();
-      this.setTime();
+      this.setTime({
+        reset: false
+      });
     });
   }
 
-  setTime(newTime = 10) {
+  setTime({newTime = 10, reset = false}) {
+    const timeUpdate = this.state.gameData.set('gameTime', Math.max(newTime, 0));
+    const resetUpdate = timeUpdate.set('resetGameTime', reset);
+
     this.setState({
-      gameData: this.state.gameData.set('gameTime', Math.max(newTime, 0))
+      gameData: resetUpdate
     });
   }
 
@@ -47,7 +52,8 @@ class GameStore {
   }
 
   getTeamOfType(players, teamType) {
-    return players.filter(player => player.get('teamType') === teamType)
+    return players
+      .filter(player => player.get('teamType') === teamType)
       .map(player => {
         const init = player.set('initials', this.getPlayerInitials(player.get('name')));
         const total = init.set('total', 0);
@@ -55,12 +61,15 @@ class GameStore {
       });
   }
 
-  setQM(qm) {
-    const questionMaster = qm.set('initials', this.getPlayerInitials(qm.get('name')));
-
+  setQM(questionMaster) {
     this.setState({
       gameData: this.state.gameData.set('questionMaster', questionMaster)
     });
+  }
+
+  getQM() {
+    const qm = this.state.gameData.get('qm');
+    return qm.set('initials', this.getPlayerInitials(qm.get('name')));
   }
 
   setTeams() {
@@ -69,7 +78,7 @@ class GameStore {
     this.setQuestionee(players);
     this.setHomeTeam(this.getTeamOfType(players, 1));
     this.setAwayTeam(this.getTeamOfType(players, 2));
-    this.setQM(this.state.gameData.get('qm'));
+    this.setQM(this.getQM());
   }
 
   setRound(indx) {
@@ -135,11 +144,14 @@ class GameStore {
   }
 
   onPlayerAnswered() {
-    this.setTime();
+    this.setTime({reset: true, newTime: 10});
   }
 
   onUpdateTime(newTime) {
-    this.setTime(newTime);
+    this.setTime({
+      reset: false,
+      newTime: newTime
+    });
   }
 
   onUpdateQuestionee() {
