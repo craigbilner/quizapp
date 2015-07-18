@@ -9,6 +9,7 @@ import GameSummaryComponent from '../gameSummaryComponent/gameSummaryComponent';
 export default class GameComponent extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props.gameData.toJS());
   }
 
   shouldComponentUpdate(nextProps) {

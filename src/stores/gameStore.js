@@ -13,10 +13,14 @@ class GameStore {
     };
   }
 
-  onPlayerAnswered() {
+  onPlayerAnswered(opts) {
     this.setState({
       gameData: gameStoreLogic
         .applyRules(this.state.gameData)
+        .applyScore(opts)
+        .applyNextQuestion()
+        .applyQuestion()
+        .applyQuestionee()
         .applyTime({
           reset: true,
           newTime: 10,

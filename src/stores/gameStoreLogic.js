@@ -2,9 +2,9 @@
 
 import Immutable from 'immutable';
 
-class GameStoreLogic {
-  constructor() {
-    this.tempData = new Immutable.Map({});
+class BaseLogic {
+  constructor(data = Immutable.fromJS({})) {
+    this.tempData = data;
   }
 
   applyRules(data) {
@@ -12,6 +12,44 @@ class GameStoreLogic {
     return this;
   }
 
+  applyQuestion() {
+    return this;
+  }
+
+  applyNextQuestion() {
+    return this;
+  }
+
+  applyQuestionee() {
+    return this;
+  }
+
+  applyTeams() {
+    return this;
+  }
+
+  applyQM() {
+    return this;
+  }
+
+  applyTime() {
+    return this;
+  }
+
+  applyTimerText() {
+    return this;
+  }
+
+  applyScore() {
+    return this;
+  }
+
+  result() {
+    return this.tempData;
+  }
+}
+
+class GameStoreLogic extends BaseLogic {
   applyQuestion() {
     const question = this.getQuestion(this.tempData.get('questionSet'));
 
@@ -28,6 +66,22 @@ class GameStoreLogic {
     return this;
   }
 
+  applyNextQuestion() {
+    const questioneeIndx = this.tempData
+      .getIn(['teams', 'players'])
+      .findIndex(player => player.get('isQuestionee'));
+    const questionIndx = this.tempData
+      .get('questionSet')
+      .findIndex(question => !question.get('hasFinished'));
+
+    this.tempData = this.tempData
+      .setIn([questioneeIndx, 'isQuestionee'], false)
+      .setIn([questioneeIndx === 7 ? 0 : questioneeIndx, 'isQuestionee'], true)
+      .setIn(['questionSet', questionIndx, 'hasFinished'], true);
+
+    return this;
+  }
+
   applyQuestionee() {
     const questionee = this.tempData
       .getIn(['teams', 'players'])
@@ -36,7 +90,7 @@ class GameStoreLogic {
     this.tempData = this.tempData.merge({
       questioneeName: questionee.get('name'),
       questioneeId: questionee.get('playerId'),
-      questioneeTeam: questionee.get('teamType')
+      questioneeTeamType: questionee.get('teamType')
     });
 
     return this;
@@ -83,8 +137,60 @@ class GameStoreLogic {
     return this;
   }
 
+  applyScore({playerId, teamType, seat}) {
+
+    if (teamType !== this.tempData.get('questioneeTeamType')) {
+      return new BaseLogic(this.tempData);
+    }
+
+    const {score, isOwnQuestion} = this.calculateScore.call(this.calculateScore, this.tempData, playerId, teamType)
+      .isOwnQuestion(2)
+      .isOwnTeam(1)
+      .score();
+
+    const playerPath = [
+      teamType === 1 ? 'homeTeam' : 'awayTeam',
+      seat - 1
+    ];
+
+    this.tempData = this.tempData
+      .updateIn([...playerPath, 'total'], total => total + score)
+      .updateIn([...playerPath, 'twos'], twos => twos + (isOwnQuestion >> 0));
+
+    return this;
+  }
+
   result() {
     return this.tempData;
+  }
+
+  calculateScore(data, playerId, teamType) {
+    const isOwnTeam = teamType === data.get('questioneeTeamType');
+    const isOwnQuestion = isOwnTeam && playerId === data.get('questioneeId');
+    let playerScore = 0;
+
+    this.isOwnQuestion = score => {
+      if (playerScore === 0 && isOwnQuestion) {
+        playerScore = score;
+      }
+      return this;
+    };
+
+    this.isOwnTeam = score => {
+      if (playerScore === 0 && isOwnTeam) {
+        playerScore = score;
+      }
+      return this;
+    };
+
+    this.score = () => {
+      return {
+        score: playerScore,
+        isOwnQuestion: isOwnQuestion
+      };
+    };
+
+    return this;
   }
 
   keyIn(keys) {
@@ -109,9 +215,11 @@ class GameStoreLogic {
     return players
       .filter(player => player.get('teamType') === teamType)
       .map(player => {
-        const init = player.set('initials', this.getPlayerInitials(player.get('name')));
-        const total = init.set('total', 0);
-        return total.set('twos', 0);
+        return player.merge({
+          initials: this.getPlayerInitials(player.get('name')),
+          total: 0,
+          twos: 0
+        });
       });
   }
 
@@ -119,7 +227,9 @@ class GameStoreLogic {
     const lastQuestion = questionSet.find(question => !question.get('hasFinished'));
 
     return lastQuestion || Immutable.fromJS({
-        qText: 'there are no more questions'
+        indx: '00',
+        qText: 'there are no more questions',
+        aText: 'there are no more answers'
       });
   }
 
