@@ -73,10 +73,11 @@ class GameStoreLogic extends BaseLogic {
     const questionIndx = this.tempData
       .get('questionSet')
       .findIndex(question => !question.get('hasFinished'));
+    const nextIndx = questioneeIndx === 7 ? 0 : questioneeIndx + 1;
 
     this.tempData = this.tempData
-      .setIn([questioneeIndx, 'isQuestionee'], false)
-      .setIn([questioneeIndx === 7 ? 0 : questioneeIndx, 'isQuestionee'], true)
+      .setIn(['teams', 'players', questioneeIndx, 'isQuestionee'], false)
+      .setIn(['teams', 'players', nextIndx, 'isQuestionee'], true)
       .setIn(['questionSet', questionIndx, 'hasFinished'], true);
 
     return this;
@@ -97,6 +98,15 @@ class GameStoreLogic extends BaseLogic {
   }
 
   applyTeams() {
+    const teamSort = this.teamSort(this.tempData.get('firstTeamType'));
+
+    this.tempData = this.tempData.setIn(['teams', 'players'], this.tempData
+      .getIn(['teams', 'players'])
+      .sort(teamSort)
+      .sort((prev, next) => {
+        return prev.get('seat') > next.get('seat');
+      }));
+
     const players = this.tempData.getIn(['teams', 'players']);
 
     this.tempData = this.tempData.merge({
@@ -138,12 +148,13 @@ class GameStoreLogic extends BaseLogic {
   }
 
   applyScore({playerId, teamType, seat}) {
-
     if (teamType !== this.tempData.get('questioneeTeamType')) {
       return new BaseLogic(this.tempData);
     }
 
-    const {score, isOwnQuestion} = this.calculateScore.call(this.calculateScore, this.tempData, playerId, teamType)
+    const {score, isOwnQuestion} = this
+      .calculateScore
+      .call(this.calculateScore, this.tempData, playerId, teamType)
       .isOwnQuestion(2)
       .isOwnTeam(1)
       .score();
@@ -162,6 +173,13 @@ class GameStoreLogic extends BaseLogic {
 
   result() {
     return this.tempData;
+  }
+
+  teamSort(firstTeamType = 1) {
+    return (prev, next) => {
+      const diff = prev.get('teamType') - next.get('teamType');
+      return diff * (firstTeamType === 1 ? 1 : -1);
+    };
   }
 
   calculateScore(data, playerId, teamType) {

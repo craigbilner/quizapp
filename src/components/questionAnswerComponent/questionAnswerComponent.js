@@ -15,9 +15,10 @@ export default class QuestionAnswerComponent extends React.Component {
   render() {
     const tc1 = 'question_answer-question-indx question_answer-question-left question_answer-meta';
     const tc2 = 'question_answer-answer-desc question_answer-question-left question_answer-meta';
+    let returnValue = '<div></div>';
 
     if (this.props.questionIndx !== '00') {
-      return (
+      returnValue = (
         <div>
           <div className="question_answer-player">
             <QuestioneeComponent questioneeName={this.props.questioneeName}/>
@@ -43,12 +44,13 @@ export default class QuestionAnswerComponent extends React.Component {
           </div>
         </div>
       );
-    }
-    else {
-      return (
+    } else {
+      returnValue = (
         <div>Game Over!</div>
       );
     }
+
+    return returnValue;
   }
 }
 
