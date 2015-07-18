@@ -10,6 +10,8 @@ import common from 'koa-common';
 import path from 'path';
 import getFiles from '../helpers/getFiles';
 import AppComponent from '../components/appComponent/appComponent';
+import Immutable from'immutable';
+import gameStoreLogic from '../stores/gameStoreLogic';
 
 const app = koa();
 
@@ -27,7 +29,14 @@ app.use(function *(next) {
 
   const data = {
     GameStore: {
-      gameData
+      gameData: gameStoreLogic
+        .applyRules(Immutable.fromJS(gameData))
+        .applyQuestion()
+        .applyQuestionee()
+        .applyTeams()
+        .applyQM()
+        .applyTime({})
+        .result()
     }
   };
 

@@ -11,18 +11,6 @@ class GameStore {
     this.state = {
       gameData: Immutable.Map({})
     };
-    this.on('bootstrap', () => {
-      this.setState({
-        gameData: gameStoreLogic
-          .applyRules(this.state.gameData)
-          .applyQuestion()
-          .applyQuestionee()
-          .applyTeams()
-          .applyQM()
-          .applyTime({})
-          .result()
-      });
-    });
   }
 
   onPlayerAnswered() {
