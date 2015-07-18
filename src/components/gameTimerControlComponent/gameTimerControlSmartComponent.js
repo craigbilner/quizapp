@@ -3,13 +3,13 @@
 import React from 'react';
 import gameActions from '../../actions/gameActions';
 
-export default class GameTimerSmartComponent extends React.Component {
+export default class GameTimerControlSmartComponent extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  handleTimeChanged(newTime) {
-    gameActions.updateTime(newTime);
+  handleClick(isPaused) {
+    gameActions.toggleTime({isPaused: !isPaused});
   }
 
   render() {
@@ -18,7 +18,7 @@ export default class GameTimerSmartComponent extends React.Component {
         {
           React.Children.map(this.props.children, child => {
             return React.cloneElement(child, {
-              onTimeChange: this.handleTimeChanged.bind(this)
+              handleClick: this.handleClick.bind(this)
             });
           })
         }
@@ -27,11 +27,8 @@ export default class GameTimerSmartComponent extends React.Component {
   }
 }
 
-GameTimerSmartComponent.propTypes = {
+GameTimerControlSmartComponent.propTypes = {
   children: React.PropTypes.object
 };
 
-GameTimerSmartComponent.defaultProps = {
-  timeInterval: 1000
-};
-
+GameTimerControlSmartComponent.defaultProps = {};

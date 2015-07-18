@@ -8,7 +8,7 @@ export default class GameTimerComponent extends React.Component {
   }
 
   timeFunc() {
-    this.props.onTimeChange();
+    this.props.onTimeChange(this.props.gameTime - (this.props.timeInterval / 1000));
     if (this.props.gameTime !== 0) {
       this.startTimer();
     }
@@ -49,7 +49,7 @@ GameTimerComponent.propTypes = {
   gameTime: React.PropTypes.number.isRequired,
   isPaused: React.PropTypes.bool.isRequired,
   isReset: React.PropTypes.bool.isRequired,
-  onTimeChange: React.PropTypes.func.isRequired,
+  onTimeChange: React.PropTypes.func,
   timeInterval: React.PropTypes.number.isRequired
 };
 

@@ -15,7 +15,9 @@ export default class GameTimerControlComponent extends React.Component {
 
   render() {
     return (
-      <div className="game_timer-control webflex-row">
+      <div
+        className="game_timer-control webflex-row"
+        onClick={this.props.handleClick.bind(this, this.props.isPaused)}>
         {this.getButtonText(this.props.isPaused)}
       </div>
     );
@@ -24,7 +26,8 @@ export default class GameTimerControlComponent extends React.Component {
 
 GameTimerControlComponent.propTypes = {
   isPaused: React.PropTypes.bool.isRequired,
-  timerText: React.PropTypes.object.isRequired
+  timerText: React.PropTypes.object.isRequired,
+  handleClick: React.PropTypes.func
 };
 
 GameTimerControlComponent.defaultProps = {};

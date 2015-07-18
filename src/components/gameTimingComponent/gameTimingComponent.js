@@ -1,9 +1,17 @@
 'use strict';
 
-import React from 'react';
-import GameTimerSmartComponent from '../gameTimerComponent/gameTimerSmartComponent';
-import GameTimerMessageComponent from '../gameTimerMessage/gameTimerMessage';
-import GameTimerControlComponent from '../gameTimerControlComponent/gameTimerControlComponent';
+import React
+  from 'react';
+import GameTimerSmartComponent
+  from '../gameTimerComponent/gameTimerSmartComponent';
+import GameTimerComponent
+  from '../gameTimerComponent/gameTimerComponent';
+import GameTimerMessageComponent
+  from '../gameTimerMessage/gameTimerMessage';
+import GameTimerControlSmartComponent
+  from '../gameTimerControlComponent/gameTimerControlSmartComponent';
+import GameTimerControlComponent
+  from '../gameTimerControlComponent/gameTimerControlComponent';
 
 export default class GameTimingComponent extends React.Component {
   constructor(props) {
@@ -17,21 +25,25 @@ export default class GameTimingComponent extends React.Component {
           Time remaining
         </div>
         <div className="game_timer-time">
-          <GameTimerSmartComponent
-            gameTime={this.props.gameTime}
-            isPaused={this.props.isPaused}
-            isReset={this.props.resetGameTime}
-            timeInterval={this.props.timeInterval}
-            />
+          <GameTimerSmartComponent>
+            <GameTimerComponent
+              gameTime={this.props.gameTime}
+              isPaused={this.props.isPaused}
+              isReset={this.props.resetGameTime}
+              timeInterval={this.props.timeInterval}
+              />
+          </GameTimerSmartComponent>
         </div>
         <div className="game_timer-message">
           <GameTimerMessageComponent />
         </div>
         <div className="game_timer-button webflex-row">
-          <GameTimerControlComponent
-            timerText={this.props.timerText}
-            isPaused={this.props.isPaused}
-            />
+          <GameTimerControlSmartComponent>
+            <GameTimerControlComponent
+              timerText={this.props.timerText}
+              isPaused={this.props.isPaused}
+              />
+          </GameTimerControlSmartComponent>
         </div>
       </div>
     );

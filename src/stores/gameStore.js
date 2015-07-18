@@ -26,6 +26,19 @@ class GameStore {
     });
   }
 
+  onToggleTime({isPaused = true}) {
+    this.setState({
+      gameData: gameStoreLogic
+        .applyRules(this.state.gameData)
+        .applyTime({
+          isPaused: isPaused,
+          reset: true,
+          newTime: this.state.gameData.get('gameTime')
+        })
+        .result()
+    });
+  }
+
   onUpdateTime(newTime) {
     this.setState({
       gameData: gameStoreLogic
