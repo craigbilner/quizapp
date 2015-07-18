@@ -1,23 +1,21 @@
 'use strict';
 
 import React from 'react';
-import gameActions from '../../actions/gameActions';
 
 export default class GameTimerComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.timeInterval = 1000;
   }
 
   timeFunc() {
-    gameActions.updateTime(this.props.gameTime - 1);
+    this.props.onTimeChange();
     if (this.props.gameTime !== 0) {
-      this.timer = setTimeout(this.timeFunc.bind(this), this.timeInterval);
+      this.startTimer();
     }
   }
 
   startTimer() {
-    this.timer = setTimeout(this.timeFunc.bind(this), this.timeInterval);
+    this.timer = setTimeout(this.timeFunc.bind(this), this.props.timeInterval);
   }
 
   clearTimer() {
@@ -47,7 +45,9 @@ export default class GameTimerComponent extends React.Component {
 
 GameTimerComponent.propTypes = {
   gameTime: React.PropTypes.number.isRequired,
-  isReset: React.PropTypes.bool.isRequired
+  isReset: React.PropTypes.bool.isRequired,
+  onTimeChange: React.PropTypes.func.isRequired,
+  timeInterval: React.PropTypes.number.isRequired
 };
 
 GameTimerComponent.defaultProps = {};

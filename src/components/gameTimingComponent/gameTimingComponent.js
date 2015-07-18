@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import GameTimerComponent from '../gameTimerComponent/gameTimerComponent';
+import GameTimerSmartComponent from '../gameTimerComponent/gameTimerSmartComponent';
 import GameTimerMessageComponent from '../gameTimerMessage/gameTimerMessage';
 import GameTimerControlComponent from '../gameTimerControlComponent/gameTimerControlComponent';
 
@@ -17,7 +17,11 @@ export default class GameTimingComponent extends React.Component {
           Time remaining
         </div>
         <div className="game_timer-time">
-          <GameTimerComponent gameTime={this.props.gameTime} isReset={this.props.resetGameTime}/>
+          <GameTimerSmartComponent
+            gameTime={this.props.gameTime}
+            isReset={this.props.resetGameTime}
+            timeInterval={this.props.timeInterval}
+            />
         </div>
         <div className="game_timer-message">
           <GameTimerMessageComponent />
@@ -32,7 +36,8 @@ export default class GameTimingComponent extends React.Component {
 
 GameTimingComponent.propTypes = {
   gameTime: React.PropTypes.number.isRequired,
-  resetGameTime: React.PropTypes.bool.isRequired
+  resetGameTime: React.PropTypes.bool.isRequired,
+  timeInterval: React.PropTypes.number
 };
 
 GameTimingComponent.defaultProps = {};

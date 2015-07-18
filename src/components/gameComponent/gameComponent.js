@@ -33,6 +33,7 @@ export default class GameComponent extends React.Component {
             <GameTimingComponent
               gameTime={gd.get('gameTime')}
               resetGameTime={gd.get('resetGameTime')}
+              timeInterval={gd.get('timeInterval')}
               />
           </div>
         </div>
