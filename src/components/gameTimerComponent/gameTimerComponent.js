@@ -15,7 +15,9 @@ export default class GameTimerComponent extends React.Component {
   }
 
   startTimer() {
-    this.timer = setTimeout(this.timeFunc.bind(this), this.props.timeInterval);
+    if (!this.props.isPaused) {
+      this.timer = setTimeout(this.timeFunc.bind(this), this.props.timeInterval);
+    }
   }
 
   clearTimer() {
@@ -45,6 +47,7 @@ export default class GameTimerComponent extends React.Component {
 
 GameTimerComponent.propTypes = {
   gameTime: React.PropTypes.number.isRequired,
+  isPaused: React.PropTypes.bool.isRequired,
   isReset: React.PropTypes.bool.isRequired,
   onTimeChange: React.PropTypes.func.isRequired,
   timeInterval: React.PropTypes.number.isRequired

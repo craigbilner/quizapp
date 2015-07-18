@@ -35,7 +35,8 @@ app.use(function *(next) {
         .applyQuestionee()
         .applyTeams()
         .applyQM()
-        .applyTime({})
+        .applyTime({isPaused: true})
+        .applyTimerText()
         .result()
     }
   };

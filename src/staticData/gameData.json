@@ -1,7 +1,11 @@
 {
   "timeInterval": 1000,
-  "aDesc": "Answer",
-  "roundDesc": "Round",
+  "i18n": {
+    "answerDesc": "Answer",
+    "startText": "Start",
+    "pauseText": "Pause",
+    "roundDesc": "Round"
+  },
   "qm": {
     "playerId": 9,
     "name": "Mark Cooper"

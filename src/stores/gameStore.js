@@ -17,7 +17,11 @@ class GameStore {
     this.setState({
       gameData: gameStoreLogic
         .applyRules(this.state.gameData)
-        .applyTime({reset: true, newTime: 10})
+        .applyTime({
+          reset: true,
+          newTime: 10,
+          isPaused: true
+        })
         .result()
     });
   }
@@ -26,7 +30,10 @@ class GameStore {
     this.setState({
       gameData: gameStoreLogic
         .applyRules(this.state.gameData)
-        .applyTime({reset: false, newTime: newTime})
+        .applyTime({
+          reset: false,
+          newTime: newTime
+        })
         .result()
     });
   }

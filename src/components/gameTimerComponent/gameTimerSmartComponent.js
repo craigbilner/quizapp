@@ -17,6 +17,7 @@ export default class GameTimerSmartComponent extends React.Component {
     return (
       <GameTimerComponent
         gameTime={this.props.gameTime}
+        isPaused={this.props.isPaused}
         isReset={this.props.isReset}
         timeInterval={this.props.timeInterval}
         onTimeChange={this.handleTimeChanged.bind(this)}
@@ -27,6 +28,7 @@ export default class GameTimerSmartComponent extends React.Component {
 
 GameTimerSmartComponent.propTypes = {
   gameTime: React.PropTypes.number.isRequired,
+  isPaused: React.PropTypes.bool.isRequired,
   isReset: React.PropTypes.bool.isRequired,
   timeInterval: React.PropTypes.number
 };

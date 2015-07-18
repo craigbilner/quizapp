@@ -16,7 +16,10 @@ class GameStoreLogic {
     const question = this.getQuestion(this.tempData.get('questionSet'));
 
     this.tempData = this.tempData.merge({
-      roundName: this.getRoundName(question.get('indx')),
+      roundName: this.getRoundName(
+        this.tempData.getIn(['i18n', 'roundDesc']),
+        question.get('indx')
+      ),
       currentIndx: question.get('indx'),
       currentQuestion: question.get('qText'),
       currentAnswer: question.get('aText')
@@ -59,10 +62,22 @@ class GameStoreLogic {
     return this;
   }
 
-  applyTime({newTime = 10, reset = false}) {
+  applyTime({newTime = 10, reset = false, isPaused = false}) {
     this.tempData = this.tempData.merge({
       gameTime: Math.max(newTime, 0),
-      resetGameTime: reset
+      resetGameTime: reset,
+      isPaused: isPaused
+    });
+
+    return this;
+  }
+
+  applyTimerText() {
+    this.tempData = this.tempData.merge({
+      timerText: this.tempData.get('i18n').filter(this.keyIn([
+        'startText',
+        'pauseText'
+      ]))
     });
 
     return this;
@@ -70,6 +85,13 @@ class GameStoreLogic {
 
   result() {
     return this.tempData;
+  }
+
+  keyIn(keys) {
+    const keySet = Immutable.Set(keys);
+    return function (v, k) {
+      return keySet.has(k);
+    };
   }
 
   getPlayerInitials(name) {
@@ -101,13 +123,13 @@ class GameStoreLogic {
       });
   }
 
-  getRoundName(indx) {
+  getRoundName(roundDesc, indx) {
     let roundInt = 0;
     if (indx) {
       [roundInt] = indx.split('');
     }
 
-    return `Round ${roundInt}`;
+    return `${roundDesc} ${roundInt}`;
   }
 
 }

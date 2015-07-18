@@ -19,6 +19,7 @@ export default class GameTimingComponent extends React.Component {
         <div className="game_timer-time">
           <GameTimerSmartComponent
             gameTime={this.props.gameTime}
+            isPaused={this.props.isPaused}
             isReset={this.props.resetGameTime}
             timeInterval={this.props.timeInterval}
             />
@@ -27,7 +28,10 @@ export default class GameTimingComponent extends React.Component {
           <GameTimerMessageComponent />
         </div>
         <div className="game_timer-button webflex-row">
-          <GameTimerControlComponent />
+          <GameTimerControlComponent
+            timerText={this.props.timerText}
+            isPaused={this.props.isPaused}
+            />
         </div>
       </div>
     );
@@ -36,8 +40,10 @@ export default class GameTimingComponent extends React.Component {
 
 GameTimingComponent.propTypes = {
   gameTime: React.PropTypes.number.isRequired,
+  isPaused: React.PropTypes.bool.isRequired,
   resetGameTime: React.PropTypes.bool.isRequired,
-  timeInterval: React.PropTypes.number
+  timeInterval: React.PropTypes.number,
+  timerText: React.PropTypes.object.isRequired
 };
 
 GameTimingComponent.defaultProps = {};

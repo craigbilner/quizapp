@@ -26,14 +26,17 @@ export default class GameComponent extends React.Component {
               roundName={gd.get('roundName')}
               questionIndx={gd.get('currentIndx')}
               questionText={gd.get('currentQuestion')}
+              answerDesc={gd.getIn(['i18n', 'answerDesc'])}
               answerText={gd.get('currentAnswer')}
               />
           </div>
           <div className="game_timer">
             <GameTimingComponent
               gameTime={gd.get('gameTime')}
+              isPaused={gd.get('isPaused')}
               resetGameTime={gd.get('resetGameTime')}
               timeInterval={gd.get('timeInterval')}
+              timerText={gd.get('timerText')}
               />
           </div>
         </div>

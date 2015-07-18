@@ -34,7 +34,7 @@ export default class QuestionAnswerComponent extends React.Component {
         </div>
         <div className="question_answer-answer webflex-row">
           <div className={tc2}>
-            Answer
+            {this.props.answerDesc}
           </div>
           <div className="question_answer-answer-text question_answer-question-right">
             <AnswerComponent answerText={this.props.answerText}/>
@@ -50,7 +50,8 @@ QuestionAnswerComponent.propTypes = {
   roundName: React.PropTypes.string.isRequired,
   questionIndx: React.PropTypes.string.isRequired,
   questionText: React.PropTypes.string.isRequired,
-  answerText: React.PropTypes.string.isRequired
+  answerText: React.PropTypes.string.isRequired,
+  answerDesc: React.PropTypes.string.isRequired
 };
 
 QuestionAnswerComponent.defaultProps = {};
