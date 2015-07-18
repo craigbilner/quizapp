@@ -3,6 +3,7 @@
 import alt from '../../altWrapper';
 import Immutable from 'immutable';
 import gameActions from '../actions/gameActions';
+import gameStoreLogic from '../stores/gameStoreLogic';
 
 class GameStore {
   constructor() {
@@ -11,152 +12,34 @@ class GameStore {
       gameData: Immutable.Map({})
     };
     this.on('bootstrap', () => {
-      this.setQuestion();
-      this.setTeams();
-      this.setTime({
-        reset: false
+      this.setState({
+        gameData: gameStoreLogic
+          .applyRules(this.state.gameData)
+          .applyQuestion()
+          .applyQuestionee()
+          .applyTeams()
+          .applyQM()
+          .applyTime({})
+          .result()
       });
-    });
-  }
-
-  setTime({newTime = 10, reset = false}) {
-    const timeUpdate = this.state.gameData.set('gameTime', Math.max(newTime, 0));
-    const resetUpdate = timeUpdate.set('resetGameTime', reset);
-
-    this.setState({
-      gameData: resetUpdate
-    });
-  }
-
-  setHomeTeam(homeTeam) {
-    this.setState({
-      gameData: this.state.gameData.set('homeTeam', homeTeam)
-    });
-  }
-
-  setAwayTeam(awayTeam) {
-    this.setState({
-      gameData: this.state.gameData.set('awayTeam', awayTeam)
-    });
-  }
-
-  getPlayerInitials(name) {
-    return name
-      .split(' ')
-      .reduce(function (prev, next) {
-        prev.push(next[0]);
-        return prev;
-      }, [])
-      .join('')
-      .toUpperCase();
-  }
-
-  getTeamOfType(players, teamType) {
-    return players
-      .filter(player => player.get('teamType') === teamType)
-      .map(player => {
-        const init = player.set('initials', this.getPlayerInitials(player.get('name')));
-        const total = init.set('total', 0);
-        return total.set('twos', 0);
-      });
-  }
-
-  setQM(questionMaster) {
-    this.setState({
-      gameData: this.state.gameData.set('questionMaster', questionMaster)
-    });
-  }
-
-  getQM() {
-    const qm = this.state.gameData.get('qm');
-    return qm.set('initials', this.getPlayerInitials(qm.get('name')));
-  }
-
-  setTeams() {
-    const players = this.state.gameData.getIn(['teams', 'players']);
-
-    this.setQuestionee(players);
-    this.setHomeTeam(this.getTeamOfType(players, 1));
-    this.setAwayTeam(this.getTeamOfType(players, 2));
-    this.setQM(this.getQM());
-  }
-
-  setRound(indx) {
-    const roundName = `Round ${this.getRound(indx)}`;
-    this.setState({
-      gameData: this.state.gameData.set('roundName', roundName)
-    });
-  }
-
-  getRound(indx) {
-    let roundInt = 0;
-    if (indx) {
-      [roundInt] = indx.split('');
-    }
-
-    return roundInt;
-  }
-
-  getQuestion(questionSet) {
-    const lastQuestion = questionSet.find(question => !question.get('hasFinished'));
-
-    return lastQuestion || Immutable.fromJS({
-        qText: 'there are no more questions'
-      });
-  }
-
-  setIndx(indx) {
-    this.setState({
-      gameData: this.state.gameData.set('currentIndx', indx)
-    });
-  }
-
-  setQuestionText(text) {
-    this.setState({
-      gameData: this.state.gameData.set('currentQuestion', text)
-    });
-  }
-
-  setAnswerText(text) {
-    this.setState({
-      gameData: this.state.gameData.set('currentAnswer', text)
-    });
-  }
-
-  setQuestion() {
-    const question = this.getQuestion(this.state.gameData.get('questionSet'));
-    this.setRound(question.get('indx'));
-    this.setIndx(question.get('indx'));
-    this.setQuestionText(question.get('qText'));
-    this.setAnswerText(question.get('aText'));
-  }
-
-  getQuestionee(players) {
-    return players.find(player => player.get('isQuestionee'));
-  }
-
-  setQuestionee(players) {
-    const questionee = this.getQuestionee(players);
-
-    this.setState({
-      gameData: this.state.gameData.set('questionee', questionee.get('name'))
     });
   }
 
   onPlayerAnswered() {
-    this.setTime({reset: true, newTime: 10});
-  }
-
-  onUpdateTime(newTime) {
-    this.setTime({
-      reset: false,
-      newTime: newTime
+    this.setState({
+      gameData: gameStoreLogic
+        .applyRules(this.state.gameData)
+        .applyTime({reset: true, newTime: 10})
+        .result()
     });
   }
 
-  onUpdateQuestionee() {
+  onUpdateTime(newTime) {
     this.setState({
-      gameData: this.state.gameData.set('questionee', 'Craig Bilner')
+      gameData: gameStoreLogic
+        .applyRules(this.state.gameData)
+        .applyTime({reset: false, newTime: newTime})
+        .result()
     });
   }
 }

@@ -19,7 +19,7 @@ export default class QuestionAnswerComponent extends React.Component {
     return (
       <div>
         <div className="question_answer-player">
-          <QuestioneeComponent questionee={this.props.questionee}/>
+          <QuestioneeComponent questioneeName={this.props.questioneeName}/>
         </div>
         <div className="question_answer-meta">
           <RoundComponent roundName={this.props.roundName}/>
@@ -46,7 +46,7 @@ export default class QuestionAnswerComponent extends React.Component {
 }
 
 QuestionAnswerComponent.propTypes = {
-  questionee: React.PropTypes.string.isRequired,
+  questioneeName: React.PropTypes.string.isRequired,
   roundName: React.PropTypes.string.isRequired,
   questionIndx: React.PropTypes.string.isRequired,
   questionText: React.PropTypes.string.isRequired,

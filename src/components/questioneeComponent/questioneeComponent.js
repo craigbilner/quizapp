@@ -8,18 +8,18 @@ export default class QuestioneeComponent extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return this.props.questionee !== nextProps.questionee;
+    return this.props.questioneeName !== nextProps.questioneeName;
   }
 
   render() {
     return (
-      <span>{this.props.questionee}</span>
+      <span>{this.props.questioneeName}</span>
     );
   }
 }
 
 QuestioneeComponent.propTypes = {
-  questionee: React.PropTypes.string.isRequired
+  questioneeName: React.PropTypes.string.isRequired
 };
 
 QuestioneeComponent.defaultProps = {};

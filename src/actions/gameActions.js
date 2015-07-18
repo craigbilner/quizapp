@@ -4,7 +4,7 @@ import alt from '../../altWrapper';
 
 class GameActions {
   constructor() {
-    this.generateActions('updateQuestionee', 'playerAnswered', 'updateTime');
+    this.generateActions('playerAnswered', 'updateTime');
   }
 }
 

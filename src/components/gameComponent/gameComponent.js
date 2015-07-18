@@ -22,7 +22,7 @@ export default class GameComponent extends React.Component {
         <div className="game_top webflex-row">
           <div className="question_answer">
             <QuestionAnswerComponent
-              questionee={gd.get('questionee')}
+              questioneeName={gd.get('questioneeName')}
               roundName={gd.get('roundName')}
               questionIndx={gd.get('currentIndx')}
               questionText={gd.get('currentQuestion')}
