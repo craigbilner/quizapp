@@ -1,10 +1,16 @@
 {
   "timeInterval": 1000,
+  "playerTimeInterval": 10,
+  "teamTimeInterval": 5,
   "i18n": {
     "answerDesc": "Answer",
     "startText": "Start",
     "pauseText": "Pause",
-    "roundDesc": "Round"
+    "roundDesc": "Round",
+    "player": "Player",
+    "team": "Team",
+    "over": "Over",
+    "timesUp": "Time's Up!"
   },
   "qm": {
     "playerId": 9,

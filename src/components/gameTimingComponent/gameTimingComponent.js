@@ -7,7 +7,7 @@ import GameTimerSmartComponent
 import GameTimerComponent
   from '../gameTimerComponent/gameTimerComponent';
 import GameTimerMessageComponent
-  from '../gameTimerMessage/gameTimerMessage';
+  from '../gameTimerMessageComponent/gameTimerMessageComponent';
 import GameTimerControlSmartComponent
   from '../gameTimerControlComponent/gameTimerControlSmartComponent';
 import GameTimerControlComponent
@@ -35,7 +35,7 @@ export default class GameTimingComponent extends React.Component {
           </GameTimerSmartComponent>
         </div>
         <div className="game_timer-message">
-          <GameTimerMessageComponent />
+          <GameTimerMessageComponent timerMessage={this.props.timerMessage}/>
         </div>
         <div className="game_timer-button webflex-row">
           <GameTimerControlSmartComponent>
@@ -55,7 +55,8 @@ GameTimingComponent.propTypes = {
   isPaused: React.PropTypes.bool.isRequired,
   resetGameTime: React.PropTypes.bool.isRequired,
   timeInterval: React.PropTypes.number,
-  timerText: React.PropTypes.object.isRequired
+  timerText: React.PropTypes.object.isRequired,
+  timerMessage: React.PropTypes.string.isRequired
 };
 
 GameTimingComponent.defaultProps = {};

@@ -23,7 +23,6 @@ class GameStore {
         .applyQuestionee()
         .applyTime({
           reset: true,
-          newTime: 10,
           isPaused: true
         })
         .result()
@@ -47,6 +46,9 @@ class GameStore {
     this.setState({
       gameData: gameStoreLogic
         .applyRules(this.state.gameData)
+        .applyNextQuestionee({
+          newTime: newTime
+        })
         .applyTime({
           reset: false,
           newTime: newTime

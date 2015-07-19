@@ -24,6 +24,10 @@ class BaseLogic {
     return this;
   }
 
+  applyNextQuestionee() {
+    return this;
+  }
+
   applyTeams() {
     return this;
   }
@@ -91,8 +95,25 @@ class GameStoreLogic extends BaseLogic {
     this.tempData = this.tempData.merge({
       questioneeName: questionee.get('name'),
       questioneeId: questionee.get('playerId'),
-      questioneeTeamType: questionee.get('teamType')
+      questioneeTeamType: questionee.get('teamType'),
+      answereeTeamType: questionee.get('teamType'),
+      timerMessage: this.tempData.getIn(['i18n', 'player'])
     });
+
+    return this;
+  }
+
+  applyNextQuestionee({newTime = 0}) {
+    if (newTime === 0) {
+      this.tempData = this.calculateNextQuestionee
+        .call(this.calculateNextQuestionee, this.tempData)
+        .setNextQuestionee()
+        .setTimerMessage()
+        .setGameTime()
+        .result();
+
+      return new BaseLogic(this.tempData);
+    }
 
     return this;
   }
@@ -126,7 +147,7 @@ class GameStoreLogic extends BaseLogic {
     return this;
   }
 
-  applyTime({newTime = 10, reset = false, isPaused = false}) {
+  applyTime({newTime = this.tempData.get('playerTimeInterval'), reset = false, isPaused = false}) {
     this.tempData = this.tempData.merge({
       gameTime: Math.max(newTime, 0),
       resetGameTime: reset,
@@ -148,7 +169,7 @@ class GameStoreLogic extends BaseLogic {
   }
 
   applyScore({playerId, teamType, seat}) {
-    if (teamType !== this.tempData.get('questioneeTeamType')) {
+    if (teamType !== this.tempData.get('answereeTeamType')) {
       return new BaseLogic(this.tempData);
     }
 
@@ -175,6 +196,57 @@ class GameStoreLogic extends BaseLogic {
     return this.tempData;
   }
 
+  calculateNextQuestionee(data) {
+    this.data = data;
+
+    this.setNextQuestionee = () => {
+      const currentTeam = data.get('answereeTeamType');
+      if (data.get('questioneeId')) {
+        this.data = this.data.set('questioneeId', null);
+      } else if (currentTeam === data.get('questioneeTeamType')) {
+        this.data = this.data.set('answereeTeamType', currentTeam === 1 ? 2 : 1);
+      } else {
+        this.data = this.data.set('answereeTeamType', null);
+      }
+
+      return this;
+    };
+
+    this.setTimerMessage = () => {
+      let timerMessage = '';
+      if (this.data.get('questioneeId')) {
+        timerMessage = this.data.getIn(['i18n', 'player']);
+      } else if (this.data.get('questioneeTeamType') === this.data.get('answereeTeamType')) {
+        timerMessage = this.data.getIn(['i18n', 'team']);
+      } else if (this.data.get('answereeTeamType')) {
+        timerMessage = this.data.getIn(['i18n', 'over']);
+      } else {
+        timerMessage = this.data.getIn(['i18n', 'timesUp']);
+      }
+
+      this.data = this.data.set('timerMessage', timerMessage);
+
+      return this;
+    };
+
+    this.setGameTime = () => {
+      const timeToSet = !this.data.get('questioneeId') && !this.data.get('answereeTeamType')
+        ? this.data.get('playerTimeInterval')
+        : this.data.get('teamTimeInterval');
+
+      this.data = this.data.merge({
+        gameTime: timeToSet,
+        isPaused: timeToSet === this.data.get('playerTimeInterval')
+      });
+
+      return this;
+    };
+
+    this.result = () => this.data;
+
+    return this;
+  }
+
   teamSort(firstTeamType = 1) {
     return (prev, next) => {
       const diff = prev.get('teamType') - next.get('teamType');
@@ -183,7 +255,7 @@ class GameStoreLogic extends BaseLogic {
   }
 
   calculateScore(data, playerId, teamType) {
-    const isOwnTeam = teamType === data.get('questioneeTeamType');
+    const isOwnTeam = teamType === data.get('answereeTeamType');
     const isOwnQuestion = isOwnTeam && playerId === data.get('questioneeId');
     let playerScore = 0;
 
