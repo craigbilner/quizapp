@@ -1,4 +1,4 @@
-![build status](https://circleci.com/gh/craigbilner/quizapp.png?circle-token=:b540fdcb3a1d5e4e46c748d2d3ce7f2e9da1ff28)
+![build status](https://circleci.com/gh/craigbilner/quizapp.svg?style=shield&circle-token=b540fdcb3a1d5e4e46c748d2d3ce7f2e9da1ff28)
 [![Coverage Status](https://coveralls.io/repos/craigbilner/quizapp/badge.svg?branch=master&service=github)](https://coveralls.io/github/craigbilner/quizapp?branch=master)
 
 # quizapp
