@@ -4,7 +4,8 @@
   "description": "Upload quiz questions in a PDF or create your own quizzes, then play the quiz league team format with an easy to use interface to handle questions, timing and scoring. With live scoreboards and stats it takes the hassle out of quiz admin.",
   "main": "index.js",
   "config": {
-    "wpConfig": ""
+    "wpConfig": "",
+    "dbPort": 28015
   },
   "scripts": {
     "build:base": "webpack --config $npm_package_config_wpConfig --progress --colors --display-error-details",
@@ -12,7 +13,8 @@
     "build:watch": "npm run build -- --watch",
     "test:build": "npm run build:base --quizapp:wpConfig=webpack.test.config.js --",
     "test:build:watch": "npm run build:base --quizapp:wpConfig=webpack.test.config.js -- --watch",
-    "test": "mocha ./src/tests.min.js",
+    "test:quick": "mocha ./src/tests.min.js",
+    "test": "babel-istanbul cover _mocha ./src/**/*Tests.js && cat ./coverage/lcov.info | coveralls",
     "start": "babel-node --harmony --stage 0 ./src/server/server.js",
     "lint": "eslint src"
   },
@@ -34,14 +36,18 @@
   "dependencies": {
     "alt": "^0.17.0",
     "babel": "^5.6.14",
+    "babel-istanbul": "^0.2.10",
+    "coveralls": "^2.11.3",
     "immutable": "^3.7.4",
     "iso": "^4.1.0",
     "jsonfile": "^2.2.1",
     "koa": "^0.21.0",
     "koa-common": "^1.2.0",
     "koa-hbs": "^0.7.0",
+    "mocha-lcov-reporter": "0.0.2",
     "react": "^0.14.0-beta1",
-    "react-dom": "^0.14.0-beta1"
+    "react-dom": "^0.14.0-beta1",
+    "rethinkdbdash": "^2.0.17"
   },
   "devDependencies": {
     "babel-core": "^5.6.15",

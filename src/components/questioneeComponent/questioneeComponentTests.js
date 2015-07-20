@@ -11,7 +11,7 @@ describe('the questioneeComponent should', () => {
     const shallowRenderer = TestUtils.createRenderer();
     const testQuestionee = 'Test questionee';
     shallowRenderer.render(React.createElement(QuestioneeComponent, {
-      questionee: testQuestionee
+      questioneeName: testQuestionee
     }));
 
     const component = shallowRenderer.getRenderOutput();

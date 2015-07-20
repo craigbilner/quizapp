@@ -19,27 +19,7 @@
   "venue": "Crown",
   "setBy": "David Stainer",
   "questionSet": [
-    {
-      "id": 1,
-      "indx": "1a",
-      "qText": "Some question",
-      "aText": "Some answer",
-      "hasFinished": false
-    },
-    {
-      "id": 2,
-      "indx": "1b",
-      "qText": "another question",
-      "aText": "another answer",
-      "hasFinished": false
-    },
-    {
-      "id": 3,
-      "indx": "2a",
-      "qText": "fdsaf dsafdsafd safdsafdsa",
-      "aText": "fdsaf dsaf dsafdsa fd",
-      "hasFinished": false
-    }
+
   ],
   "teams": {
     "homeName": "Fast and loos",

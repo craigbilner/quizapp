@@ -14,3 +14,5 @@ node_modules
 #local files
 prototypes
 dist/*.min.js
+src/*.min.js
+coverage

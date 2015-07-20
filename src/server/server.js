@@ -12,7 +12,16 @@ import getFiles from '../helpers/getFiles';
 import AppComponent from '../components/appComponent/appComponent';
 import Immutable from'immutable';
 import gameStoreLogic from '../stores/gameStoreLogic';
+import rethinkDb from 'rethinkdbdash';
 
+const r = rethinkDb({
+  servers: [
+    {
+      host: '192.168.99.100',
+      port: process.env.npm_package_config_dbPort
+    }
+  ]
+});
 const app = koa();
 
 app.use(hbs.middleware({
@@ -24,6 +33,10 @@ app.use(common.static('./dist'));
 
 app.use(function *(next) {
   yield next;
+
+  const dbData = yield r.dbList();
+
+  console.log(dbData);
 
   const gameData = yield getFiles.json(path.join(__dirname, '../staticData/gameData.json'));
 
