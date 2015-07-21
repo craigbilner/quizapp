@@ -13,12 +13,13 @@ import AppComponent from '../components/appComponent/appComponent';
 import Immutable from'immutable';
 import gameStoreLogic from '../stores/gameStoreLogic';
 import rethinkDb from 'rethinkdbdash';
+import {dbConfig, appConfig} from './config';
 
 const r = rethinkDb({
   servers: [
     {
-      host: '192.168.99.100',
-      port: process.env.npm_package_config_dbPort
+      host: dbConfig.host,
+      port: dbConfig.port
     }
   ]
 });
@@ -34,11 +35,17 @@ app.use(common.static('./dist'));
 app.use(function *(next) {
   yield next;
 
-  const dbData = yield r.dbList();
-
-  console.log(dbData);
-
   const gameData = yield getFiles.json(path.join(__dirname, '../staticData/gameData.json'));
+  const allQuestions = yield r.db('quizappdb').table('questions').orderBy('round', 'indx').map({
+    aText: r.row('answer'),
+    id: r.row('id'),
+    indx: r.row('indx'),
+    qText: r.row('question'),
+    round: r.row('round'),
+    hasFinished: false
+  });
+  gameData.questionSet = allQuestions.filter(question => question.round);
+  gameData.spareSet = allQuestions.filter(question => !question.round);
 
   const data = {
     GameStore: {
@@ -46,7 +53,8 @@ app.use(function *(next) {
         .applyRules(Immutable.fromJS(gameData))
         .applyQuestion()
         .applyQuestionee()
-        .applyTeams()
+        .applyTeamOrder()
+        .applyTeamSummary()
         .applyQM()
         .applyTime({isPaused: true})
         .applyTimerText()
@@ -63,4 +71,4 @@ app.use(function *(next) {
   });
 });
 
-app.listen(3000);
+app.listen(appConfig.port);

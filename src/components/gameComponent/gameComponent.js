@@ -53,8 +53,12 @@ export default class GameComponent extends React.Component {
             <GameSummaryComponent
               homeName={gd.getIn(['teams', 'homeName'])}
               homeTeam={gd.get('homeTeam')}
+              homeHandicap={gd.getIn(['teams', 'homeHandicap'])}
+              homeTeamTotal={gd.get('homeTeamTotal')}
               awayName={gd.getIn(['teams', 'awayName'])}
               awayTeam={gd.get('awayTeam')}
+              awayHandicap={gd.getIn(['teams', 'awayHandicap'])}
+              awayTeamTotal={gd.get('awayTeamTotal')}
               />
           </div>
         </div>

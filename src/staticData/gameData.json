@@ -26,6 +26,7 @@
     "homeHandicap": 7,
     "awayName": "Blenheim Black",
     "awayHandicap": 10,
+    "firstTeamType": 1,
     "players": [
       {
         "seat": 1,
@@ -53,7 +54,8 @@
         "playerId": 4,
         "name": "Ian Holmes",
         "isQuestionee": false,
-        "teamType": 1
+        "teamType": 1,
+        "isCaptain": true
       },
       {
         "seat": 1,
@@ -81,7 +83,8 @@
         "playerId": 8,
         "name": "Chris James",
         "isQuestionee": false,
-        "teamType": 2
+        "teamType": 2,
+        "isCaptain": true
       }
     ]
   }

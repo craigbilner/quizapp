@@ -9,7 +9,7 @@ export default class SummaryTeamComponent extends React.Component {
 
   render() {
     return (
-      <div className="game_summary-home-players game_summary-players webflex-column">
+      <div className="game_summary-players webflex-column">
         {
           this.props.players.map(player => {
             return (
@@ -26,13 +26,17 @@ export default class SummaryTeamComponent extends React.Component {
             );
           })
         }
+        <div className="game_summary-totals">
+          <div className="game_summary-totals-number">{this.props.teamTotal}</div>
+        </div>
       </div>
     );
   }
 }
 
 SummaryTeamComponent.propTypes = {
-  players: React.PropTypes.object.isRequired
+  players: React.PropTypes.object.isRequired,
+  teamTotal: React.PropTypes.number.isRequired
 };
 
 SummaryTeamComponent.defaultProps = {};

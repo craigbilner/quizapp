@@ -60,7 +60,7 @@ class GameStoreLogic extends BaseLogic {
     this.tempData = this.tempData.merge({
       roundName: this.getRoundName(
         this.tempData.getIn(['i18n', 'roundDesc']),
-        question.get('indx')
+        question.get('round')
       ),
       currentIndx: question.get('indx'),
       currentQuestion: question.get('qText'),
@@ -78,6 +78,10 @@ class GameStoreLogic extends BaseLogic {
       .get('questionSet')
       .findIndex(question => !question.get('hasFinished'));
     const nextIndx = questioneeIndx === 7 ? 0 : questioneeIndx + 1;
+
+    if (questionIndx === 31) {
+      this.applyTeamOrder(this.tempData.getIn(['teams', 'firstTeamType']) === 1 ? 2 : 1);
+    }
 
     this.tempData = this.tempData
       .setIn(['teams', 'players', questioneeIndx, 'isQuestionee'], false)
@@ -118,8 +122,8 @@ class GameStoreLogic extends BaseLogic {
     return this;
   }
 
-  applyTeams() {
-    const teamSort = this.teamSort(this.tempData.get('firstTeamType'));
+  applyTeamOrder(firstTeamType = 1) {
+    const teamSort = this.teamSort(firstTeamType);
 
     this.tempData = this.tempData.setIn(['teams', 'players'], this.tempData
       .getIn(['teams', 'players'])
@@ -128,10 +132,16 @@ class GameStoreLogic extends BaseLogic {
         return prev.get('seat') > next.get('seat');
       }));
 
+    return this;
+  }
+
+  applyTeamSummary() {
     const players = this.tempData.getIn(['teams', 'players']);
 
     this.tempData = this.tempData.merge({
+      homeTeamTotal: this.tempData.getIn(['teams', 'homeHandicap']),
       homeTeam: this.getTeamOfType(players, 1),
+      awayTeamTotal: this.tempData.getIn(['teams', 'awayHandicap']),
       awayTeam: this.getTeamOfType(players, 2)
     });
 
@@ -188,6 +198,13 @@ class GameStoreLogic extends BaseLogic {
     this.tempData = this.tempData
       .updateIn([...playerPath, 'total'], total => total + score)
       .updateIn([...playerPath, 'twos'], twos => twos + (isOwnQuestion >> 0));
+    this.tempData = this.tempData
+      .set('homeTeamTotal',
+      this.calculateTotal(this.tempData.get('homeTeam'))
+      + this.tempData.getIn(['teams', 'homeHandicap']))
+      .set('awayTeamTotal',
+      this.calculateTotal(this.tempData.get('awayTeam'))
+      + this.tempData.getIn(['teams', 'awayHandicap']));
 
     return this;
   }
@@ -252,6 +269,12 @@ class GameStoreLogic extends BaseLogic {
       const diff = prev.get('teamType') - next.get('teamType');
       return diff * (firstTeamType === 1 ? 1 : -1);
     };
+  }
+
+  calculateTotal(team) {
+    return team.reduce((prev, next) => {
+      return prev + next.get('total');
+    }, 0);
   }
 
   calculateScore(data, playerId, teamType) {
@@ -323,13 +346,8 @@ class GameStoreLogic extends BaseLogic {
       });
   }
 
-  getRoundName(roundDesc, indx) {
-    let roundInt = 0;
-    if (indx) {
-      [roundInt] = indx.split('');
-    }
-
-    return `${roundDesc} ${roundInt}`;
+  getRoundName(roundDesc, round) {
+    return `${roundDesc} ${round}`;
   }
 
 }
