@@ -1,12 +1,16 @@
 'use strict';
 
 import React from 'react';
+import Radium from 'radium';
 import QuestionAnswerComponent from '../questionAnswerComponent/questionAnswerComponent';
 import GameTimingComponent from '../gameTimingComponent/gameTimingComponent';
 import GameTableComponent from '../gameTableComponent/gameTableComponent';
 import GameSummaryComponent from '../gameSummaryComponent/gameSummaryComponent';
+import style from '../gameComponent/gameComponentStyle';
 
-export default class GameComponent extends React.Component {
+@Radium
+export default
+class GameComponent extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -17,10 +21,31 @@ export default class GameComponent extends React.Component {
 
   render() {
     const gd = this.props.gameData;
+    const topStyle = [
+      this.props.baseStyles.layout.rows,
+      style.top
+    ];
+    const questionAnswerStyle = [
+      this.props.baseStyles.layout.flex(2),
+      style.questionAnswer
+    ];
+    const timingStyle = [
+      this.props.baseStyles.layout.flex(1),
+      style.timing
+    ];
+    const bottomStyle = [
+      this.props.baseStyles.layout.rows,
+      style.bottom
+    ];
+    const bottomRegionStyle = [
+      this.props.baseStyles.layout.flex(1),
+      style.bottomRegion
+    ];
+
     return (
-      <div className="game">
-        <div className="game_top webflex-row">
-          <div className="question_answer">
+      <div>
+        <div style={topStyle}>
+          <div style={questionAnswerStyle}>
             <QuestionAnswerComponent
               questioneeName={gd.get('questioneeName')}
               roundName={gd.get('roundName')}
@@ -30,7 +55,7 @@ export default class GameComponent extends React.Component {
               answerText={gd.get('currentAnswer')}
               />
           </div>
-          <div className="game_timer">
+          <div style={timingStyle}>
             <GameTimingComponent
               gameTime={gd.get('gameTime')}
               isPaused={gd.get('isPaused')}
@@ -42,15 +67,15 @@ export default class GameComponent extends React.Component {
               />
           </div>
         </div>
-        <div className="game_bottom webflex-row">
-          <div className="table_container">
+        <div style={bottomStyle}>
+          <div style={bottomRegionStyle}>
             <GameTableComponent
               homeTeam={gd.get('homeTeam')}
               awayTeam={gd.get('awayTeam')}
               questionMaster={gd.get('questionMaster')}
               />
           </div>
-          <div className="game_summary_container">
+          <div style={bottomRegionStyle}>
             <GameSummaryComponent
               homeName={gd.getIn(['teams', 'homeName'])}
               homeTeam={gd.get('homeTeam')}
