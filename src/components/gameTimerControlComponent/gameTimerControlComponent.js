@@ -1,7 +1,10 @@
 'use strict';
 
 import React from 'react';
+import Radium from'radium';
+import style from '../gameTimerControlComponent/gameTImerControlStyle';
 
+@Radium
 export default class GameTimerControlComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -14,9 +17,14 @@ export default class GameTimerControlComponent extends React.Component {
   }
 
   render() {
+    const compStyle = [
+      this.props.baseStyles.button,
+      this.props.isPaused ? style.isPaused : style.isTiming
+    ];
+
     return (
       <div
-        className="game_timer-control webflex-row"
+        style={compStyle}
         onClick={this.props.handleClick.bind(this, this.props.isPaused)}>
         {this.getButtonText(this.props.isPaused)}
       </div>

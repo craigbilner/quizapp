@@ -2,6 +2,8 @@
 
 import React
   from 'react';
+import Radium
+  from 'Radium';
 import GameTimerSmartComponent
   from '../gameTimerComponent/gameTimerSmartComponent';
 import GameTimerComponent
@@ -12,8 +14,12 @@ import GameTimerControlSmartComponent
   from '../gameTimerControlComponent/gameTimerControlSmartComponent';
 import GameTimerControlComponent
   from '../gameTimerControlComponent/gameTimerControlComponent';
+import GameQuestionControlComponent
+  from '../gameQuestionControlComponent/gameQuestionControlComponent';
 
-export default class GameTimingComponent extends React.Component {
+@Radium
+export default
+class GameTimingComponent extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -37,13 +43,18 @@ export default class GameTimingComponent extends React.Component {
         <div className="game_timer-message">
           <GameTimerMessageComponent timerMessage={this.props.timerMessage}/>
         </div>
-        <div className="game_timer-button webflex-row">
-          <GameTimerControlSmartComponent>
+        <div style={[this.props.baseStyles.layout.rows]}>
+          <GameTimerControlSmartComponent baseStyles={this.props.baseStyles}>
             <GameTimerControlComponent
               timerText={this.props.timerText}
               isPaused={this.props.isPaused}
+              baseStyles={this.props.baseStyles}
               />
           </GameTimerControlSmartComponent>
+
+          <div style={this.props.baseStyles.layout.flex(1)}>
+            <GameQuestionControlComponent baseStyles={this.props.baseStyles}/>
+          </div>
         </div>
       </div>
     );

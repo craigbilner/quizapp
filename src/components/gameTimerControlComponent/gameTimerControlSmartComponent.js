@@ -1,8 +1,10 @@
 'use strict';
 
 import React from 'react';
+import Radium from 'Radium';
 import gameActions from '../../actions/gameActions';
 
+@Radium
 export default class GameTimerControlSmartComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +16,7 @@ export default class GameTimerControlSmartComponent extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={this.props.baseStyles.layout.flex(1)}>
         {
           React.Children.map(this.props.children, child => {
             return React.cloneElement(child, {

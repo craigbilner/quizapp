@@ -38,6 +38,7 @@ export default class GameComponent extends React.Component {
               timeInterval={gd.get('timeInterval')}
               timerText={gd.get('timerText')}
               timerMessage={gd.get('timerMessage')}
+              baseStyles={this.props.baseStyles}
               />
           </div>
         </div>
@@ -68,7 +69,8 @@ export default class GameComponent extends React.Component {
 }
 
 GameComponent.propTypes = {
-  gameData: React.PropTypes.object.isRequired
+  gameData: React.PropTypes.object.isRequired,
+  baseStyles: React.PropTypes.object
 };
 
 GameComponent.defaultProps = {};
