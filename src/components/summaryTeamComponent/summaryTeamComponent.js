@@ -1,24 +1,40 @@
 'use strict';
 
 import React from 'react';
+import Radium from 'Radium';
+import style from '../summaryTeamComponent/summaryTeamStyle';
 
-export default class SummaryTeamComponent extends React.Component {
+class SummaryTeamComponent extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
+    const compStyle = [
+      this.props.baseStyles.layout.columns,
+      this.props.baseStyles.layout.flex(10)
+    ];
+    const playerContainerStyle = [
+      this.props.baseStyles.layout.rows,
+      this.props.baseStyles.layout.flex(1),
+      style.playerContainer
+    ];
+    const scoreStyle = [
+      this.props.baseStyles.layout.flex(1),
+      style.score
+    ];
+
     return (
-      <div className="game_summary-players webflex-column">
+      <div style={compStyle}>
         {
           this.props.players.map(player => {
             return (
               <div key={player.get('playerId')}
-                   className="game_summary-player_container webflex-row">
-                <div className="game_summary-player">
+                   style={playerContainerStyle}>
+                <div style={this.props.baseStyles.layout.flex(1)}>
                   {player.get('name')}
                 </div>
-                <div className="game_summary-score">
+                <div style={scoreStyle}>
                   <span>{player.get('total')}</span>
                   <span> ({player.get('twos')})</span>
                 </div>
@@ -26,8 +42,8 @@ export default class SummaryTeamComponent extends React.Component {
             );
           })
         }
-        <div className="game_summary-totals">
-          <div className="game_summary-totals-number">{this.props.teamTotal}</div>
+        <div style={style.totals}>
+          <div style={style.totalsNumber}>{this.props.teamTotal}</div>
         </div>
       </div>
     );
@@ -36,8 +52,12 @@ export default class SummaryTeamComponent extends React.Component {
 
 SummaryTeamComponent.propTypes = {
   players: React.PropTypes.object.isRequired,
-  teamTotal: React.PropTypes.number.isRequired
+  teamTotal: React.PropTypes.number.isRequired,
+  baseStyles: React.PropTypes.object
 };
 
 SummaryTeamComponent.defaultProps = {};
+
+export default Radium(SummaryTeamComponent);
+
 

@@ -1,8 +1,10 @@
 'use strict';
 
 import React from 'react';
+import Radium from 'Radium';
+import style from '../playerComponent/playerStyle';
 
-export default class PlayerComponent extends React.Component {
+class PlayerComponent extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -10,13 +12,13 @@ export default class PlayerComponent extends React.Component {
   render() {
     return (
       <div
-        className="table_container-player"
+        style={style.container}
         onClick={this.props.handleClick.bind(this, {
           playerId: this.props.player.get('playerId'),
           teamType: this.props.player.get('teamType'),
           seat: this.props.player.get('seat')
         })}>
-        <div className="player_profile">{this.props.player.get('initials')}</div>
+        <div style={style.player}>{this.props.player.get('initials')}</div>
       </div>
     );
   }
@@ -29,3 +31,4 @@ PlayerComponent.propTypes = {
 
 PlayerComponent.defaultProps = {};
 
+export default Radium(PlayerComponent);

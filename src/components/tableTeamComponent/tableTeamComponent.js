@@ -11,7 +11,7 @@ export default class TableTeamComponent extends React.Component {
 
   render() {
     return (
-      <div className="table_container-home_team table-container-team webflex-column">
+      <div style={this.props.baseStyles.layout.flex.columns}>
         {
           this.props.players
             .sort((prev, next) => {
@@ -20,7 +20,7 @@ export default class TableTeamComponent extends React.Component {
             .map(player => {
               return (
                 <PlayerSmartComponent key={player.get('playerId')}>
-                  <PlayerComponent player={player}/>
+                  <PlayerComponent player={player} baseStyles={this.props.baseStyles}/>
                 </PlayerSmartComponent>
               );
             })
@@ -31,7 +31,8 @@ export default class TableTeamComponent extends React.Component {
 }
 
 TableTeamComponent.propTypes = {
-  players: React.PropTypes.object.isRequired
+  players: React.PropTypes.object.isRequired,
+  baseStyles: React.PropTypes.object
 };
 
 TableTeamComponent.defaultProps = {};

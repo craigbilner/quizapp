@@ -28,10 +28,19 @@ class GameTableComponent extends React.Component {
     return (
       <div>
         <div style={this.props.baseStyles.layout.rows}>
-          <TableTeamComponent players={this.props.homeTeam}/>
-
+          <div style={this.props.baseStyles.layout.flex(1)}>
+            <TableTeamComponent
+              players={this.props.homeTeam}
+              baseStyles={this.props.baseStyles}
+              />
+          </div>
           <div style={tableStyle}></div>
-          <TableTeamComponent players={this.props.awayTeam}/>
+          <div style={this.props.baseStyles.layout.flex(1)}>
+            <TableTeamComponent
+              players={this.props.awayTeam}
+              baseStyles={this.props.baseStyles}
+              />
+          </div>
         </div>
         <div style={tableBottomStyle}>
           <div style={this.props.baseStyles.layout.flex(1)}></div>
