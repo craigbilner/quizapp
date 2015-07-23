@@ -1,8 +1,10 @@
 'use strict';
 
 import React from 'react';
+import Radium from'Radium';
+import style from '../questioneeComponent/questioneeStyle';
 
-export default class QuestioneeComponent extends React.Component {
+class QuestioneeComponent extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -13,7 +15,9 @@ export default class QuestioneeComponent extends React.Component {
 
   render() {
     return (
-      <span>{this.props.questioneeName}</span>
+      <div style={style}>
+        <span>{this.props.questioneeName}</span>
+      </div>
     );
   }
 }
@@ -24,3 +28,4 @@ QuestioneeComponent.propTypes = {
 
 QuestioneeComponent.defaultProps = {};
 
+export default Radium(QuestioneeComponent);

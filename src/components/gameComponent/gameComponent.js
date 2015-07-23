@@ -1,15 +1,13 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'radium';
+import Radium from 'Radium';
 import QuestionAnswerComponent from '../questionAnswerComponent/questionAnswerComponent';
 import GameTimingComponent from '../gameTimingComponent/gameTimingComponent';
 import GameTableComponent from '../gameTableComponent/gameTableComponent';
 import GameSummaryComponent from '../gameSummaryComponent/gameSummaryComponent';
 import style from '../gameComponent/gameComponentStyle';
 
-@Radium
-export default
 class GameComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -53,6 +51,7 @@ class GameComponent extends React.Component {
               questionText={gd.get('currentQuestion')}
               answerDesc={gd.getIn(['i18n', 'answerDesc'])}
               answerText={gd.get('currentAnswer')}
+              baseStyles={this.props.baseStyles}
               />
           </div>
           <div style={timingStyle}>
@@ -73,6 +72,7 @@ class GameComponent extends React.Component {
               homeTeam={gd.get('homeTeam')}
               awayTeam={gd.get('awayTeam')}
               questionMaster={gd.get('questionMaster')}
+              baseStyles={this.props.baseStyles}
               />
           </div>
           <div style={bottomRegionStyle}>
@@ -85,6 +85,7 @@ class GameComponent extends React.Component {
               awayTeam={gd.get('awayTeam')}
               awayHandicap={gd.getIn(['teams', 'awayHandicap'])}
               awayTeamTotal={gd.get('awayTeamTotal')}
+              baseStyles={this.props.baseStyles}
               />
           </div>
         </div>
@@ -99,4 +100,6 @@ GameComponent.propTypes = {
 };
 
 GameComponent.defaultProps = {};
+
+export default Radium(GameComponent);
 

@@ -4,8 +4,7 @@ import React from 'react';
 import Radium from'radium';
 import style from '../gameTimerControlComponent/gameTImerControlStyle';
 
-@Radium
-export default class GameTimerControlComponent extends React.Component {
+class GameTimerControlComponent extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -35,8 +34,10 @@ export default class GameTimerControlComponent extends React.Component {
 GameTimerControlComponent.propTypes = {
   isPaused: React.PropTypes.bool.isRequired,
   timerText: React.PropTypes.object.isRequired,
-  handleClick: React.PropTypes.func
+  handleClick: React.PropTypes.func,
+  baseStyles: React.PropTypes.object
 };
 
 GameTimerControlComponent.defaultProps = {};
 
+export default Radium(GameTimerControlComponent);

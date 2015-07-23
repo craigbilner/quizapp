@@ -4,8 +4,7 @@ import React from 'react';
 import Radium from 'Radium';
 import gameActions from '../../actions/gameActions';
 
-@Radium
-export default class GameTimerControlSmartComponent extends React.Component {
+class GameTimerControlSmartComponent extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -30,7 +29,10 @@ export default class GameTimerControlSmartComponent extends React.Component {
 }
 
 GameTimerControlSmartComponent.propTypes = {
-  children: React.PropTypes.object
+  children: React.PropTypes.object,
+  baseStyles: React.PropTypes.object
 };
 
 GameTimerControlSmartComponent.defaultProps = {};
+
+export default Radium(GameTimerControlSmartComponent);

@@ -1,21 +1,33 @@
 'use strict';
 
 import React from 'react';
+import Radium from 'Radium';
+import style from '../questionComponent/questionStyle';
 
-export default class QuestionComponent extends React.Component {
+class QuestionComponent extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
+    const compStyle = [
+      this.props.baseStyles.layout.flex(5),
+      style
+    ];
+
     return (
-      <span>{this.props.questionText}</span>
+      <div style={compStyle}>
+        <span>{this.props.questionText}</span>
+      </div>
     );
   }
 }
 
 QuestionComponent.propTypes = {
-  questionText: React.PropTypes.string.isRequired
+  questionText: React.PropTypes.string.isRequired,
+  baseStyles: React.PropTypes.object
 };
 
 QuestionComponent.defaultProps = {};
+
+export default Radium(QuestionComponent);

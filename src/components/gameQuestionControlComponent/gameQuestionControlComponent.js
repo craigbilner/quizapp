@@ -4,8 +4,7 @@ import React from 'react';
 import Radium from 'Radium';
 import style from '../gameQuestionControlComponent/gameQuestionControlStyle';
 
-@Radium
-export default class GameQuestionControlComponentComponent extends React.Component {
+class GameQuestionControlComponentComponent extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -22,7 +21,11 @@ export default class GameQuestionControlComponentComponent extends React.Compone
   }
 }
 
-GameQuestionControlComponentComponent.propTypes = {};
+GameQuestionControlComponentComponent.propTypes = {
+  baseStyles: React.PropTypes.object
+};
 
 GameQuestionControlComponentComponent.defaultProps = {};
+
+export default Radium(GameQuestionControlComponentComponent);
 

@@ -1,8 +1,10 @@
 'use strict';
 
 import React from 'react';
+import Radium from 'Radium';
+import style from '../questionIndxComponent/questionIndxStyle';
 
-export default class QuestionIndxComponent extends React.Component {
+class QuestionIndxComponent extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -12,15 +14,24 @@ export default class QuestionIndxComponent extends React.Component {
   }
 
   render() {
+    const compStyle = [
+      this.props.baseStyles.layout.flex(1),
+      style
+    ];
+
     return (
-      <span>{this.props.questionIndx}</span>
+      <div style={compStyle}>
+        <span>{this.props.questionIndx}</span>
+      </div>
     );
   }
 }
 
 QuestionIndxComponent.propTypes = {
-  questionIndx: React.PropTypes.string.isRequired
+  questionIndx: React.PropTypes.string.isRequired,
+  baseStyles: React.PropTypes.object
 };
 
 QuestionIndxComponent.defaultProps = {};
 
+export default Radium(QuestionIndxComponent);

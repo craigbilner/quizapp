@@ -1,46 +1,54 @@
 'use strict';
 
 import React from 'react';
+import Radium from 'Radium';
 import QuestioneeComponent from '../questioneeComponent/questioneeComponent';
 import QuestionComponent from '../questionComponent/questionComponent';
 import RoundComponent from '../roundComponent/roundComponent';
 import QuestionIndxComponent from '../questionIndxComponent/questionIndxComponent';
 import AnswerComponent from '../answerComponent/answerComponent';
+import style from '../questionAnswerComponent/questionAnswerStyle';
 
-export default class QuestionAnswerComponent extends React.Component {
+class QuestionAnswerComponent extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const tc1 = 'question_answer-question-indx question_answer-question-left question_answer-meta';
-    const tc2 = 'question_answer-answer-desc question_answer-question-left question_answer-meta';
+    const answerStyle = [
+      this.props.baseStyles.layout.rows,
+      style.answer
+    ];
+    const answerDescStyle = [
+      this.props.baseStyles.layout.flex(1),
+      style.answerDesc
+    ];
     let returnValue = '<div></div>';
 
     if (this.props.questionIndx !== '00') {
       returnValue = (
         <div>
-          <div className="question_answer-player">
-            <QuestioneeComponent questioneeName={this.props.questioneeName}/>
+          <QuestioneeComponent questioneeName={this.props.questioneeName}/>
+          <RoundComponent roundName={this.props.roundName}/>
+
+          <div style={this.props.baseStyles.layout.rows}>
+            <QuestionIndxComponent
+              questionIndx={this.props.questionIndx}
+              baseStyles={this.props.baseStyles}
+              />
+            <QuestionComponent
+              questionText={this.props.questionText}
+              baseStyles={this.props.baseStyles}
+              />
           </div>
-          <div className="question_answer-meta">
-            <RoundComponent roundName={this.props.roundName}/>
-          </div>
-          <div className="question_answer-question webflex-row">
-            <div className={tc1}>
-              <QuestionIndxComponent questionIndx={this.props.questionIndx}/>
-            </div>
-            <div className="question_answer-question-text question_answer-question-right">
-              <QuestionComponent questionText={this.props.questionText}/>
-            </div>
-          </div>
-          <div className="question_answer-answer webflex-row">
-            <div className={tc2}>
+          <div style={answerStyle}>
+            <div style={answerDescStyle}>
               {this.props.answerDesc}
             </div>
-            <div className="question_answer-answer-text question_answer-question-right">
-              <AnswerComponent answerText={this.props.answerText}/>
-            </div>
+            <AnswerComponent
+              answerText={this.props.answerText}
+              baseStyles={this.props.baseStyles}
+              />
           </div>
         </div>
       );
@@ -65,3 +73,4 @@ QuestionAnswerComponent.propTypes = {
 
 QuestionAnswerComponent.defaultProps = {};
 
+export default Radium(QuestionAnswerComponent);

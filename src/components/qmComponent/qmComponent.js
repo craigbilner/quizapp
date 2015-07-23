@@ -1,15 +1,19 @@
 'use strict';
 
 import React from 'react';
+import Radium from 'Radium';
+import style from '../qmComponent/qmStyle';
 
-export default class QMComponent extends React.Component {
+class QMComponent extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <div className="player_profile player_profile_qm">{this.props.player.get('initials')}</div>
+      <div style={style}>
+        {this.props.player.get('initials')}
+      </div>
     );
   }
 }
@@ -20,3 +24,4 @@ QMComponent.propTypes = {
 
 QMComponent.defaultProps = {};
 
+export default Radium(QMComponent);

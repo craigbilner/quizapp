@@ -1,8 +1,10 @@
 'use strict';
 
 import React from 'react';
+import Radium from 'Radium';
+import style from '../roundComponent/roundStyle';
 
-export default class RoundComponent extends React.Component {
+class RoundComponent extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -13,7 +15,9 @@ export default class RoundComponent extends React.Component {
 
   render() {
     return (
-      <span>{this.props.roundName}</span>
+      <div style={style}>
+        <span>{this.props.roundName}</span>
+      </div>
     );
   }
 }
@@ -24,3 +28,4 @@ RoundComponent.propTypes = {
 
 RoundComponent.defaultProps = {};
 
+export default Radium(RoundComponent);

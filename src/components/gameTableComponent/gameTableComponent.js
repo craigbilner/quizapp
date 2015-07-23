@@ -1,36 +1,49 @@
 'use strict';
 
 import React from 'react';
+import Radium from 'Radium';
+import style from '../gameTableComponent/gameTableStyle';
 import TableTeamComponent from '../tableTeamComponent/tableTeamComponent';
 import QMComponent from '../qmComponent/qmComponent';
 
-export default class GameTableComponent extends React.Component {
+class GameTableComponent extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {};
   }
 
   render() {
+    const tableStyle = [
+      this.props.baseStyles.layout.flex(1),
+      style.table
+    ];
+    const tableBottomStyle = [
+      this.props.baseStyles.layout.rows,
+      style.tableBottom
+    ];
+    const tableHeadStyle = [
+      this.props.baseStyles.layout.flex(1),
+      style.tableHead
+    ];
+
     return (
       <div>
-        <div className="table_container-top webflex-row">
+        <div style={this.props.baseStyles.layout.rows}>
           <TableTeamComponent players={this.props.homeTeam}/>
 
-          <div className="table_container-table_main"></div>
+          <div style={tableStyle}></div>
           <TableTeamComponent players={this.props.awayTeam}/>
         </div>
-        <div className="table_container-bottom webflex-row">
-          <div className="table-container-team"></div>
-          <div className="table-container-table_head"></div>
-          <div className="table-container-team"></div>
+        <div style={tableBottomStyle}>
+          <div style={this.props.baseStyles.layout.flex(1)}></div>
+          <div style={tableHeadStyle}></div>
+          <div style={this.props.baseStyles.layout.flex(1)}></div>
         </div>
-        <div className="table_container-bottom webflex-row">
-          <div className="table-container-team"></div>
-          <div className="table-container-qm">
-            <QMComponent player={this.props.questionMaster} />
+        <div style={tableBottomStyle}>
+          <div style={this.props.baseStyles.layout.flex(1)}></div>
+          <div>
+            <QMComponent player={this.props.questionMaster}/>
           </div>
-          <div className="table-container-team"></div>
+          <div style={this.props.baseStyles.layout.flex(1)}></div>
         </div>
       </div>
     );
@@ -40,8 +53,10 @@ export default class GameTableComponent extends React.Component {
 GameTableComponent.propTypes = {
   homeTeam: React.PropTypes.object.isRequired,
   awayTeam: React.PropTypes.object.isRequired,
-  questionMaster: React.PropTypes.object.isRequired
+  questionMaster: React.PropTypes.object.isRequired,
+  baseStyles: React.PropTypes.object
 };
 
 GameTableComponent.defaultProps = {};
 
+export default Radium(GameTableComponent);

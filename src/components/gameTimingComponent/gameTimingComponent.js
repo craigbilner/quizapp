@@ -4,6 +4,8 @@ import React
   from 'react';
 import Radium
   from 'Radium';
+import style
+  from '../gameTimingComponent/gameTimingStyle';
 import GameTimerSmartComponent
   from '../gameTimerComponent/gameTimerSmartComponent';
 import GameTimerComponent
@@ -17,20 +19,23 @@ import GameTimerControlComponent
 import GameQuestionControlComponent
   from '../gameQuestionControlComponent/gameQuestionControlComponent';
 
-@Radium
-export default
 class GameTimingComponent extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
+    const timerStyle = [
+      this.props.baseStyles.layout.flex(1),
+      style.timer
+    ];
+
     return (
-      <div className="webflex-column">
-        <div className="game_timer-title">
+      <div style={this.props.baseStyles.layout.columns}>
+        <div style={this.props.baseStyles.layout.flex(1)}>
           Time remaining
         </div>
-        <div className="game_timer-time">
+        <div style={timerStyle}>
           <GameTimerSmartComponent>
             <GameTimerComponent
               gameTime={this.props.gameTime}
@@ -40,7 +45,7 @@ class GameTimingComponent extends React.Component {
               />
           </GameTimerSmartComponent>
         </div>
-        <div className="game_timer-message">
+        <div style={this.props.baseStyles.layout.flex(1)}>
           <GameTimerMessageComponent timerMessage={this.props.timerMessage}/>
         </div>
         <div style={[this.props.baseStyles.layout.rows]}>
@@ -67,8 +72,10 @@ GameTimingComponent.propTypes = {
   resetGameTime: React.PropTypes.bool.isRequired,
   timeInterval: React.PropTypes.number,
   timerText: React.PropTypes.object.isRequired,
-  timerMessage: React.PropTypes.string.isRequired
+  timerMessage: React.PropTypes.string.isRequired,
+  baseStyles: React.PropTypes.object
 };
 
 GameTimingComponent.defaultProps = {};
 
+export default Radium(GameTimingComponent);
