@@ -3,7 +3,7 @@
 import React from 'react';
 import AltContainer from 'alt/AltContainer';
 import GameComponent from '../gameComponent/gameComponent';
-import GameStore from '../../stores/gameStore';
+import AltGameStore from '../../stores/altGameStore';
 import baseStyles from '../../styles/baseStyles';
 
 export default class AppComponent extends React.Component {
@@ -13,7 +13,7 @@ export default class AppComponent extends React.Component {
 
   render() {
     return (
-      <AltContainer store={GameStore}>
+      <AltContainer store={AltGameStore}>
         <GameComponent gameData={{}} baseStyles={baseStyles} />
       </AltContainer>
     );

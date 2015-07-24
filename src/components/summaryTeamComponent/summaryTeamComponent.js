@@ -36,7 +36,7 @@ class SummaryTeamComponent extends React.Component {
                 </div>
                 <div style={scoreStyle}>
                   <span>{player.get('total')}</span>
-                  <span> ({player.get('twos')})</span>
+                  <span> ({player.get('ownqs')})</span>
                 </div>
               </div>
             );

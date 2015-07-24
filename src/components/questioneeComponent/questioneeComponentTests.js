@@ -16,7 +16,7 @@ describe('the questioneeComponent should', () => {
 
     const component = shallowRenderer.getRenderOutput();
 
-    assert.equal(component.props.children, testQuestionee);
+    assert.equal(component.props.children.props.children, testQuestionee);
   });
 });
 

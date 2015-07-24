@@ -1,15 +1,16 @@
 'use strict';
 
-import alt from '../../altWrapper';
 import Immutable from 'immutable';
 import gameActions from '../actions/gameActions';
 import gameStoreLogic from '../stores/gameStoreLogic';
 
 class GameStore {
-  constructor() {
-    this.bindActions(gameActions);
+  constructor(gameData) {
+    if (this.bindActions) {
+      this.bindActions(gameActions);
+    }
     this.state = {
-      gameData: Immutable.Map({})
+      gameData: Immutable.fromJS(gameData || {})
     };
   }
 
@@ -103,4 +104,5 @@ GameStore.config = {
   }
 };
 
-export default alt.createStore(GameStore, 'GameStore');
+export default GameStore;
+

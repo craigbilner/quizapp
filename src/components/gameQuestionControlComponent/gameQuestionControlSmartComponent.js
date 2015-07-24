@@ -11,11 +11,9 @@ export default class GameQuestionControlSmartComponent extends React.Component {
   handleClick(gameStatus) {
     if (gameStatus < 3) {
       gameActions.forceOver();
-    }
-    else if (gameStatus === 3) {
+    } else if (gameStatus === 3) {
       gameActions.endQuestion();
-    }
-    else if (gameStatus === 4) {
+    } else if (gameStatus === 4) {
       gameActions.nextQuestion();
     }
   }

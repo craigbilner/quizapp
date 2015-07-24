@@ -2,6 +2,8 @@
   "timeInterval": 1000,
   "playerTimeInterval": 10,
   "teamTimeInterval": 5,
+  "ownQuestionPoints": 2,
+  "bonusQuestionPoints": 1,
   "i18n": {
     "answerDesc": "Answer",
     "startText": "Start",

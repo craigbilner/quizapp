@@ -216,8 +216,8 @@ class GameStoreLogic extends BaseLogic {
     const {score, isOwnQuestion} = this
       .calculateScore
       .call(this.calculateScore, this.tempData, playerId, teamType)
-      .isOwnQuestion(2)
-      .isOwnTeam(1)
+      .isOwnQuestion(this.tempData.get('ownQuestionPoints'))
+      .isOwnTeam(this.tempData.get('bonusQuestionPoints'))
       .score();
 
     const playerPath = [
@@ -227,7 +227,7 @@ class GameStoreLogic extends BaseLogic {
 
     this.tempData = this.tempData
       .updateIn([...playerPath, 'total'], total => total + score)
-      .updateIn([...playerPath, 'twos'], twos => twos + (isOwnQuestion >> 0));
+      .updateIn([...playerPath, 'ownqs'], ownqs => ownqs + (isOwnQuestion >> 0));
     this.tempData = this.tempData
       .set('homeTeamTotal',
       this.calculateTotal(this.tempData.get('homeTeam'))
@@ -256,8 +256,6 @@ class GameStoreLogic extends BaseLogic {
       .setTimerMessage()
       .setGameTime()
       .result();
-
-    console.log(this.tempData.toJS());
 
     return this;
   }
@@ -386,7 +384,7 @@ class GameStoreLogic extends BaseLogic {
         return player.merge({
           initials: this.getPlayerInitials(player.get('name')),
           total: 0,
-          twos: 0
+          ownqs: 0
         });
       });
   }
