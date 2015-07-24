@@ -12,6 +12,10 @@ class BaseLogic {
     return this;
   }
 
+  applyI18n() {
+    return this;
+  }
+
   applyQuestion() {
     return this;
   }
@@ -48,12 +52,38 @@ class BaseLogic {
     return this;
   }
 
+  applyForceOver() {
+    return this;
+  }
+
+  applyEndQuestion() {
+    return this;
+  }
+
   result() {
     return this.tempData;
   }
 }
 
 class GameStoreLogic extends BaseLogic {
+  applyI18n() {
+    this.tempData = this.tempData.merge({
+      msgText: this.tempData.get('i18n').filter(this.keyIn([
+        'player',
+        'team',
+        'over',
+        'timesUp'
+      ])),
+      controlText: this.tempData.get('i18n').filter(this.keyIn([
+        'over',
+        'incorrect',
+        'nextQuestion'
+      ]))
+    });
+
+    return this;
+  }
+
   applyQuestion() {
     const question = this.getQuestion(this.tempData.get('questionSet'));
 
@@ -101,7 +131,7 @@ class GameStoreLogic extends BaseLogic {
       questioneeId: questionee.get('playerId'),
       questioneeTeamType: questionee.get('teamType'),
       answereeTeamType: questionee.get('teamType'),
-      timerMessage: this.tempData.getIn(['i18n', 'player'])
+      gameStatus: 1
     });
 
     return this;
@@ -209,6 +239,29 @@ class GameStoreLogic extends BaseLogic {
     return this;
   }
 
+  applyForceOver() {
+    this.tempData = this.tempData.set('questioneeId', null);
+
+    return this;
+  }
+
+  applyEndQuestion() {
+    this.tempData = this.tempData.merge({
+      questioneeId: null,
+      answereeTeamType: null
+    });
+
+    this.tempData = this.calculateNextQuestionee
+      .call(this.calculateNextQuestionee, this.tempData)
+      .setTimerMessage()
+      .setGameTime()
+      .result();
+
+    console.log(this.tempData.toJS());
+
+    return this;
+  }
+
   result() {
     return this.tempData;
   }
@@ -230,18 +283,18 @@ class GameStoreLogic extends BaseLogic {
     };
 
     this.setTimerMessage = () => {
-      let timerMessage = '';
+      let gameStatus = 0;
       if (this.data.get('questioneeId')) {
-        timerMessage = this.data.getIn(['i18n', 'player']);
+        gameStatus = 1;
       } else if (this.data.get('questioneeTeamType') === this.data.get('answereeTeamType')) {
-        timerMessage = this.data.getIn(['i18n', 'team']);
+        gameStatus = 2;
       } else if (this.data.get('answereeTeamType')) {
-        timerMessage = this.data.getIn(['i18n', 'over']);
+        gameStatus = 3;
       } else {
-        timerMessage = this.data.getIn(['i18n', 'timesUp']);
+        gameStatus = 4;
       }
 
-      this.data = this.data.set('timerMessage', timerMessage);
+      this.data = this.data.set('gameStatus', gameStatus);
 
       return this;
     };
@@ -250,10 +303,12 @@ class GameStoreLogic extends BaseLogic {
       const timeToSet = !this.data.get('questioneeId') && !this.data.get('answereeTeamType')
         ? this.data.get('playerTimeInterval')
         : this.data.get('teamTimeInterval');
+      const isPaused = timeToSet === this.data.get('playerTimeInterval');
 
       this.data = this.data.merge({
         gameTime: timeToSet,
-        isPaused: timeToSet === this.data.get('playerTimeInterval')
+        isPaused: isPaused,
+        resetGameTime: isPaused
       });
 
       return this;

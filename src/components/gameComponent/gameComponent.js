@@ -61,7 +61,9 @@ class GameComponent extends React.Component {
               resetGameTime={gd.get('resetGameTime')}
               timeInterval={gd.get('timeInterval')}
               timerText={gd.get('timerText')}
-              timerMessage={gd.get('timerMessage')}
+              gameStatus={gd.get('gameStatus')}
+              msgText={gd.get('msgText')}
+              controlText={gd.get('controlText')}
               baseStyles={this.props.baseStyles}
               />
           </div>

@@ -10,7 +10,9 @@
     "player": "Player",
     "team": "Team",
     "over": "Over",
-    "timesUp": "Time's Up!"
+    "timesUp": "Time's Up!",
+    "incorrect": "Incorrect",
+    "nextQuestion": "Next Question"
   },
   "qm": {
     "playerId": 9,

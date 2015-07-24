@@ -56,6 +56,38 @@ class GameStore {
         .result()
     });
   }
+
+  onForceOver() {
+    this.setState({
+      gameData: gameStoreLogic
+        .applyRules(this.state.gameData)
+        .applyForceOver()
+        .applyNextQuestionee({
+          newTime: 0
+        })
+        .result()
+    });
+  }
+
+  onEndQuestion() {
+    this.setState({
+      gameData: gameStoreLogic
+        .applyRules(this.state.gameData)
+        .applyEndQuestion()
+        .result()
+    });
+  }
+
+  onNextQuestion() {
+    this.setState({
+      gameData: gameStoreLogic
+        .applyRules(this.state.gameData)
+        .applyNextQuestion()
+        .applyQuestion()
+        .applyQuestionee()
+        .result()
+    });
+  }
 }
 
 GameStore.config = {

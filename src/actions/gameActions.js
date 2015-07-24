@@ -4,7 +4,16 @@ import alt from '../../altWrapper';
 
 class GameActions {
   constructor() {
-    this.generateActions('playerAnswered', 'updateTime', 'toggleTime');
+    const actions = [
+      'playerAnswered',
+      'updateTime',
+      'toggleTime',
+      'forceOver',
+      'endQuestion',
+      'nextQuestion'
+    ];
+
+    this.generateActions(...actions);
   }
 }
 

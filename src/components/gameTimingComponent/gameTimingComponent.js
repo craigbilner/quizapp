@@ -16,6 +16,8 @@ import GameTimerControlSmartComponent
   from '../gameTimerControlComponent/gameTimerControlSmartComponent';
 import GameTimerControlComponent
   from '../gameTimerControlComponent/gameTimerControlComponent';
+import GameQuestionControlSmartComponent
+  from '../gameQuestionControlComponent/gameQuestionControlSmartComponent';
 import GameQuestionControlComponent
   from '../gameQuestionControlComponent/gameQuestionControlComponent';
 
@@ -46,7 +48,10 @@ class GameTimingComponent extends React.Component {
           </GameTimerSmartComponent>
         </div>
         <div style={this.props.baseStyles.layout.flex(1)}>
-          <GameTimerMessageComponent timerMessage={this.props.timerMessage}/>
+          <GameTimerMessageComponent
+            gameStatus={this.props.gameStatus}
+            msgText={this.props.msgText}
+            />
         </div>
         <div style={[this.props.baseStyles.layout.rows]}>
           <GameTimerControlSmartComponent baseStyles={this.props.baseStyles}>
@@ -58,7 +63,13 @@ class GameTimingComponent extends React.Component {
           </GameTimerControlSmartComponent>
 
           <div style={this.props.baseStyles.layout.flex(1)}>
-            <GameQuestionControlComponent baseStyles={this.props.baseStyles}/>
+            <GameQuestionControlSmartComponent>
+              <GameQuestionControlComponent
+                baseStyles={this.props.baseStyles}
+                gameStatus={this.props.gameStatus}
+                controlText={this.props.controlText}
+                />
+            </GameQuestionControlSmartComponent>
           </div>
         </div>
       </div>
@@ -72,7 +83,9 @@ GameTimingComponent.propTypes = {
   resetGameTime: React.PropTypes.bool.isRequired,
   timeInterval: React.PropTypes.number,
   timerText: React.PropTypes.object.isRequired,
-  timerMessage: React.PropTypes.string.isRequired,
+  gameStatus: React.PropTypes.number.isRequired,
+  msgText: React.PropTypes.object,
+  controlText: React.PropTypes.object,
   baseStyles: React.PropTypes.object
 };
 

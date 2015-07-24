@@ -51,6 +51,7 @@ app.use(function *(next) {
     GameStore: {
       gameData: gameStoreLogic
         .applyRules(Immutable.fromJS(gameData))
+        .applyI18n()
         .applyQuestion()
         .applyQuestionee()
         .applyTeamOrder()
