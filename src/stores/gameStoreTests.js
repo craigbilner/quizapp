@@ -670,4 +670,37 @@ describe('for the game store logic', () => {
       });
     });
   });
+
+  describe('when the time is updated', () => {
+    it('to zero and the next answeree is the team,' +
+      'the game status should be set to the team', () => {
+      gameActions.updateTime(0);
+
+      assert.equal(altGameStore.getState().gameData.get('gameStatus'), 2);
+    });
+
+    it('to zero and the all answerees have had their chance,' +
+      'the game time should be reset and paused', () => {
+      const setup = testBase
+        .set('questioneeId', null)
+        .set('answereeTeamType', 2)
+        .set('gameTime', 1)
+        .set('isPaused', false)
+        .set('resetGameTime', false);
+
+      alt.bootstrap(JSON.stringify({
+        GameStore: {
+          gameData: setup
+        }
+      }));
+
+      gameActions.updateTime(0);
+
+      assert.equal(altGameStore.getState().gameData.get('gameTime'), 20);
+      assert.equal(altGameStore.getState().gameData.get('isPaused'), true,
+        'game should be paused');
+      assert.equal(altGameStore.getState().gameData.get('resetGameTime'), true,
+        'game should have been reset');
+    });
+  });
 });

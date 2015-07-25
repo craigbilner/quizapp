@@ -5,16 +5,17 @@
   "ownQuestionPoints": 2,
   "bonusQuestionPoints": 1,
   "i18n": {
-    "answerDesc": "Answer",
-    "startText": "Start",
-    "pauseText": "Pause",
-    "roundDesc": "Round",
-    "player": "Player",
-    "team": "Team",
-    "over": "Over",
-    "timesUp": "Time's Up!",
-    "incorrect": "Incorrect",
-    "nextQuestion": "Next Question"
+    "answerDesc": "answer",
+    "startText": "start",
+    "pauseText": "pause",
+    "roundDesc": "round",
+    "player": "player",
+    "team": "team",
+    "over": "over",
+    "timesUp": "time's up!",
+    "incorrect": "incorrect",
+    "nextQuestion": "next question",
+    "nobodyKnows": "nobody knows . . ."
   },
   "qm": {
     "playerId": 9,

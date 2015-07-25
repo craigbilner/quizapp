@@ -54,7 +54,10 @@ class GameTimingComponent extends React.Component {
             />
         </div>
         <div style={[this.props.baseStyles.layout.rows]}>
-          <GameTimerControlSmartComponent baseStyles={this.props.baseStyles}>
+          <GameTimerControlSmartComponent
+            baseStyles={this.props.baseStyles}
+            gameStatus={this.props.gameStatus}
+            >
             <GameTimerControlComponent
               timerText={this.props.timerText}
               isPaused={this.props.isPaused}

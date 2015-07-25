@@ -10,7 +10,9 @@ class GameTimerControlSmartComponent extends React.Component {
   }
 
   handleClick(isPaused) {
-    gameActions.toggleTime({isPaused: !isPaused});
+    if (this.props.gameStatus < 4) {
+      gameActions.toggleTime({isPaused: !isPaused});
+    }
   }
 
   render() {

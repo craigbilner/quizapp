@@ -11,7 +11,8 @@ export default class GameTimerMessageComponent extends React.Component {
       1: msgText.get('player'),
       2: msgText.get('team'),
       3: msgText.get('over'),
-      4: msgText.get('timesUp')
+      4: msgText.get('timesUp'),
+      5: msgText.get('nobodyKnows')
     };
   }
 

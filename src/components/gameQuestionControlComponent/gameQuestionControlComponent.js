@@ -21,6 +21,7 @@ class GameQuestionControlComponentComponent extends React.Component {
         text = this.props.controlText.get('incorrect');
         break;
       case 4:
+      case 5:
         text = this.props.controlText.get('nextQuestion');
         break;
       default:

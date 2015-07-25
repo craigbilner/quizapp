@@ -13,7 +13,7 @@ export default class GameQuestionControlSmartComponent extends React.Component {
       gameActions.forceOver();
     } else if (gameStatus === 3) {
       gameActions.endQuestion();
-    } else if (gameStatus === 4) {
+    } else {
       gameActions.nextQuestion();
     }
   }

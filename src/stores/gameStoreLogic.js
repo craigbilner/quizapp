@@ -72,7 +72,8 @@ class GameStoreLogic extends BaseLogic {
         'player',
         'team',
         'over',
-        'timesUp'
+        'timesUp',
+        'nobodyKnows'
       ])),
       controlText: this.tempData.get('i18n').filter(this.keyIn([
         'over',
@@ -138,13 +139,13 @@ class GameStoreLogic extends BaseLogic {
     return this;
   }
 
-  applyNextQuestionee({newTime = 0}) {
+  applyNextQuestionee({newTime = 0, reset = this.tempData.get('resetGameTime')}) {
     if (newTime === 0) {
       this.tempData = this.calculateNextQuestionee
         .call(this.calculateNextQuestionee, this.tempData)
         .setNextQuestionee()
-        .setTimerMessage()
-        .setGameTime()
+        .setGameStatus()
+        .setGameTime({reset: reset})
         .result();
 
       return new BaseLogic(this.tempData);
@@ -254,7 +255,7 @@ class GameStoreLogic extends BaseLogic {
 
     this.tempData = this.calculateNextQuestionee
       .call(this.calculateNextQuestionee, this.tempData)
-      .setTimerMessage()
+      .setGameStatus({gameStatus: 5})
       .setGameTime()
       .result();
 
@@ -281,33 +282,34 @@ class GameStoreLogic extends BaseLogic {
       return this;
     };
 
-    this.setTimerMessage = () => {
-      let gameStatus = 0;
-      if (this.data.get('questioneeId')) {
-        gameStatus = 1;
-      } else if (this.data.get('questioneeTeamType') === this.data.get('answereeTeamType')) {
-        gameStatus = 2;
-      } else if (this.data.get('answereeTeamType')) {
-        gameStatus = 3;
-      } else {
-        gameStatus = 4;
+    this.setGameStatus = ({gameStatus = 0} = {}) => {
+      let gameStatusToSet = gameStatus;
+      if (!gameStatusToSet) {
+        if (this.data.get('questioneeId')) {
+          gameStatusToSet = 1;
+        } else if (this.data.get('questioneeTeamType') === this.data.get('answereeTeamType')) {
+          gameStatusToSet = 2;
+        } else if (this.data.get('answereeTeamType')) {
+          gameStatusToSet = 3;
+        } else {
+          gameStatusToSet = 4;
+        }
       }
-
-      this.data = this.data.set('gameStatus', gameStatus);
+      this.data = this.data.set('gameStatus', gameStatusToSet);
 
       return this;
     };
 
-    this.setGameTime = () => {
+    this.setGameTime = ({reset = false} = {}) => {
       const timeToSet = !this.data.get('questioneeId') && !this.data.get('answereeTeamType')
         ? this.data.get('playerTimeInterval')
         : this.data.get('teamTimeInterval');
-      const isPaused = timeToSet === this.data.get('playerTimeInterval');
+      const endStatus = this.data.get('gameStatus') > 3;
 
       this.data = this.data.merge({
         gameTime: timeToSet,
-        isPaused: isPaused,
-        resetGameTime: isPaused
+        isPaused: this.data.get('isPaused') || endStatus,
+        resetGameTime: reset || this.data.get('isPaused') || endStatus
       });
 
       return this;

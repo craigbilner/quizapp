@@ -64,7 +64,8 @@ class GameStore {
         .applyRules(this.state.gameData)
         .applyForceOver()
         .applyNextQuestionee({
-          newTime: 0
+          newTime: 0,
+          reset: true
         })
         .result()
     });
