@@ -1,9 +1,9 @@
 export default {
-  timeInterval: 1000,
-  playerTimeInterval: 10,
-  teamTimeInterval: 5,
-  ownQuestionPoints: 2,
-  bonusQuestionPoints: 1,
+  timeInterval: 500,
+  playerTimeInterval: 20,
+  teamTimeInterval: 15,
+  ownQuestionPoints: 4,
+  bonusQuestionPoints: 3,
   i18n: {
     answerDesc: 'Answer',
     startText: 'Start',
