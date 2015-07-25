@@ -85,7 +85,8 @@ class GameStoreLogic extends BaseLogic {
   }
 
   applyQuestion() {
-    const question = this.getQuestion(this.tempData.get('questionSet'));
+    const question = this.getQuestion(this.tempData.get('questionSet'),
+      this.tempData.get('i18n'));
 
     this.tempData = this.tempData.merge({
       roundName: this.getRoundName(
@@ -389,13 +390,13 @@ class GameStoreLogic extends BaseLogic {
       });
   }
 
-  getQuestion(questionSet) {
+  getQuestion(questionSet, i18n) {
     const lastQuestion = questionSet.find(question => !question.get('hasFinished'));
 
     return lastQuestion || Immutable.fromJS({
         indx: '00',
-        qText: 'there are no more questions',
-        aText: 'there are no more answers'
+        qText: i18n.get('noMoreQuestions'),
+        aText: i18n.get('noMoreAnswers')
       });
   }
 
