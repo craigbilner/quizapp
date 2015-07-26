@@ -1,3 +1,5 @@
+/* eslint-disable indent, max-nested-callbacks */
+
 'use strict';
 
 import assert from 'assert';
@@ -559,7 +561,7 @@ describe('for the game store logic', () => {
       assert.equal(gameData.get('currentAnswer'), 'test there are no more answers');
     });
 
-    describe('if the home team are going first ', () => {
+    describe('and the home team are going first', () => {
       it('the next questionee after home seat one should be away seat one', () => {
         alt.bootstrap(JSON.stringify({
           GameStore: {
@@ -667,6 +669,127 @@ describe('for the game store logic', () => {
         assert.equal(gameData.get('questioneeId'), 5);
         assert.equal(gameData.get('questioneeTeamType'), 2);
         assert.equal(gameData.get('answereeTeamType'), 2);
+      });
+    });
+
+    describe('and the away team are going first', () => {
+      const rawData = Immutable.fromJS(testData);
+      const awayData = rawData.setIn(['teams', 'firstTeamType'], 2);
+      const localSetup = gameStoreLogic
+        .applyRules(awayData)
+        .applyTeamOrder()
+        .applyQuestion()
+        .applyQuestionee()
+        .applyTeamSummary()
+        .result();
+
+      it('the next questionee after away seat one should be home seat one', () => {
+        alt.bootstrap(JSON.stringify({
+          GameStore: {
+            gameData: localSetup
+          }
+        }));
+
+        gameActions.playerAnswered({
+          playerId: 5,
+          teamType: 2,
+          seat: 1
+        });
+
+        const gameData = altGameStore.getState().gameData;
+
+        assert.equal(gameData.get('questioneeName'), 'Player H1');
+        assert.equal(gameData.get('questioneeId'), 1);
+        assert.equal(gameData.get('questioneeTeamType'), 1);
+        assert.equal(gameData.get('answereeTeamType'), 1);
+      });
+
+      it('the next questionee after home seat one should be away seat two', () => {
+        alt.bootstrap(JSON.stringify({
+          GameStore: {
+            gameData: localSetup
+          }
+        }));
+
+        gameActions.playerAnswered({
+          playerId: 5,
+          teamType: 2,
+          seat: 1
+        });
+
+        gameActions.playerAnswered({
+          playerId: 1,
+          teamType: 1,
+          seat: 1
+        });
+
+        const gameData = altGameStore.getState().gameData;
+
+        assert.equal(gameData.get('questioneeName'), 'Player A2');
+        assert.equal(gameData.get('questioneeId'), 6);
+        assert.equal(gameData.get('questioneeTeamType'), 2);
+        assert.equal(gameData.get('answereeTeamType'), 2);
+      });
+
+      it('the next questionee after home seat four should be away seat one if' +
+        ' not halfway', () => {
+        const setup = localSetup
+          .setIn(['teams', 'players', 1, 'isQuestionee'], false)
+          .setIn(['teams', 'players', 7, 'isQuestionee'], true);
+
+        alt.bootstrap(JSON.stringify({
+          GameStore: {
+            gameData: setup
+          }
+        }));
+
+        gameActions.playerAnswered({
+          playerId: 4,
+          teamType: 1,
+          seat: 4
+        });
+
+        const gameData = altGameStore.getState().gameData;
+
+        assert.equal(gameData.get('questioneeName'), 'Player A1');
+        assert.equal(gameData.get('questioneeId'), 5);
+        assert.equal(gameData.get('questioneeTeamType'), 2);
+        assert.equal(gameData.get('answereeTeamType'), 2);
+      });
+
+      it('the next questionee after home seat four should be home seat one if' +
+        ' it is the 32nd question', () => {
+        const setup = localSetup
+          .set('questionSet', localSetup
+            .get('questionSet')
+            .map((question, indx) => {
+              return question.set('hasFinished', indx < 31);
+            }))
+          .set('questioneeName', 'Player H4')
+          .set('questioneeId', 4)
+          .set('questioneeTeamType', 1)
+          .set('answereeTeamType', 1)
+          .setIn(['teams', 'players', 0, 'isQuestionee'], false)
+          .setIn(['teams', 'players', 7, 'isQuestionee'], true);
+
+        alt.bootstrap(JSON.stringify({
+          GameStore: {
+            gameData: setup
+          }
+        }));
+
+        gameActions.playerAnswered({
+          playerId: 4,
+          teamType: 1,
+          seat: 4
+        });
+
+        const gameData = altGameStore.getState().gameData;
+
+        assert.equal(gameData.get('questioneeName'), 'Player H1');
+        assert.equal(gameData.get('questioneeId'), 1);
+        assert.equal(gameData.get('questioneeTeamType'), 1);
+        assert.equal(gameData.get('answereeTeamType'), 1);
       });
     });
   });

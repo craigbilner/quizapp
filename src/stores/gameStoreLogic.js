@@ -106,6 +106,11 @@ class GameStoreLogic extends BaseLogic {
     const questioneeIndx = this.tempData
       .getIn(['teams', 'players'])
       .findIndex(player => player.get('isQuestionee'));
+
+    if (questioneeIndx < 0) {
+      throw new Error('There is no questionee');
+    }
+
     const questionIndx = this.tempData
       .get('questionSet')
       .findIndex(question => !question.get('hasFinished'));
@@ -124,9 +129,14 @@ class GameStoreLogic extends BaseLogic {
   }
 
   applyQuestionee() {
-    const questionee = this.tempData
+    let questionee = this.tempData
       .getIn(['teams', 'players'])
       .find(player => player.get('isQuestionee'));
+
+    if (!questionee) {
+      this.tempData = this.tempData.setIn(['teams', 'players', 0, 'isQuestionee'], true);
+      questionee = this.tempData.getIn(['teams', 'players', 0]);
+    }
 
     this.tempData = this.tempData.merge({
       questioneeName: questionee.get('name'),
@@ -154,7 +164,7 @@ class GameStoreLogic extends BaseLogic {
     return this;
   }
 
-  applyTeamOrder(firstTeamType = 1) {
+  applyTeamOrder(firstTeamType = this.tempData.getIn(['teams', 'firstTeamType'])) {
     const teamSort = this.teamSort(firstTeamType);
 
     this.tempData = this.tempData.setIn(['teams', 'players'], this.tempData

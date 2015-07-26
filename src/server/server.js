@@ -52,9 +52,9 @@ app.use(function *(next) {
       gameData: gameStoreLogic
         .applyRules(Immutable.fromJS(gameData))
         .applyI18n()
+        .applyTeamOrder()
         .applyQuestion()
         .applyQuestionee()
-        .applyTeamOrder()
         .applyTeamSummary()
         .applyQM()
         .applyTime({isPaused: true})

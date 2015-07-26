@@ -32,7 +32,8 @@ class GameTimerControlSmartComponent extends React.Component {
 
 GameTimerControlSmartComponent.propTypes = {
   children: React.PropTypes.object,
-  baseStyles: React.PropTypes.object
+  baseStyles: React.PropTypes.object,
+  gameStatus: React.PropTypes.number.isRequired
 };
 
 GameTimerControlSmartComponent.defaultProps = {};
