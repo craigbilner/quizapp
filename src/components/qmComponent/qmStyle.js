@@ -1,8 +1,6 @@
 export default {
-  backgroundColor: 'gray',
   borderRadius: 1000,
   padding: '30%',
-  color: 'white',
   fontWeight: 'bold',
   width: '20%',
   textAlign: 'center',

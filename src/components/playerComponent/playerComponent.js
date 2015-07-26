@@ -10,6 +10,14 @@ class PlayerComponent extends React.Component {
   }
 
   render() {
+    const playerStyle = [
+      style.player,
+      {
+        backgroundColor: this.props.baseStyles.colours.dark.secondary,
+        color: this.props.baseStyles.colours.light.primary
+      }
+    ];
+
     return (
       <div
         style={style.container}
@@ -18,7 +26,7 @@ class PlayerComponent extends React.Component {
           teamType: this.props.player.get('teamType'),
           seat: this.props.player.get('seat')
         })}>
-        <div style={style.player}>{this.props.player.get('initials')}</div>
+        <div style={playerStyle}>{this.props.player.get('initials')}</div>
       </div>
     );
   }
@@ -26,7 +34,8 @@ class PlayerComponent extends React.Component {
 
 PlayerComponent.propTypes = {
   handleClick: React.PropTypes.func,
-  player: React.PropTypes.object.isRequired
+  player: React.PropTypes.object.isRequired,
+  baseStyles: React.PropTypes.object.isRequired
 };
 
 PlayerComponent.defaultProps = {};

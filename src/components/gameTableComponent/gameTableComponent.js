@@ -14,7 +14,10 @@ class GameTableComponent extends React.Component {
   render() {
     const tableStyle = [
       this.props.baseStyles.layout.flex(1),
-      style.table
+      style.table,
+      {
+        backgroundColor: this.props.baseStyles.colours.dark.tertiary
+      }
     ];
     const tableBottomStyle = [
       this.props.baseStyles.layout.rows,
@@ -22,7 +25,9 @@ class GameTableComponent extends React.Component {
     ];
     const tableHeadStyle = [
       this.props.baseStyles.layout.flex(1),
-      style.tableHead
+      {
+        backgroundColor: this.props.baseStyles.colours.dark.tertiary
+      }
     ];
 
     return (
@@ -50,7 +55,10 @@ class GameTableComponent extends React.Component {
         <div style={tableBottomStyle}>
           <div style={this.props.baseStyles.layout.flex(1)}></div>
           <div>
-            <QMComponent player={this.props.questionMaster}/>
+            <QMComponent
+              player={this.props.questionMaster}
+              baseStyles={this.props.baseStyles}
+              />
           </div>
           <div style={this.props.baseStyles.layout.flex(1)}></div>
         </div>

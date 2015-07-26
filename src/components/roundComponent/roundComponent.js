@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Radium from 'Radium';
-import style from '../roundComponent/roundStyle';
 
 class RoundComponent extends React.Component {
   constructor(props) {
@@ -14,8 +13,14 @@ class RoundComponent extends React.Component {
   }
 
   render() {
+    const compStyle = [
+      {
+        color: this.props.baseStyles.colours.dark.tertiary
+      }
+    ];
+
     return (
-      <div style={style}>
+      <div style={compStyle}>
         <span>{this.props.roundName}</span>
       </div>
     );
@@ -23,7 +28,8 @@ class RoundComponent extends React.Component {
 }
 
 RoundComponent.propTypes = {
-  roundName: React.PropTypes.string.isRequired
+  roundName: React.PropTypes.string.isRequired,
+  baseStyles: React.PropTypes.object.isRequired
 };
 
 RoundComponent.defaultProps = {};

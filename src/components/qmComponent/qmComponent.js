@@ -10,8 +10,16 @@ class QMComponent extends React.Component {
   }
 
   render() {
+    const compStyle = [
+      style,
+      {
+        backgroundColor: this.props.baseStyles.colours.dark.secondary,
+        color: this.props.baseStyles.colours.light.secondary
+      }
+    ];
+
     return (
-      <div style={style}>
+      <div style={compStyle}>
         {this.props.player.get('initials')}
       </div>
     );
@@ -19,7 +27,8 @@ class QMComponent extends React.Component {
 }
 
 QMComponent.propTypes = {
-  player: React.PropTypes.object.isRequired
+  player: React.PropTypes.object.isRequired,
+  baseStyles: React.PropTypes.object.isRequired
 };
 
 QMComponent.defaultProps = {};

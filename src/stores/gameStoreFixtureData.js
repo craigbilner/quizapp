@@ -317,28 +317,24 @@ export default {
         seat: 1,
         playerId: 1,
         name: 'Player H1',
-        isQuestionee: true,
         teamType: 1
       },
       {
         seat: 2,
         playerId: 2,
         name: 'Player H2',
-        isQuestionee: false,
         teamType: 1
       },
       {
         seat: 3,
         playerId: 3,
         name: 'Player H3',
-        isQuestionee: false,
         teamType: 1
       },
       {
         seat: 4,
         playerId: 4,
         name: 'Player H4',
-        isQuestionee: false,
         teamType: 1,
         isCaptain: true
       },
@@ -346,28 +342,24 @@ export default {
         seat: 1,
         playerId: 5,
         name: 'Player A1',
-        isQuestionee: false,
         teamType: 2
       },
       {
         seat: 2,
         playerId: 6,
         name: 'Player A2',
-        isQuestionee: false,
         teamType: 2
       },
       {
         seat: 3,
         playerId: 7,
         name: 'Player A3',
-        isQuestionee: false,
         teamType: 2
       },
       {
         seat: 4,
         playerId: 8,
         name: 'Player A4',
-        isQuestionee: false,
         teamType: 2,
         isCaptain: true
       }

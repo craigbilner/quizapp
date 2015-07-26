@@ -3,8 +3,7 @@ export default {
     padding: '5% 0 5% 0'
   },
   answerDesc: {
-    minWidth: 100,
-    color: 'gray'
+    minWidth: 100
   }
 };
 

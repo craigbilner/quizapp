@@ -23,6 +23,12 @@ class SummaryTeamComponent extends React.Component {
       this.props.baseStyles.layout.flex(1),
       style.score
     ];
+    const totalStyle = [
+      style.total,
+      {
+        borderTop: `1px solid ${this.props.baseStyles.colours.dark.tertiary}`
+      }
+    ];
 
     return (
       <div style={compStyle}>
@@ -42,8 +48,8 @@ class SummaryTeamComponent extends React.Component {
             );
           })
         }
-        <div style={style.totals}>
-          <div style={style.totalsNumber}>{this.props.teamTotal}</div>
+        <div style={totalStyle}>
+          <div style={style.totalNumber}>{this.props.teamTotal}</div>
         </div>
       </div>
     );

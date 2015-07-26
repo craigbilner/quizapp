@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Radium from 'Radium';
-import style from '../gameQuestionControlComponent/gameQuestionControlStyle';
 
 class GameQuestionControlComponentComponent extends React.Component {
   constructor(props) {
@@ -34,7 +33,7 @@ class GameQuestionControlComponentComponent extends React.Component {
   render() {
     const compStyle = [
       this.props.baseStyles.button,
-      style
+      {backgroundColor: this.props.baseStyles.colours.light.primary}
     ];
 
     return (

@@ -1,12 +1,15 @@
+import baseColours from '../styles/baseColours';
+
 export default {
+  colours: baseColours,
   button: {
-    border: '1px solid black',
+    border: `1px solid ${baseColours.dark.primary}`,
     margin: '1%',
     padding: '1%',
     cursor: 'pointer',
 
     ':hover': {
-      borderColor: 'grey'
+      borderColor: baseColours.dark.secondary
     }
 
   },

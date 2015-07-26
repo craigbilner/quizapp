@@ -21,7 +21,10 @@ class QuestionAnswerComponent extends React.Component {
     ];
     const answerDescStyle = [
       this.props.baseStyles.layout.flex(1),
-      style.answerDesc
+      style.answerDesc,
+      {
+        color: this.props.baseStyles.colours.dark.tertiary
+      }
     ];
     let returnValue = '<div></div>';
 
@@ -29,7 +32,10 @@ class QuestionAnswerComponent extends React.Component {
       returnValue = (
         <div>
           <QuestioneeComponent questioneeName={this.props.questioneeName}/>
-          <RoundComponent roundName={this.props.roundName}/>
+          <RoundComponent
+            roundName={this.props.roundName}
+            baseStyles={this.props.baseStyles}
+            />
 
           <div style={this.props.baseStyles.layout.rows}>
             <QuestionIndxComponent

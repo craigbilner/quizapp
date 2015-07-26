@@ -7,12 +7,11 @@ export default {
     textAlign: 'right',
     paddingRight: '2%'
   },
-  totals: {
-    borderTop: '1px solid gray',
+  total: {
     margin: '1%',
     padding: '1%'
   },
-  totalsNumber: {
+  totalNumber: {
     'float': 'right',
     fontSize: '200%'
   }

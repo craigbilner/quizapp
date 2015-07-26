@@ -4,8 +4,6 @@ export default {
   },
   title: {
     alignItems: 'center',
-    backgroundColor: 'grey',
-    color: 'white',
     paddingLeft: '5%'
   }
 };

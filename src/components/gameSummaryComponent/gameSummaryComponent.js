@@ -23,7 +23,11 @@ class GameSummaryComponent extends React.Component {
     const titleStyle = [
       this.props.baseStyles.layout.rows,
       this.props.baseStyles.layout.flex(1),
-      style.title
+      style.title,
+      {
+        backgroundColor: this.props.baseStyles.colours.dark.tertiary,
+        color: this.props.baseStyles.colours.light.primary
+      }
     ];
 
     return (

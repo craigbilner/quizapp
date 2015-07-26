@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Radium from'radium';
-import style from '../gameTimerControlComponent/gameTImerControlStyle';
 
 class GameTimerControlComponent extends React.Component {
   constructor(props) {
@@ -18,7 +17,9 @@ class GameTimerControlComponent extends React.Component {
   render() {
     const compStyle = [
       this.props.baseStyles.button,
-      this.props.isPaused ? style.isPaused : style.isTiming
+      this.props.isPaused
+        ? this.props.baseStyles.colours.light.primary
+        : this.props.baseStyles.colours.dark.primary
     ];
 
     return (
