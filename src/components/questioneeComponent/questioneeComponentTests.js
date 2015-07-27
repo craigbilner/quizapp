@@ -3,6 +3,7 @@
 import assert from 'assert';
 import React from 'react/addons';
 import QuestioneeComponent from '../questioneeComponent/questioneeComponent';
+import baseStyles from '../../styles/baseStyles';
 
 const TestUtils = React.addons.TestUtils;
 
@@ -11,7 +12,8 @@ describe('the questioneeComponent should', () => {
     const shallowRenderer = TestUtils.createRenderer();
     const testQuestionee = 'Test questionee';
     shallowRenderer.render(React.createElement(QuestioneeComponent, {
-      questioneeName: testQuestionee
+      questioneeName: testQuestionee,
+      baseStyles: baseStyles
     }));
 
     const component = shallowRenderer.getRenderOutput();

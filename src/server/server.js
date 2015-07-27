@@ -58,7 +58,6 @@ app.use(function *(next) {
         .applyTeamSummary()
         .applyQM()
         .applyTime({isPaused: true})
-        .applyTimerText()
         .result()
     }
   };

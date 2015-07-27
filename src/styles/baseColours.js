@@ -1,13 +1,13 @@
 export default {
   dark: {
     primary: 'black',
-    secondary: 'blue',
-    tertiary: 'purple'
+    secondary: 'black',
+    tertiary: 'black'
   },
   light: {
-    primary: 'orange',
-    secondary: 'yellow',
-    tertiary: 'green'
+    primary: 'black',
+    secondary: 'black',
+    tertiary: 'red'
   }
 };
 

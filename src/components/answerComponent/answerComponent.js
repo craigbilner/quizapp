@@ -12,7 +12,10 @@ class AnswerComponent extends React.Component {
   render() {
     const compStyle = [
       this.props.baseStyles.layout.flex(5),
-      style
+      style,
+      {
+        color: this.props.baseStyles.colours.dark.primary
+      }
     ];
     return (
       <div style={compStyle}>

@@ -31,7 +31,10 @@ class QuestionAnswerComponent extends React.Component {
     if (this.props.questionIndx !== '00') {
       returnValue = (
         <div>
-          <QuestioneeComponent questioneeName={this.props.questioneeName}/>
+          <QuestioneeComponent
+            questioneeName={this.props.questioneeName}
+            baseStyles={this.props.baseStyles}
+            />
           <RoundComponent
             roundName={this.props.roundName}
             baseStyles={this.props.baseStyles}

@@ -19,14 +19,24 @@ class SummaryTeamComponent extends React.Component {
       this.props.baseStyles.layout.flex(1),
       style.playerContainer
     ];
+    const playerStyle = [
+      this.props.baseStyles.layout.flex(1),
+      {
+        color: this.props.baseStyles.colours.dark.primary
+      }
+    ];
     const scoreStyle = [
       this.props.baseStyles.layout.flex(1),
-      style.score
+      style.score,
+      {
+        color: this.props.baseStyles.colours.dark.primary
+      }
     ];
     const totalStyle = [
       style.total,
       {
-        borderTop: `1px solid ${this.props.baseStyles.colours.dark.tertiary}`
+        borderTop: `1px solid ${this.props.baseStyles.colours.dark.tertiary}`,
+        color: this.props.baseStyles.colours.dark.primary
       }
     ];
 
@@ -37,7 +47,7 @@ class SummaryTeamComponent extends React.Component {
             return (
               <div key={player.get('playerId')}
                    style={playerContainerStyle}>
-                <div style={this.props.baseStyles.layout.flex(1)}>
+                <div style={playerStyle}>
                   {player.get('name')}
                 </div>
                 <div style={scoreStyle}>

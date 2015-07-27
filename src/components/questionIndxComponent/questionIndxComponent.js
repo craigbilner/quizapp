@@ -17,7 +17,9 @@ class QuestionIndxComponent extends React.Component {
     const compStyle = [
       this.props.baseStyles.layout.flex(1),
       style,
-      this.props.baseStyles.colours.dark.tertiary
+      {
+        color: this.props.baseStyles.colours.dark.tertiary
+      }
     ];
 
     return (

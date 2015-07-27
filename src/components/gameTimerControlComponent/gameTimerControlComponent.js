@@ -10,16 +10,19 @@ class GameTimerControlComponent extends React.Component {
 
   getButtonText(isPaused) {
     return isPaused
-      ? this.props.timerText.get('startText')
-      : this.props.timerText.get('pauseText');
+      ? this.props.timingText.get('start')
+      : this.props.timingText.get('pause');
   }
 
   render() {
     const compStyle = [
       this.props.baseStyles.button,
-      this.props.isPaused
-        ? this.props.baseStyles.colours.light.primary
-        : this.props.baseStyles.colours.dark.primary
+      {
+        backgroundColor: this.props.isPaused
+          ? this.props.baseStyles.colours.light.primary
+          : this.props.baseStyles.colours.light.secondary,
+        color: this.props.baseStyles.colours.dark.primary
+      }
     ];
 
     return (
@@ -34,7 +37,7 @@ class GameTimerControlComponent extends React.Component {
 
 GameTimerControlComponent.propTypes = {
   isPaused: React.PropTypes.bool.isRequired,
-  timerText: React.PropTypes.object.isRequired,
+  timingText: React.PropTypes.object.isRequired,
   handleClick: React.PropTypes.func,
   baseStyles: React.PropTypes.object
 };

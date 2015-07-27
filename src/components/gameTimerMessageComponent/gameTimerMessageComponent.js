@@ -1,8 +1,9 @@
 'use strict';
 
 import React from 'react';
+import Radium from 'Radium';
 
-export default class GameTimerMessageComponent extends React.Component {
+class GameTimerMessageComponent extends React.Component {
   constructor(props) {
     super(props);
     const msgText = this.props.msgText;
@@ -21,16 +22,23 @@ export default class GameTimerMessageComponent extends React.Component {
   }
 
   render() {
+    const compStyle = [
+      {
+        color: this.props.baseStyles.colours.dark.primary
+      }
+    ];
     return (
-      <span>{this.getMessage(this.props.gameStatus)}</span>
+      <span style={compStyle}>{this.getMessage(this.props.gameStatus)}</span>
     );
   }
 }
 
 GameTimerMessageComponent.propTypes = {
   msgText: React.PropTypes.object.isRequired,
-  gameStatus: React.PropTypes.number.isRequired
+  gameStatus: React.PropTypes.number.isRequired,
+  baseStyles: React.PropTypes.object.isRequired
 };
 
 GameTimerMessageComponent.defaultProps = {};
 
+export default Radium(GameTimerMessageComponent);

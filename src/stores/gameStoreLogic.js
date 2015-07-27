@@ -44,10 +44,6 @@ class BaseLogic {
     return this;
   }
 
-  applyTimerText() {
-    return this;
-  }
-
   applyScore() {
     return this;
   }
@@ -79,6 +75,11 @@ class GameStoreLogic extends BaseLogic {
         'over',
         'incorrect',
         'nextQuestion'
+      ])),
+      timingText: this.tempData.get('i18n').filter(this.keyIn([
+        'start',
+        'pause',
+        'timeRemaining'
       ]))
     });
 
@@ -204,17 +205,6 @@ class GameStoreLogic extends BaseLogic {
       gameTime: Math.max(newTime, 0),
       resetGameTime: reset,
       isPaused: isPaused
-    });
-
-    return this;
-  }
-
-  applyTimerText() {
-    this.tempData = this.tempData.merge({
-      timerText: this.tempData.get('i18n').filter(this.keyIn([
-        'startText',
-        'pauseText'
-      ]))
     });
 
     return this;

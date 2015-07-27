@@ -20,7 +20,6 @@ describe('for the game store logic', () => {
     .applyTeamSummary()
     .applyQM()
     .applyTime({isPaused: true})
-    .applyTimerText()
     .result();
 
   describe('if a player answers their own question within the player time interval', () => {

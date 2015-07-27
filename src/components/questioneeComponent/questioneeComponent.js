@@ -14,8 +14,15 @@ class QuestioneeComponent extends React.Component {
   }
 
   render() {
+    const compStyle = [
+      style,
+      {
+        color: this.props.baseStyles.colours.dark.primary
+      }
+    ];
+
     return (
-      <div style={style}>
+      <div style={compStyle}>
         <span>{this.props.questioneeName}</span>
       </div>
     );
@@ -23,7 +30,8 @@ class QuestioneeComponent extends React.Component {
 }
 
 QuestioneeComponent.propTypes = {
-  questioneeName: React.PropTypes.string.isRequired
+  questioneeName: React.PropTypes.string.isRequired,
+  baseStyles: React.PropTypes.object.isRequired
 };
 
 QuestioneeComponent.defaultProps = {};

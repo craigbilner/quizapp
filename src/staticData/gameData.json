@@ -6,8 +6,9 @@
   "bonusQuestionPoints": 1,
   "i18n": {
     "answerDesc": "answer",
-    "startText": "start",
-    "pauseText": "pause",
+    "start": "start",
+    "pause": "pause",
+    "timeRemaining": "time remaining",
     "roundDesc": "round",
     "player": "player",
     "team": "team",

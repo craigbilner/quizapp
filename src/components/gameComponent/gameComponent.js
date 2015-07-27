@@ -60,7 +60,7 @@ class GameComponent extends React.Component {
               isPaused={gd.get('isPaused')}
               resetGameTime={gd.get('resetGameTime')}
               timeInterval={gd.get('timeInterval')}
-              timerText={gd.get('timerText')}
+              timingText={gd.get('timingText')}
               gameStatus={gd.get('gameStatus')}
               msgText={gd.get('msgText')}
               controlText={gd.get('controlText')}

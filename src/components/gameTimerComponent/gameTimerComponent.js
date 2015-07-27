@@ -1,8 +1,9 @@
 'use strict';
 
 import React from 'react';
+import Radium from 'Radium';
 
-export default class GameTimerComponent extends React.Component {
+class GameTimerComponent extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -39,8 +40,14 @@ export default class GameTimerComponent extends React.Component {
       this.startTimer();
     }
 
+    const compStyle = [
+      {
+        color: this.props.baseStyles.colours.dark.primary
+      }
+    ];
+
     return (
-      <span>{this.props.gameTime}</span>
+      <span style={compStyle}>{this.props.gameTime}</span>
     );
   }
 }
@@ -50,8 +57,10 @@ GameTimerComponent.propTypes = {
   isPaused: React.PropTypes.bool.isRequired,
   isReset: React.PropTypes.bool.isRequired,
   onTimeChange: React.PropTypes.func,
-  timeInterval: React.PropTypes.number.isRequired
+  timeInterval: React.PropTypes.number.isRequired,
+  baseStyles: React.PropTypes.object.isRequired
 };
 
 GameTimerComponent.defaultProps = {};
 
+export default Radium(GameTimerComponent);
