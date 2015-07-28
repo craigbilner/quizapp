@@ -1,9 +1,10 @@
 'use strict';
 
 import React from 'react';
+import Radium from 'Radium';
 import gameActions from '../../actions/gameActions';
 
-export default class PlayerSmartComponent extends React.Component {
+class PlayerSmartComponent extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -13,8 +14,16 @@ export default class PlayerSmartComponent extends React.Component {
   }
 
   render() {
+    const compStyle = [
+      this.props.baseStyles.layout.flex(1),
+      this.props.baseStyles.layout.rows,
+      {
+        justifyContent: 'center',
+        padding: '5%'
+      }
+    ];
     return (
-      <div>
+      <div style={compStyle}>
         {
           React.Children.map(this.props.children, child => {
             return React.cloneElement(child, {
@@ -28,8 +37,10 @@ export default class PlayerSmartComponent extends React.Component {
 }
 
 PlayerSmartComponent.propTypes = {
-  children: React.PropTypes.object
+  children: React.PropTypes.object,
+  baseStyles: React.PropTypes.object.isRequired
 };
 
 PlayerSmartComponent.defaultProps = {};
 
+export default Radium(PlayerSmartComponent);

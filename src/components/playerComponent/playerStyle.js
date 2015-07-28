@@ -1,16 +1,26 @@
 export default {
-  container: {
-    textAlign: 'center',
-    padding: '10% 0 10% 0'
-  },
-  player: {
+  halo: {
+    maxWidth: 70,
+    minWidth: 60,
+    maxHeight: 70,
+    minHeight: 60,
     borderRadius: 1000,
-    padding: '10%',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    height: '10%',
-    width: 30,
-    marginLeft: '25%'
+    justifyContent: 'center',
+    padding: 5
+  },
+  inner: {
+    position: 'absolute',
+    top: 5,
+    left: 5,
+    maxWidth: 70,
+    minWidth: 60,
+    maxHeight: 70,
+    minHeight: 60,
+    borderRadius: 1000,
+    justifyContent: 'center'
+  },
+  text: {
+    textAlign: 'center'
   }
 };
 

@@ -37,6 +37,7 @@ class GameComponent extends React.Component {
     ];
     const bottomRegionStyle = [
       this.props.baseStyles.layout.flex(1),
+      this.props.baseStyles.layout.columns,
       style.bottomRegion
     ];
 

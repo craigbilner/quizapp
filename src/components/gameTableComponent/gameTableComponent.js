@@ -12,6 +12,19 @@ class GameTableComponent extends React.Component {
   }
 
   render() {
+    const compStyle = [
+      this.props.baseStyles.layout.flex(1),
+      this.props.baseStyles.layout.columns,
+      style.comp
+    ];
+    const tableTopStyle = [
+      this.props.baseStyles.layout.rows,
+      this.props.baseStyles.layout.flex(10)
+    ];
+    const tableTeamContainerStyle = [
+      this.props.baseStyles.layout.flex(1),
+      this.props.baseStyles.layout.columns
+    ];
     const tableStyle = [
       this.props.baseStyles.layout.flex(1),
       style.table,
@@ -21,7 +34,8 @@ class GameTableComponent extends React.Component {
     ];
     const tableBottomStyle = [
       this.props.baseStyles.layout.rows,
-      style.tableBottom
+      style.tableBottom,
+      this.props.baseStyles.layout.flex(1)
     ];
     const tableHeadStyle = [
       this.props.baseStyles.layout.flex(1),
@@ -31,9 +45,9 @@ class GameTableComponent extends React.Component {
     ];
 
     return (
-      <div>
-        <div style={this.props.baseStyles.layout.rows}>
-          <div style={this.props.baseStyles.layout.flex(1)}>
+      <div style={compStyle}>
+        <div style={tableTopStyle}>
+          <div style={tableTeamContainerStyle}>
             <TableTeamComponent
               players={this.props.homeTeam}
               baseStyles={this.props.baseStyles}
@@ -42,7 +56,7 @@ class GameTableComponent extends React.Component {
               />
           </div>
           <div style={tableStyle}></div>
-          <div style={this.props.baseStyles.layout.flex(1)}>
+          <div style={tableTeamContainerStyle}>
             <TableTeamComponent
               players={this.props.awayTeam}
               baseStyles={this.props.baseStyles}

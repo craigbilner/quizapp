@@ -23,5 +23,13 @@ export default {
         opacity: 1
       }
     }
-  )
+  ),
+  colourChange: (from, to) => Radium.keyframes({
+    '0%': {
+      color: from
+    },
+    '100%': {
+      color: to
+    }
+  })
 };

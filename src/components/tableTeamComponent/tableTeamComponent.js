@@ -1,17 +1,23 @@
 'use strict';
 
 import React from 'react';
+import Radium from 'Radium';
 import PlayerSmartComponent from '../playerComponent/playerSmartComponent';
 import PlayerComponent from '../playerComponent/playerComponent';
 
-export default class TableTeamComponent extends React.Component {
+class TableTeamComponent extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
+    const compStyle = [
+      this.props.baseStyles.layout.columns,
+      this.props.baseStyles.layout.flex(1)
+    ];
+
     return (
-      <div style={this.props.baseStyles.layout.flex.columns}>
+      <div style={compStyle}>
         {
           this.props.players
             .sort((prev, next) => {
@@ -19,7 +25,10 @@ export default class TableTeamComponent extends React.Component {
             })
             .map(player => {
               return (
-                <PlayerSmartComponent key={player.get('playerId')}>
+                <PlayerSmartComponent
+                  key={player.get('playerId')}
+                  baseStyles={this.props.baseStyles}
+                  >
                   <PlayerComponent
                     player={player}
                     baseStyles={this.props.baseStyles}
@@ -44,3 +53,4 @@ TableTeamComponent.propTypes = {
 
 TableTeamComponent.defaultProps = {};
 
+export default Radium(TableTeamComponent);

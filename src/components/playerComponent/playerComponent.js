@@ -17,34 +17,59 @@ class PlayerComponent extends React.Component {
       );
   }
 
-  getPlayerStyle() {
-    let playerStyle = [
-      style.player,
+  getPlayerHaloStyle() {
+    let playerHaloStyle = [
+      style.halo,
       {
-        backgroundColor: this.props.baseStyles.colours.dark.tertiary,
-        color: this.props.baseStyles.colours.light.primary
-      }
+        backgroundColor: this.props.baseStyles.colours.dark.primary
+      },
+      this.props.baseStyles.layout.columns
     ];
 
     if (this.canAnswer()) {
-      playerStyle.push({
+      playerHaloStyle.push({
         animation: `${this.props.baseStyles.animations.flash} 0.5s infinite alternate ease-in-out`
       });
     }
 
-    return playerStyle;
+    return playerHaloStyle;
   }
 
   render() {
+    const compStyle = [
+      {
+        position: 'relative'
+      }
+    ];
+    const playerInnerStyle = [
+      style.inner,
+      {
+        backgroundColor: this.props.baseStyles.colours.light.primary
+      },
+      this.props.baseStyles.layout.flex(1),
+      this.props.baseStyles.layout.columns
+    ];
+    const playerTextStyle = [
+      style.text,
+      {
+        color: this.props.baseStyles.colours.dark.primary
+      }
+    ];
+
     return (
-      <div
-        style={style.container}
-        onClick={this.props.handleClick.bind(this, {
+      <div style={compStyle}>
+        <div style={this.getPlayerHaloStyle()}
+             onClick={this.props.handleClick.bind(this, {
           playerId: this.props.player.get('playerId'),
           teamType: this.props.player.get('teamType'),
           seat: this.props.player.get('seat')
         })}>
-        <div style={this.getPlayerStyle()}>{this.props.player.get('initials')}</div>
+        </div>
+        <div style={playerInnerStyle}>
+          <div style={playerTextStyle}>
+            {this.props.player.get('initials')}
+          </div>
+        </div>
       </div>
     );
   }
