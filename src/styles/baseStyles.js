@@ -1,6 +1,8 @@
 import baseColours from '../styles/baseColours';
+import animations from '../styles/radiumAnimations';
 
 export default {
+  animations: animations,
   colours: baseColours,
   button: {
     border: `1px solid ${baseColours.dark.primary}`,

@@ -29,13 +29,25 @@ class GameSummaryComponent extends React.Component {
         color: this.props.baseStyles.colours.light.primary
       }
     ];
+    const teamNameContainerStyle = [
+      this.props.baseStyles.layout.flex(1),
+      style.teamNameContainer
+    ];
+    const handicapStyle = [
+      this.props.baseStyles.layout.flex(1),
+      style.handicap
+    ];
 
     return (
       <div style={summaryStyle}>
         <div style={teamColumnStyle}>
           <div style={titleStyle}>
-            <TeamNameComponent teamName={this.props.homeName}/>
-            ({this.props.homeHandicap})
+            <div style={teamNameContainerStyle}>
+              <TeamNameComponent teamName={this.props.homeName}/>
+            </div>
+            <div style={handicapStyle}>
+              ({this.props.homeHandicap})
+            </div>
           </div>
           <SummaryTeamComponent
             players={this.props.homeTeam}
@@ -45,8 +57,12 @@ class GameSummaryComponent extends React.Component {
         </div>
         <div style={teamColumnStyle}>
           <div style={titleStyle}>
-            <TeamNameComponent teamName={this.props.awayName}/>
-            ({this.props.awayHandicap})
+            <div style={teamNameContainerStyle}>
+              <TeamNameComponent teamName={this.props.awayName}/>
+            </div>
+            <div style={handicapStyle}>
+              ({this.props.awayHandicap})
+            </div>
           </div>
           <SummaryTeamComponent
             players={this.props.awayTeam}

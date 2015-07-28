@@ -7,10 +7,9 @@ export default {
     borderRadius: 1000,
     padding: '10%',
     fontWeight: 'bold',
-    width: '20%',
     textAlign: 'center',
     height: '10%',
-    minWidth: 30,
+    width: 30,
     marginLeft: '25%'
   }
 };

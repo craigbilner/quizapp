@@ -16,7 +16,7 @@ class GameTableComponent extends React.Component {
       this.props.baseStyles.layout.flex(1),
       style.table,
       {
-        backgroundColor: this.props.baseStyles.colours.dark.tertiary
+        backgroundColor: this.props.baseStyles.colours.light.tertiary
       }
     ];
     const tableBottomStyle = [
@@ -26,7 +26,7 @@ class GameTableComponent extends React.Component {
     const tableHeadStyle = [
       this.props.baseStyles.layout.flex(1),
       {
-        backgroundColor: this.props.baseStyles.colours.dark.tertiary
+        backgroundColor: this.props.baseStyles.colours.light.tertiary
       }
     ];
 
@@ -37,6 +37,8 @@ class GameTableComponent extends React.Component {
             <TableTeamComponent
               players={this.props.homeTeam}
               baseStyles={this.props.baseStyles}
+              questioneeId={this.props.questioneeId}
+              answereeTeamType={this.props.answereeTeamType}
               />
           </div>
           <div style={tableStyle}></div>
@@ -44,6 +46,8 @@ class GameTableComponent extends React.Component {
             <TableTeamComponent
               players={this.props.awayTeam}
               baseStyles={this.props.baseStyles}
+              questioneeId={this.props.questioneeId}
+              answereeTeamType={this.props.answereeTeamType}
               />
           </div>
         </div>
@@ -71,7 +75,9 @@ GameTableComponent.propTypes = {
   homeTeam: React.PropTypes.object.isRequired,
   awayTeam: React.PropTypes.object.isRequired,
   questionMaster: React.PropTypes.object.isRequired,
-  baseStyles: React.PropTypes.object
+  baseStyles: React.PropTypes.object,
+  questioneeId: React.PropTypes.number.isRequired,
+  answereeTeamType: React.PropTypes.number.isRequired
 };
 
 GameTableComponent.defaultProps = {};

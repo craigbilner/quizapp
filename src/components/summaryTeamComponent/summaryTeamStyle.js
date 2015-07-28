@@ -3,6 +3,11 @@ export default {
     alignItems: 'center',
     paddingLeft: '5%'
   },
+  player: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap'
+  },
   score: {
     textAlign: 'right',
     paddingRight: '2%'

@@ -21,6 +21,7 @@ class SummaryTeamComponent extends React.Component {
     ];
     const playerStyle = [
       this.props.baseStyles.layout.flex(1),
+      style.player,
       {
         color: this.props.baseStyles.colours.dark.primary
       }
