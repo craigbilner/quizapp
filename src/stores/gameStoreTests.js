@@ -9,6 +9,7 @@ import altGameStore from '../stores/altGameStore';
 import gameStoreLogic from '../stores/gameStoreLogic';
 import gameActions from '../actions/gameActions';
 import testData from '../stores/gameStoreFixtureData';
+import {status} from '../enums/gameEnums';
 
 describe('for the game store logic', () => {
   const testBase = gameStoreLogic
@@ -555,9 +556,9 @@ describe('for the game store logic', () => {
 
       const gameData = altGameStore.getState().gameData;
 
-      assert.equal(gameData.get('currentIndx'), '00');
-      assert.equal(gameData.get('currentQuestion'), 'test there are no more questions');
-      assert.equal(gameData.get('currentAnswer'), 'test there are no more answers');
+      assert.equal(gameData.get('currentIndx'), '');
+      assert.equal(gameData.get('currentQuestion'), '');
+      assert.equal(gameData.get('currentAnswer'), '');
     });
 
     describe('and the home team are going first', () => {
@@ -798,7 +799,7 @@ describe('for the game store logic', () => {
       'the game status should be set to the team', () => {
       gameActions.updateTime(0);
 
-      assert.equal(altGameStore.getState().gameData.get('gameStatus'), 2);
+      assert.equal(altGameStore.getState().gameData.get('gameStatus'), status.WITH_QEETEAM);
     });
 
     it('to zero and the all answerees have had their chance,' +

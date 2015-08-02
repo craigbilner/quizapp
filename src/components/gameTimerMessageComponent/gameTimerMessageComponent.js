@@ -2,18 +2,19 @@
 
 import React from 'react';
 import Radium from 'Radium';
+import {status} from '../../enums/gameEnums';
 
 class GameTimerMessageComponent extends React.Component {
   constructor(props) {
     super(props);
     const msgText = this.props.msgText;
     this.timerMessage = {
-      0: '',
-      1: msgText.get('player'),
-      2: msgText.get('team'),
-      3: msgText.get('over'),
-      4: msgText.get('timesUp'),
-      5: msgText.get('nobodyKnows')
+      [status.DEFAULT]: '',
+      [status.WITH_PLAYER]: msgText.get('player'),
+      [status.WITH_QEETEAM]: msgText.get('team'),
+      [status.WITH_OTEAM]: msgText.get('over'),
+      [status.TIME_UP]: msgText.get('timesUp'),
+      [status.FORCE_END]: msgText.get('nobodyKnows')
     };
   }
 

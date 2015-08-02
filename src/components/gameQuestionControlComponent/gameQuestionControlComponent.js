@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Radium from 'Radium';
+import {status} from '../../enums/gameEnums';
 
 class GameQuestionControlComponentComponent extends React.Component {
   constructor(props) {
@@ -11,16 +12,16 @@ class GameQuestionControlComponentComponent extends React.Component {
   getText(gameStatus) {
     let text = '';
     switch (gameStatus) {
-      case 0:
-      case 1:
-      case 2:
+      case status.DEFAULT:
+      case status.WITH_PLAYER:
+      case status.WITH_QEETEAM:
         text = this.props.controlText.get('over');
         break;
-      case 3:
+      case status.WITH_OTEAM:
         text = this.props.controlText.get('incorrect');
         break;
-      case 4:
-      case 5:
+      case status.TIME_UP:
+      case status.FORCE_END:
         text = this.props.controlText.get('nextQuestion');
         break;
       default:

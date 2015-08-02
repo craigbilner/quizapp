@@ -7,6 +7,7 @@ import GameTimingComponent from '../gameTimingComponent/gameTimingComponent';
 import GameTableComponent from '../gameTableComponent/gameTableComponent';
 import GameSummaryComponent from '../gameSummaryComponent/gameSummaryComponent';
 import style from '../gameComponent/gameComponentStyle';
+import {status} from '../../enums/gameEnums';
 
 class GameComponent extends React.Component {
   constructor(props) {
@@ -15,6 +16,28 @@ class GameComponent extends React.Component {
 
   shouldComponentUpdate(nextProps) {
     return nextProps.gameData !== this.props.gameData;
+  }
+
+  getTimerComponent() {
+    const gd = this.props.gameData;
+    let returnValue = null
+    if (gd.get('gameStatus') !== status.GAME_OVER) {
+      returnValue = (
+        <GameTimingComponent
+          gameTime={gd.get('gameTime')}
+          isPaused={gd.get('isPaused')}
+          resetGameTime={gd.get('resetGameTime')}
+          timeInterval={gd.get('timeInterval')}
+          timingText={gd.get('timingText')}
+          gameStatus={gd.get('gameStatus')}
+          msgText={gd.get('msgText')}
+          controlText={gd.get('controlText')}
+          baseStyles={this.props.baseStyles}
+          />
+      );
+    }
+
+    return returnValue;
   }
 
   render() {
@@ -52,21 +75,12 @@ class GameComponent extends React.Component {
               questionText={gd.get('currentQuestion')}
               answerDesc={gd.getIn(['i18n', 'answerDesc'])}
               answerText={gd.get('currentAnswer')}
+              gameStatus={gd.get('gameStatus')}
               baseStyles={this.props.baseStyles}
               />
           </div>
           <div style={timingStyle}>
-            <GameTimingComponent
-              gameTime={gd.get('gameTime')}
-              isPaused={gd.get('isPaused')}
-              resetGameTime={gd.get('resetGameTime')}
-              timeInterval={gd.get('timeInterval')}
-              timingText={gd.get('timingText')}
-              gameStatus={gd.get('gameStatus')}
-              msgText={gd.get('msgText')}
-              controlText={gd.get('controlText')}
-              baseStyles={this.props.baseStyles}
-              />
+            {this.getTimerComponent()}
           </div>
         </div>
         <div style={bottomStyle}>

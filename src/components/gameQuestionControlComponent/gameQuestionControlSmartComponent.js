@@ -2,6 +2,7 @@
 
 import React from 'react';
 import gameActions from '../../actions/gameActions';
+import {status} from '../../enums/gameEnums';
 
 export default class GameQuestionControlSmartComponent extends React.Component {
   constructor(props) {
@@ -9,9 +10,9 @@ export default class GameQuestionControlSmartComponent extends React.Component {
   }
 
   handleClick(gameStatus) {
-    if (gameStatus < 3) {
+    if (gameStatus < status.WITH_OTEAM) {
       gameActions.forceOver();
-    } else if (gameStatus === 3) {
+    } else if (gameStatus === status.WITH_OTEAM) {
       gameActions.endQuestion();
     } else {
       gameActions.nextQuestion();

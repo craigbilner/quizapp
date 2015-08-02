@@ -3,6 +3,7 @@
 import React from 'react';
 import Radium from 'Radium';
 import gameActions from '../../actions/gameActions';
+import {status} from '../../enums/gameEnums';
 
 class GameTimerControlSmartComponent extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class GameTimerControlSmartComponent extends React.Component {
   }
 
   handleClick(isPaused) {
-    if (this.props.gameStatus < 4) {
+    if (this.props.gameStatus < status.TIME_UP) {
       gameActions.toggleTime({isPaused: !isPaused});
     }
   }

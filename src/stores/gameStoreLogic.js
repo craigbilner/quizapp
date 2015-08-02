@@ -1,6 +1,7 @@
 'use strict';
 
 import Immutable from 'immutable';
+import {status} from '../enums/gameEnums';
 
 class BaseLogic {
   constructor(data = Immutable.fromJS({})) {
@@ -87,19 +88,34 @@ class GameStoreLogic extends BaseLogic {
   }
 
   applyQuestion() {
-    const question = this.getQuestion(this.tempData.get('questionSet'),
-      this.tempData.get('i18n'));
+    const question = this.getQuestion(this.tempData.get('questionSet'));
 
-    this.tempData = this.tempData.merge({
-      roundName: this.getRoundName(
-        this.tempData.getIn(['i18n', 'roundDesc']),
-        question.get('round')
-      ),
-      round: question.get('round'),
-      currentIndx: question.get('indx'),
-      currentQuestion: question.get('qText'),
-      currentAnswer: question.get('aText')
-    });
+    if (question) {
+      this.tempData = this.tempData.merge({
+        roundName: this.getRoundName(
+          this.tempData.getIn(['i18n', 'roundDesc']),
+          question.get('round')
+        ),
+        round: question.get('round'),
+        currentIndx: question.get('indx'),
+        currentQuestion: question.get('qText'),
+        currentAnswer: question.get('aText')
+      });
+    }
+    else {
+      this.tempData = this.tempData.merge({
+        roundName: '',
+        round: 0,
+        currentIndx: '',
+        currentQuestion: '',
+        currentAnswer: '',
+        questioneeId: null,
+        questioneeTeamType: null,
+        answereeTeamType: null,
+        gameStatus: status.GAME_OVER
+      });
+      return new BaseLogic(this.tempData);
+    }
 
     return this;
   }
@@ -154,7 +170,7 @@ class GameStoreLogic extends BaseLogic {
       questioneeId: questionee.get('playerId'),
       questioneeTeamType: questionee.get('teamType'),
       answereeTeamType: questionee.get('teamType'),
-      gameStatus: 1
+      gameStatus: status.WITH_PLAYER
     });
 
     return this;
@@ -265,7 +281,7 @@ class GameStoreLogic extends BaseLogic {
 
     this.tempData = this.calculateNextQuestionee
       .call(this.calculateNextQuestionee, this.tempData)
-      .setGameStatus({gameStatus: 5})
+      .setGameStatus({gameStatus: status.FORCE_END})
       .setGameTime()
       .result();
 
@@ -292,17 +308,17 @@ class GameStoreLogic extends BaseLogic {
       return this;
     };
 
-    this.setGameStatus = ({gameStatus = 0} = {}) => {
+    this.setGameStatus = ({gameStatus = status.DEFAULT} = {}) => {
       let gameStatusToSet = gameStatus;
       if (!gameStatusToSet) {
         if (this.data.get('questioneeId')) {
-          gameStatusToSet = 1;
+          gameStatusToSet = status.WITH_PLAYER;
         } else if (this.data.get('questioneeTeamType') === this.data.get('answereeTeamType')) {
-          gameStatusToSet = 2;
+          gameStatusToSet = status.WITH_QEETEAM;
         } else if (this.data.get('answereeTeamType')) {
-          gameStatusToSet = 3;
+          gameStatusToSet = status.WITH_OTEAM;
         } else {
-          gameStatusToSet = 4;
+          gameStatusToSet = status.TIME_UP;
         }
       }
       this.data = this.data.set('gameStatus', gameStatusToSet);
@@ -314,7 +330,7 @@ class GameStoreLogic extends BaseLogic {
       const timeToSet = !this.data.get('questioneeId') && !this.data.get('answereeTeamType')
         ? this.data.get('playerTimeInterval')
         : this.data.get('teamTimeInterval');
-      const endStatus = this.data.get('gameStatus') > 3;
+      const endStatus = this.data.get('gameStatus') > status.WITH_OTEAM;
 
       this.data = this.data.merge({
         gameTime: timeToSet,
@@ -403,14 +419,8 @@ class GameStoreLogic extends BaseLogic {
       });
   }
 
-  getQuestion(questionSet, i18n) {
-    const lastQuestion = questionSet.find(question => !question.get('hasFinished'));
-
-    return lastQuestion || Immutable.fromJS({
-        indx: '00',
-        qText: i18n.get('noMoreQuestions'),
-        aText: i18n.get('noMoreAnswers')
-      });
+  getQuestion(questionSet) {
+    return questionSet.find(question => !question.get('hasFinished'));
   }
 
   getRoundName(roundDesc, round) {

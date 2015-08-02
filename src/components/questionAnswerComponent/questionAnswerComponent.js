@@ -8,6 +8,7 @@ import RoundComponent from '../roundComponent/roundComponent';
 import QuestionIndxComponent from '../questionIndxComponent/questionIndxComponent';
 import AnswerComponent from '../answerComponent/answerComponent';
 import style from '../questionAnswerComponent/questionAnswerStyle';
+import {status} from '../../enums/gameEnums';
 
 class QuestionAnswerComponent extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class QuestionAnswerComponent extends React.Component {
     ];
     let returnValue = '<div></div>';
 
-    if (this.props.questionIndx !== '00') {
+    if (this.props.gameStatus !== status.GAME_OVER) {
       returnValue = (
         <div>
           <QuestioneeComponent

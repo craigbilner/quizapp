@@ -44,7 +44,30 @@ app.use(function *(next) {
     round: r.row('round'),
     hasFinished: false
   });
-  gameData.questionSet = allQuestions.filter(question => question.round);
+  //gameData.questionSet = allQuestions.filter(question => question.round);
+  gameData.questionSet = [
+    {
+      aText: 'the first answer',
+      id: 'id1',
+      indx: '1a',
+      qText: 'the first question',
+      round: 1
+    },
+    {
+      aText: 'the second answer',
+      id: 'id2',
+      indx: '1b',
+      qText: 'the second question',
+      round: 1
+    },
+    {
+      aText: 'the third answer',
+      id: 'id3',
+      indx: '2a',
+      qText: 'the third question',
+      round: 1
+    }
+  ];
   gameData.spareSet = allQuestions.filter(question => !question.round);
 
   const data = {

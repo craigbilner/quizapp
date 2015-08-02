@@ -3,6 +3,7 @@
 import React from 'react';
 import Radium from 'Radium';
 import style from '../playerComponent/playerStyle';
+import {status} from '../../enums/gameEnums';
 
 class PlayerComponent extends React.Component {
   constructor(props) {
@@ -36,7 +37,8 @@ class PlayerComponent extends React.Component {
   }
 
   getPlayerInnerStyle() {
-    const bgColour = this.props.gameStatus > 3
+    const bgColour = this.props.gameStatus > status.WITH_OTEAM
+    && this.props.gameStatus < status.GAME_OVER
       ? style.endColour
       : this.props.baseStyles.colours.light.primary;
 
