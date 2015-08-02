@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'Radium';
+import radium from 'radium';
 import gameActions from '../../actions/gameActions';
 import {status} from '../../enums/gameEnums';
 
@@ -39,4 +39,4 @@ GameTimerControlSmartComponent.propTypes = {
 
 GameTimerControlSmartComponent.defaultProps = {};
 
-export default Radium(GameTimerControlSmartComponent);
+export default radium(GameTimerControlSmartComponent);

@@ -2,8 +2,8 @@
 
 import React
   from 'react';
-import Radium
-  from 'Radium';
+import radium
+  from 'radium';
 import style
   from '../gameTimingComponent/gameTimingStyle';
 import GameTimerSmartComponent
@@ -102,4 +102,4 @@ GameTimingComponent.propTypes = {
 
 GameTimingComponent.defaultProps = {};
 
-export default Radium(GameTimingComponent);
+export default radium(GameTimingComponent);

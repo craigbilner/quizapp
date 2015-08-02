@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'Radium';
+import radium from 'radium';
 import style from '../gameSummaryComponent/gameSummaryStyle';
 import TeamNameComponent from '../teamNameComponent/teamNameComponent';
 import SummaryTeamComponent from '../summaryTeamComponent/summaryTeamComponent';
@@ -97,4 +97,4 @@ GameSummaryComponent.propTypes = {
 
 GameSummaryComponent.defaultProps = {};
 
-export default Radium(GameSummaryComponent);
+export default radium(GameSummaryComponent);

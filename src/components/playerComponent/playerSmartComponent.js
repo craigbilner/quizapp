@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'Radium';
+import radium from 'radium';
 import gameActions from '../../actions/gameActions';
 
 class PlayerSmartComponent extends React.Component {
@@ -43,4 +43,4 @@ PlayerSmartComponent.propTypes = {
 
 PlayerSmartComponent.defaultProps = {};
 
-export default Radium(PlayerSmartComponent);
+export default radium(PlayerSmartComponent);

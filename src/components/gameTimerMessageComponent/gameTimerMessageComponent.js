@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'Radium';
+import radium from 'radium';
 import {status} from '../../enums/gameEnums';
 
 class GameTimerMessageComponent extends React.Component {
@@ -42,4 +42,4 @@ GameTimerMessageComponent.propTypes = {
 
 GameTimerMessageComponent.defaultProps = {};
 
-export default Radium(GameTimerMessageComponent);
+export default radium(GameTimerMessageComponent);

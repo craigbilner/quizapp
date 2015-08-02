@@ -1,7 +1,7 @@
-import Radium from 'Radium';
+import radium from 'radium';
 
 export default {
-  pulse: Radium.keyframes(
+  pulse: radium.keyframes(
     {
       '0%': {
         width: '10%'
@@ -14,7 +14,7 @@ export default {
       }
     }
   ),
-  flash: Radium.keyframes(
+  flash: radium.keyframes(
     {
       '0%': {
         opacity: 0
@@ -24,7 +24,7 @@ export default {
       }
     }
   ),
-  colourChange: (from, to) => Radium.keyframes({
+  colourChange: (from, to) => radium.keyframes({
     '0%': {
       color: from
     },

@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'Radium';
+import radium from 'radium';
 
 class RoundComponent extends React.Component {
   constructor(props) {
@@ -34,4 +34,4 @@ RoundComponent.propTypes = {
 
 RoundComponent.defaultProps = {};
 
-export default Radium(RoundComponent);
+export default radium(RoundComponent);

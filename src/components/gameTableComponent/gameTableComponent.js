@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'Radium';
+import radium from 'radium';
 import style from '../gameTableComponent/gameTableStyle';
 import TableTeamComponent from '../tableTeamComponent/tableTeamComponent';
 import QMComponent from '../qmComponent/qmComponent';
@@ -106,4 +106,4 @@ GameTableComponent.propTypes = {
 
 GameTableComponent.defaultProps = {};
 
-export default Radium(GameTableComponent);
+export default radium(GameTableComponent);

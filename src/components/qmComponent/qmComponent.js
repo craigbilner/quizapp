@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'Radium';
+import radium from 'radium';
 import style from '../qmComponent/qmStyle';
 
 class QMComponent extends React.Component {
@@ -33,4 +33,4 @@ QMComponent.propTypes = {
 
 QMComponent.defaultProps = {};
 
-export default Radium(QMComponent);
+export default radium(QMComponent);

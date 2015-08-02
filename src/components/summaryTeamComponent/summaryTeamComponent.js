@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'Radium';
+import radium from 'radium';
 import style from '../summaryTeamComponent/summaryTeamStyle';
 
 class SummaryTeamComponent extends React.Component {
@@ -75,6 +75,6 @@ SummaryTeamComponent.propTypes = {
 
 SummaryTeamComponent.defaultProps = {};
 
-export default Radium(SummaryTeamComponent);
+export default radium(SummaryTeamComponent);
 
 

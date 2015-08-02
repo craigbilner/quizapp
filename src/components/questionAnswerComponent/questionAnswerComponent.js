@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'Radium';
+import radium from 'radium';
 import QuestioneeComponent from '../questioneeComponent/questioneeComponent';
 import QuestionComponent from '../questionComponent/questionComponent';
 import RoundComponent from '../roundComponent/roundComponent';
@@ -83,4 +83,4 @@ QuestionAnswerComponent.propTypes = {
 
 QuestionAnswerComponent.defaultProps = {};
 
-export default Radium(QuestionAnswerComponent);
+export default radium(QuestionAnswerComponent);

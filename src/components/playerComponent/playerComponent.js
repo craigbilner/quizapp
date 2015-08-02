@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'Radium';
+import radium from 'radium';
 import style from '../playerComponent/playerStyle';
 import {status} from '../../enums/gameEnums';
 
@@ -173,4 +173,4 @@ PlayerComponent.propTypes = {
 
 PlayerComponent.defaultProps = {};
 
-export default Radium(PlayerComponent);
+export default radium(PlayerComponent);

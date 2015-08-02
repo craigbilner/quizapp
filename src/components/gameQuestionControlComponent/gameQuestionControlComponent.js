@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'Radium';
+import radium from 'radium';
 import {status} from '../../enums/gameEnums';
 
 class GameQuestionControlComponentComponent extends React.Component {
@@ -54,5 +54,5 @@ GameQuestionControlComponentComponent.propTypes = {
 
 GameQuestionControlComponentComponent.defaultProps = {};
 
-export default Radium(GameQuestionControlComponentComponent);
+export default radium(GameQuestionControlComponentComponent);
 

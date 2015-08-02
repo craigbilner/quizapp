@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'Radium';
+import radium from 'radium';
 import PlayerSmartComponent from '../playerComponent/playerSmartComponent';
 import PlayerComponent from '../playerComponent/playerComponent';
 
@@ -59,4 +59,4 @@ TableTeamComponent.propTypes = {
 
 TableTeamComponent.defaultProps = {};
 
-export default Radium(TableTeamComponent);
+export default radium(TableTeamComponent);

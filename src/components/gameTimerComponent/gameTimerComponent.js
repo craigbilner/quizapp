@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'Radium';
+import radium from 'radium';
 
 class GameTimerComponent extends React.Component {
   constructor(props) {
@@ -63,4 +63,4 @@ GameTimerComponent.propTypes = {
 
 GameTimerComponent.defaultProps = {};
 
-export default Radium(GameTimerComponent);
+export default radium(GameTimerComponent);

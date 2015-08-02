@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'Radium';
+import radium from 'radium';
 import style from '../questionIndxComponent/questionIndxStyle';
 
 class QuestionIndxComponent extends React.Component {
@@ -37,4 +37,4 @@ QuestionIndxComponent.propTypes = {
 
 QuestionIndxComponent.defaultProps = {};
 
-export default Radium(QuestionIndxComponent);
+export default radium(QuestionIndxComponent);

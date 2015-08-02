@@ -1,0 +1,11 @@
+app:
+  image: node
+  volumes:
+    - ./:/root/
+  command: npm start
+  ports:
+    - "3000:3000"
+  links:
+    - database
+database:
+  image: rethinkdb

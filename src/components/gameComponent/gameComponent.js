@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'Radium';
+import radium from 'radium';
 import QuestionAnswerComponent from '../questionAnswerComponent/questionAnswerComponent';
 import GameTimingComponent from '../gameTimingComponent/gameTimingComponent';
 import GameTableComponent from '../gameTableComponent/gameTableComponent';
@@ -127,5 +127,5 @@ GameComponent.propTypes = {
 
 GameComponent.defaultProps = {};
 
-export default Radium(GameComponent);
+export default radium(GameComponent);
 

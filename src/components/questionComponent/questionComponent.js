@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'Radium';
+import radium from 'radium';
 import style from '../questionComponent/questionStyle';
 
 class QuestionComponent extends React.Component {
@@ -33,4 +33,4 @@ QuestionComponent.propTypes = {
 
 QuestionComponent.defaultProps = {};
 
-export default Radium(QuestionComponent);
+export default radium(QuestionComponent);
