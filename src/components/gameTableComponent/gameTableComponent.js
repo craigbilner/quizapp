@@ -55,6 +55,7 @@ class GameTableComponent extends React.Component {
               answereeTeamType={this.props.answereeTeamType}
               gameStatus={this.props.gameStatus}
               round={this.props.round}
+              teamOwnQs={this.props.hTeamOwnQs}
               />
           </div>
           <div style={tableStyle}></div>
@@ -66,6 +67,7 @@ class GameTableComponent extends React.Component {
               answereeTeamType={this.props.answereeTeamType}
               gameStatus={this.props.gameStatus}
               round={this.props.round}
+              teamOwnQs={this.props.aTeamOwnQs}
               />
           </div>
         </div>
@@ -91,7 +93,9 @@ class GameTableComponent extends React.Component {
 
 GameTableComponent.propTypes = {
   homeTeam: React.PropTypes.object.isRequired,
+  hTeamOwnQs: React.PropTypes.number.isRequired,
   awayTeam: React.PropTypes.object.isRequired,
+  aTeamOwnQs: React.PropTypes.number.isRequired,
   questionMaster: React.PropTypes.object.isRequired,
   baseStyles: React.PropTypes.object,
   questioneeId: React.PropTypes.number,

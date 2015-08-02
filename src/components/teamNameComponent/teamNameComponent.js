@@ -7,15 +7,23 @@ export default class TeamNameComponent extends React.Component {
     super(props);
   }
 
+  getFullHouse() {
+    return this.props.hasFullHouse ? '*' : null;
+  }
+
   render() {
     return (
-      <span>{this.props.teamName}</span>
+      <span>
+        {this.props.teamName}
+        {this.getFullHouse()}
+      </span>
     );
   }
 }
 
 TeamNameComponent.propTypes = {
-  teamName: React.PropTypes.string.isRequired
+  teamName: React.PropTypes.string.isRequired,
+  hasFullHouse: React.PropTypes.bool.isRequired
 };
 
 TeamNameComponent.defaultProps = {};

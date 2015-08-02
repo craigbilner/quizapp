@@ -43,7 +43,10 @@ class GameSummaryComponent extends React.Component {
         <div style={teamColumnStyle}>
           <div style={titleStyle}>
             <div style={teamNameContainerStyle}>
-              <TeamNameComponent teamName={this.props.homeName}/>
+              <TeamNameComponent
+                teamName={this.props.homeName}
+                hasFullHouse={this.props.hHasFullHouse}
+                />
             </div>
             <div style={handicapStyle}>
               ({this.props.homeHandicap})
@@ -58,7 +61,10 @@ class GameSummaryComponent extends React.Component {
         <div style={teamColumnStyle}>
           <div style={titleStyle}>
             <div style={teamNameContainerStyle}>
-              <TeamNameComponent teamName={this.props.awayName}/>
+              <TeamNameComponent
+                teamName={this.props.awayName}
+                hasFullHouse={this.props.aHasFullHouse}
+                />
             </div>
             <div style={handicapStyle}>
               ({this.props.awayHandicap})
@@ -80,10 +86,12 @@ GameSummaryComponent.propTypes = {
   homeTeam: React.PropTypes.object.isRequired,
   homeHandicap: React.PropTypes.number,
   homeTeamTotal: React.PropTypes.number.isRequired,
+  hHasFullHouse: React.PropTypes.bool.isRequired,
   awayName: React.PropTypes.string.isRequired,
   awayTeam: React.PropTypes.object.isRequired,
   awayHandicap: React.PropTypes.number,
   awayTeamTotal: React.PropTypes.number.isRequired,
+  aHasFullHouse: React.PropTypes.bool.isRequired,
   baseStyles: React.PropTypes.object
 };
 

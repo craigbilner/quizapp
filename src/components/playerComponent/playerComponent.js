@@ -18,6 +18,33 @@ class PlayerComponent extends React.Component {
       );
   }
 
+  getOwnQCount(gameHalf) {
+    let count = 0;
+    const ownqs = this.props.player.get('ownqs');
+
+    if (ownqs && ownqs === this.props.player.get('questioneeCount')) {
+      if (this.props.round > 0 && this.props.round < 5) {
+        count = gameHalf === 1 ? ownqs : 0;
+      } else {
+        count = gameHalf === 1 ? 4 : ownqs - 4;
+      }
+    }
+
+    return count;
+  }
+
+  getOwnQs(gameHalf) {
+    const count = this.getOwnQCount(gameHalf);
+
+    return '*'.repeat(count);
+  }
+
+  getTeamOwnQ() {
+    return this.props.teamOwnQs && this.props.teamOwnQs >= this.props.player.get('seat')
+      ? '*'
+      : null;
+  }
+
   getPlayerHaloStyle() {
     let playerHaloStyle = [
       style.halo,
@@ -54,37 +81,36 @@ class PlayerComponent extends React.Component {
     return playerInnerStyle;
   }
 
-  getOwnQCount(gameHalf) {
-    let count = 0;
-    const ownqs = this.props.player.get('ownqs');
-
-    if (ownqs && ownqs === this.props.player.get('questioneeCount')) {
-      if (this.props.round < 5) {
-        count = gameHalf === 1 ? ownqs : 0;
-      } else {
-        count = gameHalf === 1 ? 4 : ownqs - 4;
-      }
-    }
-
-    return count;
-  }
-
-  getOwnQs(gameHalf) {
-    const count = this.getOwnQCount(gameHalf);
-
-    return '.'.repeat(count);
-  }
-
   getOwnQBulletStyle(gameHalf) {
     const ownqBulletStyle = {
       position: 'absolute',
       left: '50%',
-      marginLeft: -13,
-      fontSize: 25,
-      top: gameHalf === 1 ? -10 : -20
+      marginLeft: -16,
+      fontSize: 15,
+      top: gameHalf === 1 ? 10 : -10,
+      color: this.props.baseStyles.colours.dark.primary
     };
 
+    if (this.props.player.get('ownqs') === 8) {
+      ownqBulletStyle.color = style.fhColour;
+      ownqBulletStyle.animation = `
+      ${this.props.baseStyles.animations.flash}
+      0.5s infinite alternate ease-in-out
+      `;
+    }
+
     return ownqBulletStyle;
+  }
+
+  getTeamOwnQStyle() {
+    return [
+      style.teamOwnQ,
+      {
+        color: this.props.teamOwnQs === 4
+          ? style.fhColour
+          : this.props.baseStyles.colours.dark.primary
+      }
+    ];
   }
 
   render() {
@@ -128,6 +154,7 @@ class PlayerComponent extends React.Component {
             <span style={this.getOwnQBulletStyle(2)}>{this.getOwnQs(2)}</span>
           </div>
         </div>
+        <div style={this.getTeamOwnQStyle()}>{this.getTeamOwnQ()}</div>
       </div>
     );
   }
@@ -140,7 +167,8 @@ PlayerComponent.propTypes = {
   questioneeId: React.PropTypes.number,
   answereeTeamType: React.PropTypes.number,
   gameStatus: React.PropTypes.number.isRequired,
-  round: React.PropTypes.number.isRequired
+  round: React.PropTypes.number.isRequired,
+  teamOwnQs: React.PropTypes.number.isRequired
 };
 
 PlayerComponent.defaultProps = {};

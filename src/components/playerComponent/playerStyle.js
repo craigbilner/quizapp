@@ -22,6 +22,13 @@ export default {
   text: {
     textAlign: 'center'
   },
-  endColour: 'rgb(255, 145, 145)'
+  endColour: 'rgb(255, 145, 145)',
+  teamOwnQ: {
+    textAlign: 'center',
+    marginBottom: 15,
+    height: 1,
+    fontSize: 25
+  },
+  fhColour: 'gold'
 };
 

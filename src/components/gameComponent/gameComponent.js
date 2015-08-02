@@ -20,7 +20,8 @@ class GameComponent extends React.Component {
 
   getTimerComponent() {
     const gd = this.props.gameData;
-    let returnValue = null
+    let returnValue = null;
+
     if (gd.get('gameStatus') !== status.GAME_OVER) {
       returnValue = (
         <GameTimingComponent
@@ -93,6 +94,8 @@ class GameComponent extends React.Component {
               answereeTeamType={gd.get('answereeTeamType')}
               gameStatus={gd.get('gameStatus')}
               round={gd.get('round')}
+              hTeamOwnQs={gd.get('hTeamOwnQs')}
+              aTeamOwnQs={gd.get('aTeamOwnQs')}
               baseStyles={this.props.baseStyles}
               />
           </div>
@@ -102,10 +105,12 @@ class GameComponent extends React.Component {
               homeTeam={gd.get('homeTeam')}
               homeHandicap={gd.getIn(['teams', 'homeHandicap'])}
               homeTeamTotal={gd.get('homeTeamTotal')}
+              hHasFullHouse={gd.get('hHasFullHouse')}
               awayName={gd.getIn(['teams', 'awayName'])}
               awayTeam={gd.get('awayTeam')}
               awayHandicap={gd.getIn(['teams', 'awayHandicap'])}
               awayTeamTotal={gd.get('awayTeamTotal')}
+              aHasFullHouse={gd.get('aHasFullHouse')}
               baseStyles={this.props.baseStyles}
               />
           </div>

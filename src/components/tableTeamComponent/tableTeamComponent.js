@@ -36,6 +36,7 @@ class TableTeamComponent extends React.Component {
                     answereeTeamType={this.props.answereeTeamType}
                     gameStatus={this.props.gameStatus}
                     round={this.props.round}
+                    teamOwnQs={this.props.teamOwnQs}
                     />
                 </PlayerSmartComponent>
               );
@@ -52,7 +53,8 @@ TableTeamComponent.propTypes = {
   questioneeId: React.PropTypes.number,
   answereeTeamType: React.PropTypes.number,
   gameStatus: React.PropTypes.number.isRequired,
-  round: React.PropTypes.number.isRequired
+  round: React.PropTypes.number.isRequired,
+  teamOwnQs: React.PropTypes.number.isRequired
 };
 
 TableTeamComponent.defaultProps = {};

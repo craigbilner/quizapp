@@ -101,8 +101,7 @@ class GameStoreLogic extends BaseLogic {
         currentQuestion: question.get('qText'),
         currentAnswer: question.get('aText')
       });
-    }
-    else {
+    } else {
       this.tempData = this.tempData.merge({
         roundName: '',
         round: 0,
@@ -151,6 +150,13 @@ class GameStoreLogic extends BaseLogic {
       .setIn(['questionSet', questionIndx, 'hasFinished'], true)
       .setIn(['teams', 'players', nextIndx, 'isQuestionee'], true)
       .updateIn([...playerPath, 'questioneeCount'], count => count + 1);
+
+    if (questioneeIndx === 7) {
+      this.tempData = this.tempData.merge({
+        hTeamOwnQs: 0,
+        aTeamOwnQs: 0
+      });
+    }
 
     return this;
   }
@@ -210,8 +216,12 @@ class GameStoreLogic extends BaseLogic {
     this.tempData = this.tempData.merge({
       homeTeamTotal: this.tempData.getIn(['teams', 'homeHandicap']),
       homeTeam: this.getTeamOfType(players, 1),
+      hTeamOwnQs: 0,
+      hHasFullHouse: false,
       awayTeamTotal: this.tempData.getIn(['teams', 'awayHandicap']),
-      awayTeam: this.getTeamOfType(players, 2)
+      awayTeam: this.getTeamOfType(players, 2),
+      aTeamOwnQs: 0,
+      aHasFullHouse: false
     });
 
     return this;
@@ -262,7 +272,15 @@ class GameStoreLogic extends BaseLogic {
       + this.tempData.getIn(['teams', 'homeHandicap']))
       .set('awayTeamTotal',
       this.calculateTotal(this.tempData.get('awayTeam'))
-      + this.tempData.getIn(['teams', 'awayHandicap']));
+      + this.tempData.getIn(['teams', 'awayHandicap']))
+      .update(teamType === 1 ? 'hTeamOwnQs' : 'aTeamOwnQs', ownq => isOwnQuestion ? ownq + 1 : 0);
+
+    if (this.tempData.get('hTeamOwnQs') === 4) {
+      this.tempData = this.tempData.set('hHasFullHouse', true);
+    }
+    if (this.tempData.get('aTeamOwnQs') === 4) {
+      this.tempData = this.tempData.set('aHasFullHouse', true);
+    }
 
     return this;
   }
