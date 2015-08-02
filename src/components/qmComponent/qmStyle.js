@@ -1,5 +1,5 @@
 export default {
-  borderRadius: 1000,
+  borderRadius: '50%',
   padding: '30%',
   fontWeight: 'bold',
   width: '20%',

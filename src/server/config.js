@@ -7,6 +7,7 @@ export default {
     port: env.npm_package_config_dbPort
   },
   appConfig: {
-    port: 3000
+    port: env.PORT || 3000,
+    NODE_ENV: env.NODE_ENV || 'development'
   }
 };

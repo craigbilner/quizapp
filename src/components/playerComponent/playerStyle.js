@@ -4,7 +4,7 @@ export default {
     minWidth: 60,
     maxHeight: 70,
     minHeight: 60,
-    borderRadius: 1000,
+    borderRadius: '50%',
     justifyContent: 'center',
     padding: 5
   },
@@ -16,11 +16,12 @@ export default {
     minWidth: 60,
     maxHeight: 70,
     minHeight: 60,
-    borderRadius: 1000,
+    borderRadius: '50%',
     justifyContent: 'center'
   },
   text: {
     textAlign: 'center'
-  }
+  },
+  endColour: 'rgb(255, 145, 145)'
 };
 

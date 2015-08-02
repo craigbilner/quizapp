@@ -95,6 +95,7 @@ class GameStoreLogic extends BaseLogic {
         this.tempData.getIn(['i18n', 'roundDesc']),
         question.get('round')
       ),
+      round: question.get('round'),
       currentIndx: question.get('indx'),
       currentQuestion: question.get('qText'),
       currentAnswer: question.get('aText')
@@ -107,6 +108,9 @@ class GameStoreLogic extends BaseLogic {
     const questioneeIndx = this.tempData
       .getIn(['teams', 'players'])
       .findIndex(player => player.get('isQuestionee'));
+
+    const questionee = this.tempData
+      .getIn(['teams', 'players', questioneeIndx]);
 
     if (questioneeIndx < 0) {
       throw new Error('There is no questionee');
@@ -121,10 +125,16 @@ class GameStoreLogic extends BaseLogic {
       this.applyTeamOrder(this.tempData.getIn(['teams', 'firstTeamType']) === 1 ? 2 : 1);
     }
 
+    const playerPath = [
+      questionee.get('teamType') === 1 ? 'homeTeam' : 'awayTeam',
+      questionee.get('seat') - 1
+    ];
+
     this.tempData = this.tempData
       .setIn(['teams', 'players', questioneeIndx, 'isQuestionee'], false)
+      .setIn(['questionSet', questionIndx, 'hasFinished'], true)
       .setIn(['teams', 'players', nextIndx, 'isQuestionee'], true)
-      .setIn(['questionSet', questionIndx, 'hasFinished'], true);
+      .updateIn([...playerPath, 'questioneeCount'], count => count + 1);
 
     return this;
   }
@@ -387,7 +397,8 @@ class GameStoreLogic extends BaseLogic {
         return player.merge({
           initials: this.getPlayerInitials(player.get('name')),
           total: 0,
-          ownqs: 0
+          ownqs: 0,
+          questioneeCount: 0
         });
       });
   }

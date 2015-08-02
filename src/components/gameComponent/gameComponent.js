@@ -77,6 +77,8 @@ class GameComponent extends React.Component {
               questionMaster={gd.get('questionMaster')}
               questioneeId={gd.get('questioneeId')}
               answereeTeamType={gd.get('answereeTeamType')}
+              gameStatus={gd.get('gameStatus')}
+              round={gd.get('round')}
               baseStyles={this.props.baseStyles}
               />
           </div>
