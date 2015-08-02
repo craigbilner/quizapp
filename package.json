@@ -45,7 +45,7 @@
     "koa-common": "^1.2.0",
     "koa-hbs": "^0.7.0",
     "mocha-lcov-reporter": "0.0.2",
-    "radium": "^0.13.4",
+    "radium": "^0.13.5",
     "react": "0.14.0-beta1",
     "react-dom": "0.14.0-beta1",
     "rethinkdbdash": "^2.0.17"
